@@ -1,0 +1,16 @@
+---
+- name: Get instances id with Environment tag AAP_Deployment
+  register: instance_info
+  amazon.aws.ec2_instance_info:
+    region: "{{ region }}"
+    filters:
+      tag:Environment: [AAP_Deployment]
+      instance-state-name: [running]
+      tag:Contact: "{{ my_email_address }}"
+
+- name: Setting AAP_Deployment ec2 nodes to absent
+  loop: "{{ instance_info['instances'] }}"
+  amazon.aws.ec2_instance:
+    region: "{{ region }}"
+    state: absent
+    instance_ids: "{{ item['instance_id'] }}"
