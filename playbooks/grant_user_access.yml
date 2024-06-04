@@ -1,0 +1,15 @@
+---
+- name: Update authorized_keys on new machine 
+  hosts: "{{ my_server }}"
+  gather_facts: no
+
+  tasks:
+
+    - name: Set up multiple authorized keys
+      with_file:
+        - public_keys/georgeh
+        - public_keys/ames
+      ansible.posix.authorized_key:
+        user: ec2-user
+        state: present
+        key: '{{ item }}'

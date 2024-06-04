@@ -1,0 +1,6 @@
+{
+    "ansible.python.interpreterPath": "/bin/python3",
+    "files.trimTrailingWhitespace": true,
+    "editor.renderFinalNewline": "on",
+    "files.trimFinalNewlines": true
+}

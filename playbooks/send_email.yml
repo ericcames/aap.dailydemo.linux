@@ -1,0 +1,19 @@
+---
+  - name: Let everyone know a new demo server is born
+    hosts: localhost
+    gather_facts: no
+
+    tasks:
+    
+      - name: Send an email with the link to the aap demo Server
+        community.general.mail:
+          host: "{{ smtpserver }}"
+          port: "{{ smtp_port }}"
+          secure: try
+          username: "{{ username }}"
+          password: "{{ password }}"
+          subject: Ansible Automation Platform (AAP) Daily Demo - Linux
+          body: "System {{ my_server }} has been successfully provisioned using AAP. The playbooks and notes can be found here: https://github.com/redawg/Ansiblewesttigers/tree/master/Demonstrations/AAP_daily_demo  The server will be destroyed at 01:00 AM UTC time. This URL will take you to the webserver: http://{{ my_server }} You can admin the machine here: https://{{ my_server }}:9090 or use ssh command to login: ssh ec2-user@{{ my_server }}"
+          from: "{{ mailfrom }}"
+          to: "{{ mailto }}"
+          bcc: "{{ bccto }}"

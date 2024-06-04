@@ -1,0 +1,26 @@
+---
+- name: Update requested item ticket in ServiceNow
+  hosts: localhost
+  gather_facts: no
+  
+  tasks: 
+  
+    - name: Retrieve requested item ticket sysid
+      register: result
+      servicenow.itsm.api_info:
+        resource: sc_req_item
+        sysparm_query: numberSTARTSWITH{{ ticket_number }}
+      
+    - name: Print the result
+      ansible.builtin.debug:
+        var: result
+
+    - name: Update the requested item work notes and state in ServiceNow
+      servicenow.itsm.api:
+        action: patch
+        resource: sc_req_item
+        sys_id: "{{ result.record[0].sys_id }}"
+        data:
+          request_state: "{{ request_state | default(omit) }}"
+          comments: "Uh-Oh something broke.\n\nServiceNow incident number: {{ incident_ticket }}\n\nAnsible Job ID: {{ my_job_id }}\n\nMessage: {{ my_error }}"
+          state: 4

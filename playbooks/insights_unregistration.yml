@@ -1,0 +1,17 @@
+---
+- name: Installing and Registering Red Hat Insights on a server
+  hosts: "{{ my_server }}"
+  become: true
+  gather_facts: false
+
+  tasks:
+
+  - name: Making sure the packages we are need are installed.
+    ansible.builtin.dnf:
+      name:
+        - insights-client
+      state: latest
+
+  - name: UN-Register the insights client.
+    redhat.insights.insights_register:
+      state: absent
