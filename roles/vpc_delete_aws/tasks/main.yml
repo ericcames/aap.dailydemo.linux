@@ -1,0 +1,60 @@
+---
+- name: Get VPC_ID
+  check_mode: true
+  register: my_vpc
+  amazon.aws.ec2_vpc_net:
+    name: "{{ vpc_name }}_{{ user_name }}"
+    cidr_block: "{{ vpc_cidr }}"
+    region: "{{ region }}"
+    state: present
+
+- name: End Play
+  when: my_vpc.vpc.id is not defined
+  ansible.builtin.meta: end_play
+
+- name: Remove IGW
+  amazon.aws.ec2_vpc_igw:
+    vpc_id: "{{ my_vpc.vpc.id }}"
+    region: "{{ region }}"
+    state: absent
+
+- name: Remove subnet
+  amazon.aws.ec2_vpc_subnet:
+    state: absent
+    vpc_id: "{{ my_vpc.vpc.id }}"
+    cidr: "{{ vpc_cidr }}"
+    region: "{{ region }}"
+
+- name: Gather Route Table IDs
+  register: inet_route_table
+  amazon.aws.ec2_vpc_route_table_info:
+    region: "{{ region }}"
+    filters:
+      tag:Name: "{{ ec2_rt_name }}"
+      vpc-id: "{{ my_vpc.vpc.id }}"
+
+- name: Remove Route Table
+  tags:
+    - rt
+  amazon.aws.ec2_vpc_route_table:
+    vpc_id: "{{ my_vpc.vpc.id }}"
+    region: "{{ region }}"
+    route_table_id: "{{ inet_route_table.route_tables[0].id }}"
+    lookup: id
+    state: absent
+
+- name: Remove security group
+  amazon.aws.ec2_security_group:
+    name: "{{ ec2_security_group_name }}"
+    vpc_id: "{{ my_vpc.vpc.id }}"
+    region: "{{ region }}"
+    state: absent
+
+- name: Remove VPC
+  tags:
+    - removevpc
+  amazon.aws.ec2_vpc_net:
+    name: "{{ vpc_name }}_{{ user_name }}"
+    cidr_block: "{{ vpc_cidr }}"
+    region: "{{ region }}"
+    state: absent
