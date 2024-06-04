@@ -1,4 +1,17 @@
 ---
+# Gather the start time to use in a later playbook
+- name: Record the machine_create_time
+  delegate_to: 127.0.0.1
+  register: machine_create_time_pre
+  ansible.builtin.command:
+    cmd: "date '+%H:%M:%S'"
+
+# Make the start time available to other playbooks
+- name: Capture machine instance start time
+  ansible.builtin.set_stats:
+    data:
+      machine_create_time: "{{ machine_create_time_pre.stdout }}"
+
 - name: Looking up Subnet_id
   register: subnet_id
   amazon.aws.ec2_vpc_subnet_info:
@@ -14,7 +27,7 @@
 - name: Creating machine instance
   register: ec2_vms
   amazon.aws.ec2_instance:
-    name: Ansible Automation Platform
+    name: Linux Daily Demo
     region: "{{ region }}"
     key_name: "{{ my_ssh_key }}"
     vpc_subnet_id: "{{ vpc_subnet_id }}"
@@ -24,7 +37,7 @@
       assign_public_ip: "{{ assign_public_ip }}"
     image_id: "{{ image }}"
     tags:
-      Environment: AAP_Deployment
+      Environment: linux-dailydemo
       AlwaysUp: "{{ alwaysup }}"
       Createdby: Ansible Controller
       Contact: "{{ my_email_address }}"
@@ -37,23 +50,5 @@
   ansible.builtin.wait_for:
     port: 22
     host: "{{ item['public_ip_address'] }}"
-    search_regex: OpenSSH
-    delay: 10
-
-- name: Ensure we have an elastic ip for each controller
-  register: ec2_eips
-  loop: "{{ ec2_vms['instances'] }}"
-  amazon.aws.ec2_eip:
-    device_id: "{{ item['instance_id'] }}"
-    region: "{{ region }}"
-    tag_name: reserved_for
-    tag_value: "{{ item['instance_id'] }}"
-    release_on_disassociation: true
-
-- name: Wait 300 seconds for port 22 to become open and contain "OpenSSH"
-  loop: "{{ ec2_eips['results'] }}"
-  ansible.builtin.wait_for:
-    port: 22
-    host: "{{ item['public_ip'] }}"
     search_regex: OpenSSH
     delay: 10
