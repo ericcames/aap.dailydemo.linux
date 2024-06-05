@@ -29,6 +29,7 @@
   amazon.aws.ec2_instance:
     name: Linux Daily Demo
     region: "{{ region }}"
+    state: running
     key_name: "{{ my_ssh_key }}"
     vpc_subnet_id: "{{ vpc_subnet_id }}"
     instance_type: "{{ instance_type }}"
