@@ -11,7 +11,7 @@
 
 - name: Registering system with Red Hat Subscription Management
   hosts: rheldemo
-  gather_facts: no
+  become: true
 
   roles:
 
