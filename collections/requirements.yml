@@ -6,7 +6,7 @@ collections:
 - name: community.aws
 - name: servicenow.itsm
 - name: servicenow.servicenow
-- name: awx.awx
+- name: ansible.controller
 - name: community.mysql
 - name: community.windows
 - name: ansible.utils
