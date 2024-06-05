@@ -37,7 +37,8 @@
   - name: Red Hat Subscription Manager
     ansible.builtin.include_role:
       name: redhat_subscription_manager
-      status: present
+      vars:
+        status: present
 
   - name: Linux Post install
     ansible.builtin.include_role:
