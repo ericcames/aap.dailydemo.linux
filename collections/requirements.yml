@@ -1,12 +1,11 @@
 ---
 collections:
-- name: community.general
-- name: amazon.aws
-- name: ansible.posix
-- name: community.aws
-- name: servicenow.itsm
-- name: servicenow.servicenow
-- name: ansible.controller
-- name: community.mysql
-- name: community.windows
-- name: ansible.utils
+  - name: amazon.aws
+  - name: ansible.posix
+  - name: ansible.utils
+  - name: ansible.controller
+  - name: servicenow.itsm
+  - name: servicenow.servicenow
+  - name: community.mysql
+  - name: community.general
+  - name: community.aws
