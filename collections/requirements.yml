@@ -4,7 +4,6 @@ collections:
   - name: ansible.posix
   - name: ansible.utils
   - name: ansible.controller
-    version: 4.5.0
   - name: servicenow.itsm
   - name: servicenow.servicenow
   - name: community.mysql
