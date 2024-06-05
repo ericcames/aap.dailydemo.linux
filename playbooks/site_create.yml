@@ -8,3 +8,12 @@
     - role: instance_create_aws
     - role: inventory_add_servers
     - role: get_instance_info
+
+- name: Registering system with Red Hat Subscription Management
+  hosts: rheldemo
+  gather_facts: no
+
+  roles:
+
+    - role: redhat_subscription_manager
+      status: present

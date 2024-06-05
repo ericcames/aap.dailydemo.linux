@@ -1,0 +1,20 @@
+---
+# Gather the start time to use in a later playbook
+- name: Record the subscription_time
+  delegate_to: 127.0.0.1
+  register: subscription_time_pre
+  ansible.builtin.command:
+    cmd: "date '+%H:%M:%S'"
+
+# Make the start time available to other playbooks
+- name: Capture the subscription_time
+  ansible.builtin.set_stats:
+    data:
+      subscription_time: "{{ subscription_time_pre.stdout }}"
+
+- name: Register and subscribe the system
+  community.general.redhat_subscription:
+    username: "{{ username }}"
+    password: "{{ password }}"
+    state: "{{ status }}"
+    consumer_name: "{{ my_server }}"
