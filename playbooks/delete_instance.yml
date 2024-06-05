@@ -1,7 +1,0 @@
----
-- name: Delete machine instance
-  hosts: localhost
-  connection: local
-
-  roles:
-    - role: instance_delete_aws

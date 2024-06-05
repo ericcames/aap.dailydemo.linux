@@ -1,0 +1,16 @@
+---
+- name: Unregister the aap daily demo linux system
+  hosts: webservers
+  become: true
+
+  roles:
+    - role: linux_unregister_servers
+
+- name: Delete aap daily demo linux server at Amazon
+  hosts: localhost
+  connection: local
+
+  roles:
+    - role: instance_delete_aws
+    - role: vpc_delete_aws
+    - role: inventory_remove_servers

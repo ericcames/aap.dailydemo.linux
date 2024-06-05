@@ -1,0 +1,9 @@
+---
+- name: Create AAP Daily Demo Linux infrastructure
+  hosts: localhost
+  connection: local
+
+  roles:
+    - role: vpc_create_aws
+    - role: instance_create_aws
+    - role: inventory_add_servers
