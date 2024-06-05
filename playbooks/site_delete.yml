@@ -5,6 +5,7 @@
 
   roles:
 
+    - role: linux_unregister_servers
     - role: redhat_subscription_manager
       status: absent
 

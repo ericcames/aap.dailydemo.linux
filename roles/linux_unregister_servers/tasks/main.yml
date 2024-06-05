@@ -1,0 +1,10 @@
+---
+- name: Making sure the insights-client is installed
+  ansible.builtin.dnf:
+    name:
+      - insights-client
+    state: present
+
+- name: UN-Register the insights client
+  redhat.insights.insights_register:
+    state: absent
