@@ -1,0 +1,7 @@
+---
+- name: Add new vm to the inventory
+  hosts: localhost
+  connection: local
+
+  roles:
+    - role: inventory_add_servers

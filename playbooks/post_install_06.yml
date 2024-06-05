@@ -1,0 +1,8 @@
+---
+- name: Configuration management for our linux server
+  hosts: rheldemo
+  become: true
+
+  roles:
+
+    - role: linux_post_install

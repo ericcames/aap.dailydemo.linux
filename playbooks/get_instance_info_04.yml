@@ -1,0 +1,7 @@
+---
+- name: Gather our instance information
+  hosts: localhost
+  connection: local
+
+  roles:
+    - role: get_instance_info
