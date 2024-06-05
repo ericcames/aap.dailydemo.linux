@@ -7,3 +7,4 @@
     - role: vpc_create_aws
     - role: instance_create_aws
     - role: inventory_add_servers
+    - role: get_instance_info

@@ -1,66 +1,8 @@
 ---
-  - name: Gather AWS instance info
-    hosts: localhost
-    connection: local
-    gather_facts: no
-    vars:
-       region: ''
-       servername: ''
+- name: Gather machine info
+  hosts: localhost
+  connection: local
 
-    tasks:   
+  roles:
 
-    - name: Get instances id with tag {{ servername }} in {{ region }}
-      register: instance_info
-      amazon.aws.ec2_instance_info:
-       region: "{{ region }}"
-       filters:
-         "tag:Name": "{{ servername }}"
-         instance-state-name: [ "running"]
-         "tag:Contact": "{{ my_email_address }}"
-      
-    - name: Printing out instance_info.instances[0].instance_id
-      when: instance_info.instances[0].instance_id is defined
-      ansible.builtin.debug:
-         msg: "{{ instance_info.instances[0].instance_id }}"
-
-    - name: Capture public dns name
-      register: my_server
-      ansible.builtin.set_stats:
-        data:
-          my_server: "{{ instance_info.instances[0].public_dns_name }}"
-
-    - name: Capture public ip address
-      register: my_public_ip
-      ansible.builtin.set_stats:
-        data:
-          my_public_ip: "{{ instance_info.instances[0].public_ip_address }}"
-
-    - name: Capture image id
-      register: my_ami_id
-      ansible.builtin.set_stats:
-        data:
-          my_ami_id: "{{ instance_info.instances[0].image_id }}"
-
-    - name: Capture instance id
-      register: my_instance_id
-      ansible.builtin.set_stats:
-        data:
-          my_instance_id: "{{ instance_info.instances[0].instance_id }}"
-
-    - name: Capture instance type
-      register: my_instance_type
-      ansible.builtin.set_stats:
-        data:
-          my_instance_type: "{{ instance_info.instances[0].instance_type }}"
-    
-    - name: Capture public ip address
-      register: my_launch_time
-      ansible.builtin.set_stats:
-        data:
-          my_launch_time: "{{ instance_info.instances[0].launch_time }}"
-
-    - name: Capture availability zone
-      register: my_availability_zone
-      ansible.builtin.set_stats:
-        data:
-          my_availability_zone: "{{ instance_info.instances[0].placement.availability_zone }}"
+    - role: get_instance_info
