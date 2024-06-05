@@ -1,5 +1,5 @@
 ---
-- name: Get instances id with tag {{ servername }} in {{ region }}
+- name: Get instances id
   register: instance_info
   amazon.aws.ec2_instance_info:
     region: "{{ region }}"
