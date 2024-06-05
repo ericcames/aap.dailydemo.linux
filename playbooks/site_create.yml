@@ -12,6 +12,7 @@
 - name: Server configration management is begining
   hosts: rheldemo
   become: true
+  gather_facts: true
 
   roles:
 
