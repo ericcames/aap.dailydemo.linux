@@ -1,3 +1,0 @@
----
-username: "{{ customer_portal_username }}"
-password: "{{ customer_portal_password }}"
