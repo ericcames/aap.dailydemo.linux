@@ -3,7 +3,8 @@ collections:
   - name: amazon.aws
   - name: ansible.posix
   - name: ansible.utils
-  - name: awx.awx
+  - name: ansible.controller
+    version: 4.5.0
   - name: servicenow.itsm
   - name: servicenow.servicenow
   - name: community.mysql
