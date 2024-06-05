@@ -1,10 +1,13 @@
 ---
-# - name: Unregister the aap daily demo linux system
-#   hosts: rheldemo
-#   become: true
+- name: UN-Registering system with Red Hat Subscription Management and Red Hat Insights
+  hosts: rheldemo
+  become: true
 
-#   roles:
-#     - role: linux_unregister_servers
+  roles:
+
+    - role: redhat_subscription_manager
+      status: absent
+
 
 - name: Delete aap daily demo linux server at Amazon
   hosts: localhost
