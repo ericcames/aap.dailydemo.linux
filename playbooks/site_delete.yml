@@ -1,10 +1,10 @@
 ---
-- name: Unregister the aap daily demo linux system
-  hosts: webservers
-  become: true
+# - name: Unregister the aap daily demo linux system
+#   hosts: rheldemo
+#   become: true
 
-  roles:
-    - role: linux_unregister_servers
+#   roles:
+#     - role: linux_unregister_servers
 
 - name: Delete aap daily demo linux server at Amazon
   hosts: localhost
