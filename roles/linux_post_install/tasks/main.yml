@@ -16,7 +16,6 @@
   ansible.builtin.dnf:
     name:
       - insights-client
-      - certbot
       - bind-utils
       - ansible-core
       - wget
