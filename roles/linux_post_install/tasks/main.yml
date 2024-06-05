@@ -1,0 +1,149 @@
+---
+# Gather the start time to use in a later playbook
+- name: Record the post_install_time
+  delegate_to: 127.0.0.1
+  register: post_install_time_pre
+  ansible.builtin.command:
+    cmd: "date '+%H:%M:%S'"
+
+# Make the start time available to other playbooks
+- name: Capture the post_install_time
+  ansible.builtin.set_stats:
+    data:
+      post_install_time: "{{ post_install_time_pre.stdout }}"
+
+- name: Making sure all our software is installed
+  ansible.builtin.dnf:
+    name:
+      - insights-client
+      - certbot
+      - bind-utils
+      - ansible-core
+      - wget
+      - git
+      - rsync
+    state: present
+
+- name: Gather the list of packages we want to update here; excluding sudo & openssl
+  register: my_packages
+  ansible.builtin.shell: dnf list updates --security -q | grep -v Available| grep -v sudo|grep -v openssl | awk '{print $1}'
+  args:
+    executable: /bin/bash
+
+- name: patching my_packages
+  when: my_packages.stdout_lines != []
+  ansible.builtin.shell: "dnf update -y {{ my_packages.stdout_lines | join(' ') }}"
+  args:
+    executable: /bin/bash
+
+- name: Register the insights client
+  redhat.insights.insights_register:
+    state: present
+
+- name: Get the ansible fact from the first play
+  ansible.builtin.set_fact:
+    my_public_ip: "{{ hostvars['localhost']['my_public_ip']}}"
+
+- name: Print ansible facts
+  ansible.builtin.debug:
+    var: ansible_facts
+
+- name: Update the /etc/hosts file
+  ansible.builtin.template:
+    src: templates/hosts.j2
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: "0644"
+    backup: true
+
+- name: Copy the sshd-banner file into place
+  ansible.builtin.copy:
+    src: files/sshd-banner
+    dest: /etc/ssh/sshd-banner
+    owner: root
+    group: root
+    mode: u+rw,g-wx,o-wx
+
+- name: Updating the sshd_config file to show the new banner
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    state: present
+    regexp: ^#Banner none
+    line: Banner /etc/ssh/sshd-banner
+
+- name: Reloading sshd service
+  ansible.builtin.systemd:
+    state: reloaded
+    name: sshd.service
+    enabled: true
+
+- name: Copy the new /etc/motd into place
+  ansible.builtin.copy:
+    src: files/motd
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: u+rw,g-wx,o-wx
+
+- name: Copy the new /etc/issue into place
+  ansible.builtin.copy:
+    src: files/issue
+    dest: /etc/issue
+    owner: root
+    group: root
+    mode: u+rw,g-wx,o-wx
+
+- name: Make sure the /etc/motd.d directory exists
+  ansible.builtin.file:
+    path: /etc/motd.d
+    state: directory
+    mode: "0755"
+
+- name: Install the latest version of cockpit
+  ansible.builtin.dnf:
+    name: cockpit
+    state: latest
+
+- name: Make sure the /etc/cockpit directory exists
+  ansible.builtin.file:
+    path: /etc/cockpit
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Copy the /etc/issue.cockpit into place
+  ansible.builtin.copy:
+    src: files/issue.cockpit
+    dest: /etc/issue.cockpit
+    owner: root
+    group: root
+    mode: u+rw,g-wx,o-wx
+
+- name: Copy the /etc/cockpit/cockpit.conf into place
+  ansible.builtin.copy:
+    src: files/cockpit.conf
+    dest: /etc/cockpit/cockpit.conf
+    owner: root
+    group: root
+    mode: u+rw,g-wx,o-wx
+
+- name: Enable the cockpit socket
+  changed_when: false
+  ansible.builtin.command:
+    cmd: systemctl enable cockpit.socket
+
+- name: Start the cockpit socket
+  changed_when: false
+  ansible.builtin.command:
+    cmd: systemctl start cockpit.socket
+
+- name: Check to see if we need a reboot
+  register: reboot_required
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+
+- name: Reboot the machine if it is required
+  when: reboot_required.stat.exists
+  ansible.builtin.reboot:
