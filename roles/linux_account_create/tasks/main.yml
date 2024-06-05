@@ -1,0 +1,32 @@
+---
+- name: Include our user info
+  ansible.builtin.include_vars:
+    file: files/{{ user_list_vault }}
+
+- name: Ensure users are created
+  loop: "{{ users }}"
+  no_log: true
+  ansible.builtin.user:
+    name: "{{ item['name'] }}"
+    password: "{{ item['user_password'] | password_hash('sha512') }}"
+    update_password: on_create
+    comment: "{{ item['user_comment'] }}"
+    home: "{{ item['user_home'] }}"
+
+- name: Create sudoers in sudoers.d directory
+  loop: "{{ users }}"
+  when: item['sudoers_account'] is true
+  no_log: true
+  ansible.builtin.copy:
+    dest: /etc/sudoers.d/{{ item['name'] }}
+    content: "{{ item['name'] }} ALL=(ALL) NOPASSWD: ALL\n"
+    owner: root
+    group: root
+    mode: ug+rwX,o=
+
+- name: Making sure the public keys are in place
+  loop: "{{ keys }}"
+  ansible.posix.authorized_key:
+    user: "{{ item['name']}}"
+    state: present
+    key: "{{ lookup('file', item['key'] ) }}"

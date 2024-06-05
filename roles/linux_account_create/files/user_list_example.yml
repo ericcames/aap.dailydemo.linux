@@ -1,0 +1,21 @@
+---
+users:
+  - name: foobar
+    sudoers_account: false
+    user_comment: Normal User
+    user_password: Ansible-r0cks!
+    user_home: /home/foobar
+  - name: ansible-svc
+    sudoers_account: true
+    user_comment: Service Account
+    user_password: Ansible-r0cks!
+    user_home: /var/lib/awx
+  - name: jsmith
+    sudoers_account: true
+    user_comment: Administrative Account
+    user_password: Ansible-r0cks!
+    user_home: /home/jsmith
+keys:
+  - name: foobar
+    key: files/public_keys/foobar
+  - name: files/public/keys/ansible-svc

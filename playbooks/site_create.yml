@@ -19,3 +19,4 @@
     - role: redhat_subscription_manager
       status: present
     - role: linux_post_install
+    - role: linux_account_create
