@@ -17,4 +17,4 @@
     username: "{{ username }}"
     password: "{{ password }}"
     state: "{{ status }}"
-    consumer_name: "{{ my_server }}"
+    consumer_name: "{{ inventory_hostname }}"
