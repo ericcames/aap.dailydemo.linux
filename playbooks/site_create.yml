@@ -5,21 +5,21 @@
 
   tasks:
 
-  - name: VPC Create role
-    ansible.builtin.include_role:
-      name: vpc_create_aws
+    - name: VPC Create role
+      ansible.builtin.include_role:
+        name: vpc_create_aws
 
-  - name: Create instance role
-    ansible.builtin.include_role:
-      name: instance_create_aws
+    - name: Create instance role
+      ansible.builtin.include_role:
+        name: instance_create_aws
 
-  - name: Inventory add role
-    ansible.builtin.include_role:
-      name: inventory_add_servers
+    - name: Inventory add role
+      ansible.builtin.include_role:
+        name: inventory_add_servers
 
-  - name: Get instance info
-    ansible.builtin.include_role:
-      name: get_instance_info
+    - name: Get instance info
+      ansible.builtin.include_role:
+        name: get_instance_info
 
   # roles:
   #   - role: vpc_create_aws
@@ -34,27 +34,27 @@
 
   tasks:
 
-  - name: Red Hat Subscription Manager
-    ansible.builtin.include_role:
-      name: redhat_subscription_manager
-    vars:
-      status: present
+    - name: Red Hat Subscription Manager
+      ansible.builtin.include_role:
+        name: redhat_subscription_manager
+      vars:
+        status: present
 
-  - name: Linux Post install
-    ansible.builtin.include_role:
-      name: linux_post_install
+    - name: Linux Post install
+      ansible.builtin.include_role:
+        name: linux_post_install
 
-  - name: Account setup
-    ansible.builtin.include_role:
-      name: linux_account_create
+    - name: Account setup
+      ansible.builtin.include_role:
+        name: linux_account_create
 
-  - name: LAMP setup
-    ansible.builtin.include_role:
-      name: lamp_setup
+    - name: LAMP setup
+      ansible.builtin.include_role:
+        name: lamp_setup
 
-  - name: Website setup
-    ansible.builtin.include_role:
-      name: website_setup
+    - name: Website setup
+      ansible.builtin.include_role:
+        name: website_setup
 
   # roles:
 
