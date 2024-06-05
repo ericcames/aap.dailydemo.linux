@@ -14,7 +14,7 @@
 
 - name: Register and subscribe the system
   community.general.redhat_subscription:
-    username: "{{ username }}"
-    password: "{{ password }}"
+    username: "{{ customer_portal_username }}"
+    password: "{{ customer_portal_password }}"
     state: "{{ status }}"
     consumer_name: "{{ inventory_hostname }}"

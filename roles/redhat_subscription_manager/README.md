@@ -9,8 +9,8 @@ Requirements
 Role Variables
 --------------
 
-username: mikey.mouse
-password: redhat123
+customer_portal_username: mikey.mouse
+customer_portal_password: redhat123
 status: present
 
 Dependencies
