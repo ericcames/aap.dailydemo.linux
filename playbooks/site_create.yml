@@ -21,3 +21,4 @@
     - role: linux_post_install
     - role: linux_account_create
     - role: lamp_setup
+    - role: website_setup
