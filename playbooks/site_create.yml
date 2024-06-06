@@ -29,12 +29,9 @@
 
   post_tasks:
 
-    - name: gather stuff
-      ansible.builtin.setup:
-
-    - name: Show Gathered Facts
+    - name: Debug vpc_create_time
       ansible.builtin.debug:
-        msg: "{{ hostvars['localhost'].ansible_facts }}"
+        var: vpc_create_time
 
 - name: Server configration management is begining
   hosts: rheldemo
