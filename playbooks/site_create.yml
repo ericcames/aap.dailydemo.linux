@@ -27,12 +27,6 @@
     - role: inventory_add_servers
     - role: get_instance_info
 
-  post_tasks:
-
-    - name: Debug vpc_create_time
-      ansible.builtin.debug:
-        var: vpc_create_time
-
 - name: Server configration management is begining
   hosts: rheldemo
   become: true
@@ -42,7 +36,7 @@
 
     - name: Debug vpc_create_time
       ansible.builtin.debug:
-        var: vpc_create_time
+        var: hostvars['localhost']['vpc_create_time']
 
     - name: Debug machine_create_time
       ansible.builtin.debug:
