@@ -15,7 +15,8 @@
 # Make the start time available to other roles
 - name: Capture the create vpc_create_time
   ansible.builtin.set_fact:
-    vpc_create_time_1: "{{ vpc_create_time_pre.stdout }}"
+    vpc_create_time: "{{ vpc_create_time_pre.stdout }}"
+    cacheable: true
 
 - name: Create VPC
   register: my_vpc
