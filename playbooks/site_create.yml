@@ -32,7 +32,7 @@
   become: true
   gather_facts: true
   vars:
-    vpc_create_time: hostvars['localhost']['vpc_create_time']['stdout']
+    vpc_create_time: "{{ hostvars['localhost']['vpc_create_time']['stdout'] }}"
 
   pre_tasks:
 
