@@ -25,14 +25,6 @@
   ansible.builtin.debug:
     var: lamp_time
 
-- name: Debug subscription_time
-  ansible.builtin.debug:
-    var: subscription_time
-
-- name: Debug insights_time
-  ansible.builtin.debug:
-    var: insights_time
-
 - name: Copy the image file for the website
   ansible.builtin.copy:
     src: images/aap.png
