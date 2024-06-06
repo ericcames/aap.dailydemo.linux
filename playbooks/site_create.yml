@@ -3,24 +3,6 @@
   hosts: localhost
   connection: local
 
-  # tasks:
-
-  #   - name: VPC Create role
-  #     ansible.builtin.include_role:
-  #       name: vpc_create_aws
-
-  #   - name: Create instance role
-  #     ansible.builtin.include_role:
-  #       name: instance_create_aws
-
-  #   - name: Inventory add role
-  #     ansible.builtin.include_role:
-  #       name: inventory_add_servers
-
-  #   - name: Get instance info
-  #     ansible.builtin.include_role:
-  #       name: get_instance_info
-
   roles:
     - role: vpc_create_aws
     - role: instance_create_aws
@@ -33,12 +15,9 @@
   gather_facts: true
   vars:
     vpc_create_time: "{{ hostvars['localhost']['vpc_create_time']['stdout'] }}"
+    machine_create_time: "{{ hostvars['localhost']['machine_create_time']['stdout'] }}"
 
   pre_tasks:
-
-    - name: Debug vpc_create_time
-      ansible.builtin.debug:
-        var: vpc_create_time
 
     - name: Debug machine_create_time
       ansible.builtin.debug:
@@ -59,29 +38,6 @@
     - name: Debug insights_time
       ansible.builtin.debug:
         var: insights_time
-  # tasks:
-
-  #   - name: Red Hat Subscription Manager
-  #     ansible.builtin.include_role:
-  #       name: redhat_subscription_manager
-  #     vars:
-  #       status: present
-
-  #   - name: Linux Post install
-  #     ansible.builtin.include_role:
-  #       name: linux_post_install
-
-  #   - name: Account setup
-  #     ansible.builtin.include_role:
-  #       name: linux_account_create
-
-  #   - name: LAMP setup
-  #     ansible.builtin.include_role:
-  #       name: lamp_setup
-
-  #   - name: Website setup
-  #     ansible.builtin.include_role:
-  #       name: website_setup
 
   roles:
 

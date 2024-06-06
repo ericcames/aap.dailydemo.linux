@@ -1,16 +1,9 @@
 ---
-# Gather the start time to use in a later playbook
 - name: Record the machine_create_time
   delegate_to: 127.0.0.1
-  register: machine_create_time_pre
+  register: machine_create_time
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"
-
-# Make the start time available to other playbooks
-- name: Capture machine instance start time
-  ansible.builtin.set_stats:
-    data:
-      machine_create_time: "{{ machine_create_time_pre.stdout }}"
 
 - name: Looking up Subnet_id
   register: subnet_id

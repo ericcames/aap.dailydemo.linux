@@ -1,16 +1,9 @@
 ---
-# Gather the start time to use in a later playbook
 - name: Record the post_install_time
-  delegate_to: 127.0.0.1
-  register: post_install_time_pre
+  delegate_to: localhost
+  register: post_install_time
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"
-
-# Make the start time available to other playbooks
-- name: Capture the post_install_time
-  ansible.builtin.set_stats:
-    data:
-      post_install_time: "{{ post_install_time_pre.stdout }}"
 
 - name: Making sure all our software is installed
   ansible.builtin.dnf:
