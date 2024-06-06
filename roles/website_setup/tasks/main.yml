@@ -9,22 +9,6 @@
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"
 
-- name: Debug vpc_create_time
-  ansible.builtin.debug:
-    var: vpc_create_time
-
-- name: Debug machine_create_time
-  ansible.builtin.debug:
-    var: machine_create_time
-
-- name: Debug post_install_time
-  ansible.builtin.debug:
-    var: post_install_time
-
-- name: Debug lamp_time
-  ansible.builtin.debug:
-    var: lamp_time
-
 - name: Copy the image file for the website
   ansible.builtin.copy:
     src: images/aap.png
