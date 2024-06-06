@@ -25,10 +25,6 @@
 #     data:
 #       my_public_ip: "{{ instance_info.instances[0].public_ip_address }}"
 
-- name: Set my_server
-  ansible.builtin.set_fact:
-    my_server: "{{ inventory_hostname }}"
-
 - name: Capture image id
   register: my_ami_id
   ansible.builtin.set_stats:
