@@ -37,6 +37,8 @@
   hosts: rheldemo
   become: true
   gather_facts: true
+  vars:
+    vpc_create_time: "{{ vpc_create_time }}"
 
   pre_tasks:
 
