@@ -31,14 +31,14 @@
 
     - name: Debug vpc_create_time
       ansible.builtin.debug:
-        var: vpc_create_time
+        var: vpc_create_time_1
 
 - name: Server configration management is begining
   hosts: rheldemo
   become: true
   gather_facts: true
   vars:
-    vpc_create_time: "{{ vpc_create_time }}"
+    vpc_create_time: "{{ vpc_create_time_1 }}"
 
   pre_tasks:
 
