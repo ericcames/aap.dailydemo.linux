@@ -31,12 +31,14 @@
   hosts: rheldemo
   become: true
   gather_facts: true
+  vars:
+    vpc_create_time: hostvars['localhost']['vpc_create_time']['stdout']
 
   pre_tasks:
 
     - name: Debug vpc_create_time
       ansible.builtin.debug:
-        var: hostvars['localhost']['vpc_create_time']
+        var: vpc_create_time
 
     - name: Debug machine_create_time
       ansible.builtin.debug:
