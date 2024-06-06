@@ -29,6 +29,9 @@
 
   post_tasks:
 
+    - name: gather stuff
+      ansible.builtin.setup:
+
     - name: Show Gathered Facts
       ansible.builtin.debug:
         msg: "{{ hostvars['localhost'].ansible_facts }}"
