@@ -32,6 +32,31 @@
   become: true
   gather_facts: true
 
+  pre_tasks:
+
+    - name: Debug vpc_create_time
+      ansible.builtin.debug:
+        var: vpc_create_time
+
+    - name: Debug machine_create_time
+      ansible.builtin.debug:
+        var: machine_create_time
+
+    - name: Debug post_install_time
+      ansible.builtin.debug:
+        var: post_install_time
+
+    - name: Debug lamp_time
+      ansible.builtin.debug:
+        var: lamp_time
+
+    - name: Debug subscription_time
+      ansible.builtin.debug:
+        var: subscription_time
+
+    - name: Debug insights_time
+      ansible.builtin.debug:
+        var: insights_time
   # tasks:
 
   #   - name: Red Hat Subscription Manager
