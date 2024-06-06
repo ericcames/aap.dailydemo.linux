@@ -11,7 +11,9 @@
     username: "{{ smtp_username }}"
     password: "{{ smtp_password }}"
     subject: Ansible Automation Platform (AAP) Daily Demo - Linux
-    body: "System {{ my_server['ansible_stats']['data']['my_server'] }} has been successfully provisioned using AAP. This URL will take you to the webserver: http://{{ my_server['ansible_stats']['data']['my_server'] }} You can admin the machine here: https://{{ my_server['ansible_stats']['data']['my_server'] }}:9090 or use ssh command to login: ssh {{ my_server['ansible_stats']['data']['my_server'] }}"
+    body: "System {{ my_server['ansible_stats']['data']['my_server'] }} has been successfully provisioned using AAP.
+           You can admin the machine here: https://{{ my_server['ansible_stats']['data']['my_server'] }}:9090
+           or use ssh command to login: ssh {{ my_server['ansible_stats']['data']['my_server'] }}"
     from: "{{ mailfrom }}"
     to: "{{ mailto }}"
     bcc: "{{ bccto }}"
