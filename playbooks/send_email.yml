@@ -1,7 +1,6 @@
 ---
 - name: Let everyone know a new demo server is born
   hosts: localhost
-  gather_facts: no
 
   tasks:
 
