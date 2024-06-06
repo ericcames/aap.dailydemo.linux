@@ -5,11 +5,6 @@
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"
 
-- name: Set my_server
-  ansible.builtin.set_stats:
-    data:
-      my_server: "{{ inventory_hostname }}"
-
 - name: Making sure all our software is installed
   ansible.builtin.dnf:
     name:
