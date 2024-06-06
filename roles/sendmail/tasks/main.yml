@@ -7,7 +7,7 @@
     username: "{{ smtp_username }}"
     password: "{{ smtp_password }}"
     subject: Ansible Automation Platform (AAP) Daily Demo - Linux
-    body: "System {{ my_server }} has been successfully provisioned using AAP. The playbooks and notes can be found here: https://github.com/redawg/Ansiblewesttigers/tree/master/Demonstrations/AAP_daily_demo  The server will be destroyed at 01:00 AM UTC time. This URL will take you to the webserver: http://{{ my_server }} You can admin the machine here: https://{{ my_server }}:9090 or use ssh command to login: ssh ec2-user@{{ my_server }}"
+    body: "System {{ my_server }} has been successfully provisioned using AAP. This URL will take you to the webserver: http://{{ my_server }} You can admin the machine here: https://{{ my_server }}:9090 or use ssh command to login: ssh ec2-user@{{ my_server }}"
     from: "{{ mailfrom }}"
     to: "{{ mailto }}"
     bcc: "{{ bccto }}"

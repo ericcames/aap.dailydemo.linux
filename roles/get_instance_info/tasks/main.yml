@@ -8,22 +8,26 @@
       instance-state-name: [ "running"]
       "tag:Contact": "{{ my_email_address }}"
 
-- name: Printing out instance_info.instances[0].instance_id
-  when: instance_info.instances[0].instance_id is defined
-  ansible.builtin.debug:
-    msg: "{{ instance_info.instances[0].instance_id }}"
+# - name: Printing out instance_info.instances[0].instance_id
+#   when: instance_info.instances[0].instance_id is defined
+#   ansible.builtin.debug:
+#     msg: "{{ instance_info.instances[0].instance_id }}"
 
-- name: Capture public dns name
-  register: my_server
-  ansible.builtin.set_stats:
-    data:
-      my_server: "{{ instance_info.instances[0].public_dns_name }}"
+# - name: Capture public dns name
+#   register: my_server
+#   ansible.builtin.set_stats:
+#     data:
+#       my_server: "{{ instance_info.instances[0].public_dns_name }}"
 
-- name: Capture public ip address
-  register: my_public_ip
-  ansible.builtin.set_stats:
-    data:
-      my_public_ip: "{{ instance_info.instances[0].public_ip_address }}"
+# - name: Capture public ip address
+#   register: my_public_ip
+#   ansible.builtin.set_stats:
+#     data:
+#       my_public_ip: "{{ instance_info.instances[0].public_ip_address }}"
+
+- name: Set my_server
+  ansible.builtin.set_fact:
+    my_server: "{{ inventory_hostname }}"
 
 - name: Capture image id
   register: my_ami_id
