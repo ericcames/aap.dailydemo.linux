@@ -6,11 +6,16 @@
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"
 
- # Make the start time available to other playbooks
+# # Make the start time available to other playbooks
+# - name: Capture the create vpc_create_time
+#   ansible.builtin.set_stats:
+#     data:
+#       vpc_create_time: "{{ vpc_create_time_pre.stdout }}"
+
+# Make the start time available to other roles
 - name: Capture the create vpc_create_time
-  ansible.builtin.set_stats:
-    data:
-      vpc_create_time: "{{ vpc_create_time_pre.stdout }}"
+  ansible.builtin.set_fact:
+    vpc_create_time: "{{ vpc_create_time_pre.stdout }}"
 
 - name: Create VPC
   register: my_vpc
