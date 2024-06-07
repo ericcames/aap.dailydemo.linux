@@ -1,9 +1,15 @@
 ---
 - name: Record the machine_create_time
-  delegate_to: 127.0.0.1
-  register: machine_create_time
+  delegate_to: localhost
+  register: machine_create_time_raw
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"
+
+- name: Capture vpc start time
+  register: machine_create_time
+  ansible.builtin.set_stats:
+    data:
+      machine_create_time: "{{ machine_create_time_raw.stdout }}"
 
 - name: Looking up Subnet_id
   register: subnet_id
