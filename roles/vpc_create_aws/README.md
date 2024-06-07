@@ -1,8 +1,8 @@
 vpc_create_aws
 =========
-
+```
 This role will create an Amazon Virtual Private Cloud (VPC).
-
+```
 Requirements
 ------------
 ```
@@ -27,9 +27,9 @@ my_email_address: "{{ user_name }}@redhat.com"
 ```
 Dependencies
 ------------
-
+```
 amazon.aws
-
+```
 Example Playbook
 ----------------
 ```

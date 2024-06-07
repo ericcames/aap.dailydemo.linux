@@ -1,8 +1,8 @@
 get_instance_info
 =========
-
+```
 This role will gather ec2 info.
-
+```
 Requirements
 ------------
 ```

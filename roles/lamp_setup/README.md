@@ -1,13 +1,13 @@
 lamp_setup
 =========
-
+```
 This role will setup apache, mysql and php on a linux server
-
+```
 Requirements
 ------------
-
+```
 Root access on the machines in the inventory
-
+```
 Role Variables
 --------------
 
@@ -16,7 +16,7 @@ Dependencies
 
 Example Playbook
 ----------------
-
+```
 ---
 - name: LAMP setup
   hosts: all
@@ -25,7 +25,7 @@ Example Playbook
   roles:
 
     - role: lamp_setup
-
+```
 License
 -------
 

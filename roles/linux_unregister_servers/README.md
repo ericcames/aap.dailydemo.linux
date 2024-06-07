@@ -1,8 +1,8 @@
 linux_unregister_servers
 =========
-
+```
 This will unregister the server from Insights and the Customer Portal.
-
+```
 Requirements
 ------------
 
@@ -14,7 +14,7 @@ Dependencies
 
 Example Playbook
 ----------------
-
+```
 ---
 - name: Linux unregistration
   hosts: all
@@ -23,7 +23,7 @@ Example Playbook
   roles:
 
     - role: linux_unregister_servers
-
+```
 License
 -------
 
