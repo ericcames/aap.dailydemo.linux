@@ -1,9 +1,15 @@
 ---
 - name: Record the lamp_time
   delegate_to: localhost
-  register: lamp_time
+  register: lamp_time_raw
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"
+
+- name: Capture lamp time
+  register: lamp_time
+  ansible.builtin.set_stats:
+    data:
+      lamp_time: "{{ lamp_time_raw.stdout }}"
 
 - name: Install the latest version of Firewalld, Apache, Mariadb, php
   ansible.builtin.dnf:
