@@ -8,7 +8,7 @@ A demo designed to showcase many of the use case that people are looking for.  W
 
 **The Playbooks**
 
-- [Ansible code bot GitHub App](https://github.com/apps/ansible-code-bot "Ansible code bot GitHub App")
+- [Playbook 1 creates the network container](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/create_vpc_01.yml "Playbook 1 creates the network container")
 - [Ansible code bot console](https://bot.ai.ansible.redhat.com/console "Ansible code bot console")
 
 # The website
