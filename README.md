@@ -10,6 +10,7 @@ A demo designed to showcase many of the use case that people are looking for.  W
 
 - [Create our network container first](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/create_vpc_01.yml "create_vpc_01.yml")
 - [Create our virtual machine second](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/create_instance_02.yml "create_instance_02.yml")
+- [Update our inventory third](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/add_inventory_03.yml "add_inventory_03.yml")
 
 # The website
 ========
