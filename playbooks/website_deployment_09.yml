@@ -2,6 +2,10 @@
 - name: Website setup
   hosts: rheldemo
   become: true
+  gather_facts: true
+  vars:
+    vpc_create_time: "{{ hostvars['localhost']['vpc_create_time']['stdout'] }}"
+    machine_create_time: "{{ hostvars['localhost']['machine_create_time']['stdout'] }}"
 
   roles:
 
