@@ -2,11 +2,11 @@ Ansible Automation Platform Daily Demo for Linux
 =========
 A demo designed to showcase many of the use cases that people are looking for.  We are using the workflow visualizer to show how the various building blocks are put together and enable the delivery on demand of a custom website.  The playbooks call roles, the roles allow for ease of sharing the code and also allow for documentation of the various things needed in each role.
 
-# Workflow
+# The workflow
 
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/DDLWF.png "Workflow")
 
-**The Playbooks**
+**The playbooks**
 
 - [1. Create our network container](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/create_vpc_01.yml "create_vpc_01.yml")
 - [2. Create our virtual machine](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/create_instance_02.yml "create_instance_02.yml")
