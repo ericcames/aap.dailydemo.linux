@@ -36,7 +36,6 @@
   loop: "{{ instance_info['instances'] }}"
   ansible.controller.host:
     controller_host: https://{{ controller_url }}
-    controller_username: "{{ controller_user }}"
     controller_oauthtoken: "{{ new_token.json.token }}"
     validate_certs: false
     name: "{{ item['public_dns_name'] }}"
@@ -48,7 +47,6 @@
   loop: "{{ instance_info['instances'] }}"
   ansible.controller.group:
     controller_host: https://{{ controller_url }}
-    controller_username: "{{ controller_user }}"
     controller_oauthtoken: "{{ new_token.json.token }}"
     validate_certs: false
     name: rheldemo
