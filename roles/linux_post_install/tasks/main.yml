@@ -1,9 +1,15 @@
 ---
 - name: Record the post_install_time
   delegate_to: localhost
-  register: post_install_time
+  register: post_install_time_raw
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"
+
+- name: Capture post_install_time
+  register: post_install_time
+  ansible.builtin.set_stats:
+    data:
+      post_install_time: "{{ post_install_time_raw.stdout }}"
 
 - name: Making sure all our software is installed
   ansible.builtin.dnf:
