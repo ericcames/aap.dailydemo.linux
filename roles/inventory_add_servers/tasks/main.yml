@@ -23,6 +23,7 @@
 - name: Create a new token using username/password
   register: new_token
   ansible.controller.token:
+    controller_host: https://{{ controller_url }}
     description: 'Daily Demo token'
     scope: "write"
     state: present

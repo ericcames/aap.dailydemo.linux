@@ -13,6 +13,7 @@
     description: 'Daily Demo token'
     scope: "write"
     state: present
+    controller_host: https://{{ controller_url }}
     controller_username: "{{ controller_passwd }}"
     controller_password: "{{ controller_passwd }}"
 
