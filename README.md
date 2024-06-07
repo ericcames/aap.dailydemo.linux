@@ -16,6 +16,7 @@ A demo designed to showcase many of the use case that people are looking for.  W
 - [6. Configuration Management](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/post_install_06.yml "post_install_06.yml")
 - [7. User access](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/provision_user_access_07.yml "provision_user_access_07.yml")
 - [8. Application install](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/lamp_setup_08.yml "lamp_setup_08.yml")
+- [9. Website deployment](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/website_deployment_09.yml "website_deployment_09.yml")
 
 
 # The website
