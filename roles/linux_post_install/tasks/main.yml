@@ -42,9 +42,9 @@
 #   ansible.builtin.set_fact:
 #     my_public_ip: "{{ hostvars['localhost']['my_public_ip']}}"
 
-# - name: Print ansible facts
-#   ansible.builtin.debug:
-#     var: ansible_facts
+- name: Print my_public_ip
+  ansible.builtin.debug:
+    var: my_public_ip
 
 - name: Update the /etc/hosts file
   ansible.builtin.template:
