@@ -1,0 +1,14 @@
+---
+- name: Check webserver
+  hosts: all
+  sources:
+    - ansible.eda.url_check:
+        urls:
+          - https://aap.kona.services:8443
+        delay: 60
+  rules:
+    - name: Restart Nginx
+      condition: event.url_check.status == "up"
+      action:
+        run_playbook:
+          name: "../playbooks/print.yml"
