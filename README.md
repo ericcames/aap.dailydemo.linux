@@ -15,6 +15,10 @@ A demo designed to showcase many of the use case that people are looking for.  W
 - [5. Red Hat Registration](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/redhat_subscription_manager_05.yml "redhat_subscription_manager_05.yml")
 
 # The website
-========
+
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/DDLW1.png "Webtop")
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/DDLW2.png "Webbottom")
+
+# A youtube video of the demo
+
+- [AAP Daily Demo Linux](https://youtu.be/Wvf7-CZmAHI?si=oxqDRAWsfqpXTnD- "AAP Daily Demo Linux")
