@@ -7,8 +7,9 @@
           - https://aap.kona.services:8443
         delay: 60
   rules:
-    - name: Restart Nginx
+    - name: Check webserver
       condition: event.url_check.status == "up"
       action:
-        run_playbook:
-          name: "../playbooks/print.yml"
+        run_job_template:
+          name: "print"
+          organization: Ames Company
