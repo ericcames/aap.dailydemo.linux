@@ -8,7 +8,6 @@
       instance-state-name: [running]
 
 - name: Create a new token using username/password
-  register: new_token
   ansible.controller.token:
     controller_host: https://{{ controller_url }}
     controller_username: "{{ controller_user }}"
@@ -22,7 +21,7 @@
   loop: "{{ instance_info['instances'] }}"
   ansible.controller.host:
     controller_host: https://{{ controller_url }}
-    controller_oauthtoken: "{{ new_token.controller_token }}"
+    controller_oauthtoken: "{{ controller_token }}"
     name: "{{ item['public_dns_name'] }}"
     inventory: "{{ managed_inventory_name }}"
     state: absent
@@ -32,7 +31,7 @@
     - rheldemo
   ansible.controller.group:
     controller_host: https://{{ controller_url }}
-    controller_oauthtoken: "{{ new_token.controller_token }}"
+    controller_oauthtoken: "{{ controller_token }}"
     name: "{{ item }}"
     inventory: "{{ managed_inventory_name }}"
     state: absent
