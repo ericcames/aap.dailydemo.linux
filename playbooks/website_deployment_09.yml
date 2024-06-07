@@ -1,0 +1,8 @@
+---
+- name: Website setup
+  hosts: rheldemo
+  become: true
+
+  roles:
+
+    - role: website_setup
