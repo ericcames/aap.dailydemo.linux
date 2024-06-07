@@ -10,12 +10,13 @@
 - name: Create a new token using username/password
   register: new_token
   ansible.controller.token:
-    description: 'Daily Demo token'
-    scope: "write"
-    state: present
     controller_host: https://{{ controller_url }}
-    controller_username: "{{ controller_passwd }}"
+    controller_username: "{{ controller_user }}"
     controller_password: "{{ controller_passwd }}"
+    validate_certs: false
+    description: Daily Demo token
+    scope: write
+    state: present
 
 - name: Remove Linux Daily Demo server from the inventory
   loop: "{{ instance_info['instances'] }}"

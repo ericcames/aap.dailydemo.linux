@@ -24,11 +24,12 @@
   register: new_token
   ansible.controller.token:
     controller_host: https://{{ controller_url }}
-    description: 'Daily Demo token'
-    scope: "write"
-    state: present
-    controller_username: "{{ controller_passwd }}"
+    controller_username: "{{ controller_user }}"
     controller_password: "{{ controller_passwd }}"
+    validate_certs: false
+    description: Daily Demo token
+    scope: write
+    state: present
 
 - name: Update the AAP Managed Inventory with the Linux Daily Demo servers
   loop: "{{ instance_info['instances'] }}"
