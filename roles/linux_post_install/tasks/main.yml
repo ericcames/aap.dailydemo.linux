@@ -32,13 +32,13 @@
   redhat.insights.insights_register:
     state: present
 
-- name: Get the ansible fact from the first play
-  ansible.builtin.set_fact:
-    my_public_ip: "{{ hostvars['localhost']['my_public_ip']}}"
+# - name: Get the ansible fact from the first play
+#   ansible.builtin.set_fact:
+#     my_public_ip: "{{ hostvars['localhost']['my_public_ip']}}"
 
-- name: Print ansible facts
-  ansible.builtin.debug:
-    var: ansible_facts
+# - name: Print ansible facts
+#   ansible.builtin.debug:
+#     var: ansible_facts
 
 - name: Update the /etc/hosts file
   ansible.builtin.template:
