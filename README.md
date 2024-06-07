@@ -9,7 +9,7 @@ A demo designed to showcase many of the use case that people are looking for.  W
 **The Playbooks**
 
 - [Create our network container first](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/create_vpc_01.yml "create_vpc_01.yml")
-- [Ansible code bot console](https://bot.ai.ansible.redhat.com/console "Ansible code bot console")
+- [Create our virtual machine second](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/create_instance_02.yml "create_instance_02.yml")
 
 # The website
 ========
