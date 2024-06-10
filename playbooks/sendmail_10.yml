@@ -2,6 +2,19 @@
 - name: Sends a mail
   hosts: localhost
 
+  pre_tasks:
+
+    - name: Check for our mandatory variables
+      # You can create a custom credential for the mandatory variables
+      ansible.builtin.assert:
+        that:
+          - MAILHOST is defined
+          - MAILHOST_PORT is defined
+          - MAILHOST_USERNAME is defined
+          - MAILHOST_PASSWORD is defined
+        fail_msg: "Please make sure your mandatory variables are set"
+        success_msg: "All mandatory variables have beed set"
+
   roles:
 
     - role: sendmail
