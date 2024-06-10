@@ -14,7 +14,7 @@
     pre_check_services: "{{ services }}"
 
 - name: Making sure all our software is installed
-  ansible.builtin.package:
+  ansible.builtin.dnf:
     name:
       - insights-client
       - bind-utils
@@ -22,20 +22,16 @@
       - wget
       - git
       - rsync
-    update_cache: true
-    state: latest
-
-- name: Gather the list of packages we want to update here; excluding sudo & openssl
-  register: my_packages
-  ansible.builtin.shell: dnf list updates --security -q | grep -v Available| grep -v sudo|grep -v openssl | awk '{print $1}'
-  args:
-    executable: /bin/bash
+    state: installed
 
 - name: patching my_packages
   when: my_packages.stdout_lines != []
   register: dnf_patch
   ansible.builtin.dnf:
-    name: "{{ my_packages.stdout_lines}}"
+    name: '*'
+    exclude:
+      - openssl
+      - sudo
 
 - name: Set fact for report
   ansible.builtin.set_fact:
