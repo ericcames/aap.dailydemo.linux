@@ -5,6 +5,14 @@
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"
 
+- name: Get services
+  check_mode: false
+  ansible.builtin.service_facts:
+
+- name: Pre-check | services state
+  ansible.builtin.set_fact:
+    pre_check_services: "{{ services }}"
+
 - name: Making sure all our software is installed
   ansible.builtin.dnf:
     name:
@@ -22,11 +30,21 @@
   args:
     executable: /bin/bash
 
+# - name: patching my_packages
+#   when: my_packages.stdout_lines != []
+#   ansible.builtin.shell: "dnf update -y {{ my_packages.stdout_lines | join(' ') }}"
+#   args:
+#     executable: /bin/bash
+
 - name: patching my_packages
   when: my_packages.stdout_lines != []
-  ansible.builtin.shell: "dnf update -y {{ my_packages.stdout_lines | join(' ') }}"
-  args:
-    executable: /bin/bash
+  register: dnf_patch
+  ansible.builtin.dnf:
+    name: "{{ my_packages.stdout_lines}}"
+
+- name: Set fact for report
+  ansible.builtin.set_fact:
+    pkg_mgr_output: "{{ dnf_patch }}"
 
 - name: Register the insights client
   redhat.insights.insights_register:
@@ -139,3 +157,7 @@
 - name: Reboot the machine if it is required
   when: reboot_required.stat.exists
   ansible.builtin.reboot:
+
+- name: Get services
+  check_mode: false
+  ansible.builtin.service_facts:
