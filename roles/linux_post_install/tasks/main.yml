@@ -25,22 +25,11 @@
     update_cache: true
     state: latest
 
-# - name: Making sure all our software is installed
-#   ansible.builtin.shell: dnf install -y insights-client bind-utils ansible-core wget git rsync
-#   args:
-#     executable: /bin/bash
-
 - name: Gather the list of packages we want to update here; excluding sudo & openssl
   register: my_packages
   ansible.builtin.shell: dnf list updates --security -q | grep -v Available| grep -v sudo|grep -v openssl | awk '{print $1}'
   args:
     executable: /bin/bash
-
-# - name: patching my_packages
-#   when: my_packages.stdout_lines != []
-#   ansible.builtin.shell: "dnf update -y {{ my_packages.stdout_lines | join(' ') }}"
-#   args:
-#     executable: /bin/bash
 
 - name: patching my_packages
   when: my_packages.stdout_lines != []
@@ -58,7 +47,7 @@
 
 - name: Get the ansible fact from the first play
   ansible.builtin.set_fact:
-    my_public_ip: "{{ hostvars['localhost']['my_public_ip']}}"
+    my_public_ip: "{{ hostvars['localhost']['my_public_ip'] }}"
 
 - name: Print ansible facts
   ansible.builtin.debug:
