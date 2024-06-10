@@ -25,7 +25,6 @@
     state: installed
 
 - name: patching my_packages
-  when: my_packages.stdout_lines != []
   register: dnf_patch
   ansible.builtin.dnf:
     name: '*'
