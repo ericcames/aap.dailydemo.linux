@@ -17,3 +17,7 @@
       assignment_group: "{{ support_group }}"
     ip_address: "{{ my_public_ip }}"
     operational_status: "{{ ci_operational_status }}"
+
+- name: print the result
+  ansible.builtin.debug:
+    var: server_info
