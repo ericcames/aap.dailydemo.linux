@@ -1,0 +1,9 @@
+---
+- name: Print something out, this playbook is used by at rulebook called url_check.yml
+  hosts: localhost
+
+  tasks:
+
+    - name: Print out the call clear
+      ansible.builtin.debug:
+        msg: "The webchecks are good for aap.kona.services:8443"

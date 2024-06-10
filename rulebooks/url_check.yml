@@ -11,5 +11,5 @@
       condition: event.url_check.status == "up"
       action:
         run_job_template:
-          name: "print"
+          name: "web checks are good"
           organization: Ames Company
