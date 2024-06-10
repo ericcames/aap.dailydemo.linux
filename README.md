@@ -20,9 +20,37 @@ A demo designed to showcase many of the use cases that people are looking for.  
 [10. Send notification that the website is ready](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/sendmail_10.ym "sendmail_10.yml")<br>
 - Custom Mail Server credential
 ```
+Input configuration
+
+fields:
+  - id: smtp_server
+    type: string
+    label: Mail Server
+  - id: smtp_port
+    type: string
+    label: Mail Server Port
+  - id: smtp_username
+    type: string
+    label: Mail Server Username
+  - id: smtp_password
+    type: string
+    label: Mail Server Password
+    secret: true
+required:
+  - smtp_server
+  - smtp_port
+  - smtp_username
+  - smtp_password
 ```
+```
+Injector configuration
 
-
+env:
+  MAILHOST: '{{smtp_server}}'
+  MAILHOST_PORT: '{{smtp_port}}'
+  MAILHOST_PASSWORD: '{{smtp_password}}'
+  MAILHOST_USERNAME: '{{smtp_username}}'
+```
 # The website
 
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/DDLW1.png "Webtop")
