@@ -31,7 +31,7 @@
         linux_patch_run_once: false
         linux_patch_become_publish: true
         linux_patch_output_remote_host: "{{ inventory_hostname }}"
-        linux_patch_output_dest: "/var/www/html/patch/index.html"
+        linux_patch_output_dest: "/var/www/html/patch.html"
 
 - name: Send email
   hosts: localhost
