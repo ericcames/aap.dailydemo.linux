@@ -1,4 +1,14 @@
 ---
+- name: Check for our mandatory variables
+  # You can create a custom credential for the mandatory variables
+  ansible.builtin.assert:
+    that:
+      - controller_url is defined
+      - controller_user is defined
+      - controller_passwd is defined
+    fail_msg: "Please make sure your mandatory variables are set"
+    success_msg: "All mandatory variables have beed set"
+
 # Gather the start time to use in a later playbook
 - name: Record the aws_sync_time
   delegate_to: 127.0.0.1
