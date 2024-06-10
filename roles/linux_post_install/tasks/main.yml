@@ -14,7 +14,7 @@
     pre_check_services: "{{ services }}"
 
 - name: Making sure all our software is installed
-  ansible.builtin.dnf:
+  ansible.builtin.package:
     name:
       - insights-client
       - bind-utils
@@ -22,7 +22,6 @@
       - wget
       - git
       - rsync
-    update_cache: true
     state: present
 
 - name: Gather the list of packages we want to update here; excluding sudo & openssl
