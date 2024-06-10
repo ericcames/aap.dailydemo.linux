@@ -45,7 +45,7 @@ required:
 ```
 Injector configuration
 
-env:
+extra_vars:
   MAILHOST: '{{smtp_server}}'
   MAILHOST_PORT: '{{smtp_port}}'
   MAILHOST_PASSWORD: '{{smtp_password}}'
