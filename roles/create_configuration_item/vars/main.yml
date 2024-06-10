@@ -1,0 +1,12 @@
+my_server: aap.server.com
+ci_short_description: "created by aap.kona.services:8443"
+my_instance_id: 123456
+my_ami_id: 654321
+ci_sys_class_name: cmdb_ci_linux_server
+ci_assigned_to: mickey.mouse
+ci_environment: production
+ci_install_status: installed
+ci_category: Hardware
+my_instance_type: ''
+support_group: "Ansible West Tigers"
+ci_operational_status: operational
