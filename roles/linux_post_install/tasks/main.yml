@@ -13,21 +13,22 @@
   ansible.builtin.set_fact:
     pre_check_services: "{{ services }}"
 
-# - name: Making sure all our software is installed
-#   ansible.builtin.package:
-#     name:
-#       - insights-client
-#       - bind-utils
-#       - ansible-core
-#       - wget
-#       - git
-#       - rsync
-#     state: present
-
 - name: Making sure all our software is installed
-  ansible.builtin.shell: dnf install -y insights-client bind-utils ansible-core wget git rsync
-  args:
-    executable: /bin/bash
+  ansible.builtin.package:
+    name:
+      - insights-client
+      - bind-utils
+      - ansible-core
+      - wget
+      - git
+      - rsync
+    update_cache: true
+    state: latest
+
+# - name: Making sure all our software is installed
+#   ansible.builtin.shell: dnf install -y insights-client bind-utils ansible-core wget git rsync
+#   args:
+#     executable: /bin/bash
 
 - name: Gather the list of packages we want to update here; excluding sudo & openssl
   register: my_packages
