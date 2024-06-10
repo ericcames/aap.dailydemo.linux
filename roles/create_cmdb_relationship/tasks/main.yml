@@ -1,0 +1,23 @@
+---
+- name: Create a configuration item
+  register: server_info
+  servicenow.itsm.configuration_item:
+    name: "{{ my_server }}"
+    state: present
+    short_description: "{{ ci_short_description }}"
+    serial_number: "{{ my_instance_id }}"
+    asset_tag: "{{ my_ami_id }}"
+    sys_class_name: "{{ ci_sys_class_name }}"
+    assigned_to: "{{ ci_assigned_to }}"
+    environment: "{{ ci_environment }}"
+    install_status: "{{ ci_install_status }}"
+    category: "{{ ci_category }}"
+    other:
+      model_number: "{{ my_instance_type }}"
+      assignment_group: "{{ support_group }}"
+    ip_address: "{{ my_public_ip }}"
+    operational_status: "{{ ci_operational_status }}"
+
+- name: print the result
+  ansible.builtin.debug:
+    var: server_info

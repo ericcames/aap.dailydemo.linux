@@ -1,20 +1,7 @@
 ---
 - name: Relating newly built server to the business application it supports
   hosts: localhost
-  gather_facts: no
 
-  tasks:
+  roles:
 
-    - name: So that we know why we built the thing
-      register: my_result
-      servicenow.itsm.api:
-        action: post
-        resource: cmdb_rel_ci
-        data:
-          child: "Ansible Demonstrations"
-          parent: "{{ my_server }}"
-          type: "Uses::Used by"
-
-    - name: Print my_result
-      ansible.builtin.debug:
-        var: my_result
+    - role: create_cmdb_relationship
