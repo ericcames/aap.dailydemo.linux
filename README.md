@@ -18,6 +18,9 @@ A demo designed to showcase many of the use cases that people are looking for.  
 [8. Application install](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/lamp_setup_08.yml "lamp_setup_08.yml")<br>
 [9. Website deployment](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/website_deployment_09.yml "website_deployment_09.yml")<br>
 [10. Send notification that the website is ready](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/sendmail_10.ym "sendmail_10.yml")<br>
+- Custom Mail Server credential
+```
+```
 
 
 # The website
