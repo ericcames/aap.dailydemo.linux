@@ -28,9 +28,7 @@
   register: dnf_patch
   ansible.builtin.dnf:
     name: '*'
-    exclude:
-      - openssl
-      - sudo
+    exclude: [sudo]
 
 - name: Set fact for report
   ansible.builtin.set_fact:
