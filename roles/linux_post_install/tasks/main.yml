@@ -22,6 +22,7 @@
       - wget
       - git
       - rsync
+    update_cache: true
     state: present
 
 - name: Gather the list of packages we want to update here; excluding sudo & openssl
