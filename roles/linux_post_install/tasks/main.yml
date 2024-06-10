@@ -51,7 +51,7 @@
 
 - name: Print ansible facts
   ansible.builtin.debug:
-    var: ansible_facts
+    msg: "{{ hostvars[inventory_hostname]['ansible_facts'] }}"
 
 - name: Update the /etc/hosts file
   ansible.builtin.template:
