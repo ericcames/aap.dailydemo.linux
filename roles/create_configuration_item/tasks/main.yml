@@ -4,16 +4,16 @@
   servicenow.itsm.configuration_item:
     name: "{{ my_server }}"
     state: present
-    short_description: Ansible Automation Platfrom demo
+    short_description: "{{ ci_short_description }}"
     serial_number: "{{ my_instance_id }}"
     asset_tag: "{{ my_ami_id }}"
-    sys_class_name: cmdb_ci_linux_server
-    assigned_to: hercules
-    environment: production
-    install_status: installed
-    category: Hardware
+    sys_class_name: "{{ ci_sys_class_name }}"
+    assigned_to: "{{ ci_assigned_to }}"
+    environment: "{{ ci_environment }}"
+    install_status: "{{ ci_install_status }}"
+    category: "{{ ci_category }}"
     other:
       model_number: "{{ my_instance_type }}"
-      assignment_group: "Ansible West Tigers"
+      assignment_group: "{{ support_group }}"
     ip_address: "{{ my_public_ip }}"
-    operational_status: operational
+    operational_status: "{{ ci_operational_status }}"
