@@ -1,0 +1,8 @@
+caller_name: mickey.mouse
+my_job_id: 123456
+my_job_template_name: foobar
+ticket_number: 654321
+incident_impact: low
+incident_urgency: low
+support_group: "Ansible West Tigers"
+my_error: "Uh Oh something went wrong"

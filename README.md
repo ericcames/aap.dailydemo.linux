@@ -88,6 +88,7 @@ ServiceNow
 
 [Create a CMDB record](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/create_ci.yml "create_ci.yml") <br>
 [Create a CMDB relationship](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/create_cmdb_relationship.yml "create_cmdb_relationship.yml") <br>
+[Create incident ticket](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/incident_create.yml "incident_create.yml") <br>
 
 - ServiceNow credential
 ```
@@ -138,6 +139,40 @@ Authorization URL: https://ericames.ddns.net/api/o/authorize/
 Token URL: https://ericames.ddns.net/api/o/token/
 OAuth Redirect URL: https://ven05433.service-now.com/api/sn_ansible_spoke/ansible_oauth_redirect
 
+```
+- Automated incident management example
+
+[Example Error Handling in support of incident enrichment](https://github.com/ericcames/aap.dailydemo.linux/blob/main/roles/instance_create_aws/tasks/main.yml "Example Error Handling") <br>
+
+```
+- name: Adding incident management error handling
+  block:
+
+    PUT YOUR TASKS HERE
+
+  rescue:
+
+    - name: Capture the error message
+      register: my_error
+      ansible.builtin.set_stats:
+        data:
+          my_error: "{{ ansible_failed_result.msg }}"
+
+    - name: Capture the Job ID
+      register: my_job_id
+      ansible.builtin.set_stats:
+        data:
+          my_job_id: "{{ tower_job_id }}"
+
+    - name: Capture the Job Template name
+      register: my_job_template_name
+      ansible.builtin.set_stats:
+        data:
+          my_job_template_name: "{{ tower_job_template_name }}"
+
+    - name: Fail the job even though the rescue worked
+      ansible.builtin.fail:
+        msg: failing so we create the incident ticket
 ```
 
 # The website

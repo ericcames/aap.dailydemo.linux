@@ -8,44 +8,80 @@
     data:
       machine_create_time: "{{ machine_create_time }}"
 
-- name: Looking up Subnet_id
-  register: subnet_id
-  amazon.aws.ec2_vpc_subnet_info:
-    region: "{{ region }}"
-    filters:
-      tag:Name: "{{ subnet_name }}"
+- name: Adding incident management error handling
+  block:
+    - name: Record the machine_create_time
+      delegate_to: localhost
+      ansible.builtin.set_fact:
+        machine_create_time: "{{ lookup('pipe', 'date \"+%H:%M:%S\"') }}"
 
-- name: Setting vpc_subnet_id based on Lookup
-  when: vpc_subnet_id is undefined
-  ansible.builtin.set_fact:
-    vpc_subnet_id: "{{ subnet_id.subnets[0].id }}"
+    - name: Publish to workflow artifacts
+      ansible.builtin.set_stats:
+        data:
+          machine_create_time: "{{ machine_create_time }}"
 
-- name: Creating machine instance
-  register: ec2_vms
-  amazon.aws.ec2_instance:
-    name: Linux Daily Demo
-    region: "{{ region }}"
-    state: running
-    key_name: "{{ my_ssh_key }}"
-    vpc_subnet_id: "{{ vpc_subnet_id }}"
-    instance_type: "{{ instance_type }}"
-    security_group: "{{ ec2_security_group_name }}"
-    network:
-      assign_public_ip: "{{ assign_public_ip }}"
-    image_id: "{{ image }}"
-    tags:
-      Environment: linux-dailydemo
-      AlwaysUp: "{{ alwaysup }}"
-      Createdby: Ansible Controller
-      Contact: "{{ my_email_address }}"
-      DeletebBy: "{{ ec2_ansible_group }}"
-    wait: true
-    wait_timeout: 600
+    - name: Looking up Subnet_id
+      register: subnet_id
+      amazon.aws.ec2_vpc_subnet_info:
+        region: "{{ region }}"
+        filters:
+          tag:Name: "{{ subnet_name }}"
 
-- name: Wait 300 seconds for port 22 to become open and contain "OpenSSH"
-  loop: "{{ ec2_vms['instances'] }}"
-  ansible.builtin.wait_for:
-    port: 22
-    host: "{{ item['public_ip_address'] }}"
-    search_regex: OpenSSH
-    delay: 10
+    - name: Setting vpc_subnet_id based on Lookup
+      when: vpc_subnet_id is undefined
+      ansible.builtin.set_fact:
+        vpc_subnet_id: "{{ subnet_id.subnets[0].id }}"
+
+    - name: Creating machine instance
+      register: ec2_vms
+      amazon.aws.ec2_instance:
+        name: Linux Daily Demo
+        region: "{{ region }}"
+        state: running
+        key_name: "{{ my_ssh_key }}"
+        vpc_subnet_id: "{{ vpc_subnet_id }}"
+        instance_type: "{{ instance_type }}"
+        security_group: "{{ ec2_security_group_name }}"
+        network:
+          assign_public_ip: "{{ assign_public_ip }}"
+        image_id: "{{ image }}"
+        tags:
+          Environment: linux-dailydemo
+          AlwaysUp: "{{ alwaysup }}"
+          Createdby: Ansible Controller
+          Contact: "{{ my_email_address }}"
+          DeletebBy: "{{ ec2_ansible_group }}"
+        wait: true
+        wait_timeout: 600
+
+    - name: Wait 300 seconds for port 22 to become open and contain "OpenSSH"
+      loop: "{{ ec2_vms['instances'] }}"
+      ansible.builtin.wait_for:
+        port: 22
+        host: "{{ item['public_ip_address'] }}"
+        search_regex: OpenSSH
+        delay: 10
+
+  rescue:
+
+    - name: Capture the error message
+      register: my_error
+      ansible.builtin.set_stats:
+        data:
+          my_error: "{{ ansible_failed_result.msg }}"
+
+    - name: Capture the Job ID
+      register: my_job_id
+      ansible.builtin.set_stats:
+        data:
+          my_job_id: "{{ tower_job_id }}"
+
+    - name: Capture the Job Template name
+      register: my_job_template_name
+      ansible.builtin.set_stats:
+        data:
+          my_job_template_name: "{{ tower_job_template_name }}"
+
+    - name: Fail the job even though the rescue worked
+      ansible.builtin.fail:
+        msg: failing so we create the incident ticket

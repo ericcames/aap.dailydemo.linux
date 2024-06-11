@@ -1,0 +1,21 @@
+---
+- name: Create the incident ticket
+  register: incident_info
+  servicenow.itsm.incident:
+    state: new
+    caller: "{{ caller_name }}"
+    short_description: "Ansible Automation Platform - Job ID: {{ my_job_id }} - Template named: {{ my_job_template_name }} - failure see description."
+    description: "ServiceNow Request: {{ ticket_number }}\n\nAnsible Job ID: {{ my_job_id }}\n\nTemplate named: {{ my_job_template_name }}\n\n Message: {{ my_error }}"
+    impact: "{{ incident_impact }}"
+    urgency: "{{ incident_urgency }}"
+    other:
+      assignment_group: "{{ support_group }}"
+
+- name: Print out the Incident info
+  ansible.builtin.debug:
+    var: incident_info.record.number
+
+- name: Capture the Incident Ticket number
+  ansible.builtin.set_stats:
+    data:
+      incident_ticket: "{{ incident_info.record.number }}"
