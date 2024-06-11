@@ -88,11 +88,15 @@ ServiceNow
 
 **The playbooks**
 
-![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/Workflow2.png "Middle of Workflow")
-
 [Create a CMDB record](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/create_ci.yml "create_ci.yml") <br>
 [Create a CMDB relationship](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/create_cmdb_relationship.yml "create_cmdb_relationship.yml") <br>
+
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/Workflow2.png "Middle of Workflow")
+
 [Create incident ticket](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/incident_create.yml "incident_create.yml") <br>
+
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/Workflow1.png "Start of workflow")
+
 [Update requested item ticket](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/update_sn_req_itm.yml "update_sn_req_itm.yml") <br>
 
 
@@ -147,8 +151,6 @@ OAuth Redirect URL: https://ven05433.service-now.com/api/sn_ansible_spoke/ansibl
 
 ```
 - Automated incident management example
-
-![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/Workflow1.png "Start of workflow")
 
 [Example Error Handling in support of incident enrichment](https://github.com/ericcames/aap.dailydemo.linux/blob/main/roles/instance_create_aws/tasks/main.yml "Example Error Handling") <br>
 
