@@ -86,6 +86,35 @@ extra_vars:
 [Create a CMDB record](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/create_ci.yml "create_ci.yml") <br>
 [Create a CMDB relationship](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/create_cmdb_relationship.yml "create_cmdb_relationship.yml") <br>
 
+- ServiceNow credential
+```
+Input configuration
+
+fields:
+  - id: instance
+    type: string
+    label: Instance
+  - id: username
+    type: string
+    label: username
+  - id: password
+    type: string
+    label: password
+    secret: true
+required:
+  - instance
+  - username
+  - password
+```
+```
+Injector configuration
+
+env:
+  SN_HOST: '{{instance}}'
+  SN_PASSWORD: '{{password}}'
+  SN_USERNAME: '{{username}}'
+```
+
 # The website
 
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/DDLW1.png "Webtop")
