@@ -24,18 +24,3 @@
     from: "{{ mailfrom }}"
     to: "{{ mailto }}"
     bcc: "{{ bccto }}"
-
-    # - name: Send an email with the link to the aap demo Server
-#   community.general.mail:
-#     host: "{{ smtpserver }}"
-#     port: "{{ smtp_port }}"
-#     secure: try
-#     username: "{{ smtp_username }}"
-#     password: "{{ smtp_password }}"
-#     subject: Ansible Automation Platform (AAP) Daily Demo - Linux
-#     body: "System {{ my_server['ansible_stats']['data']['my_server'] }} has been successfully provisioned using AAP.\n
-#            You can admin the machine here: https://{{ my_server['ansible_stats']['data']['my_server'] }}:9090\n
-#            ssh {{ my_server['ansible_stats']['data']['my_server'] }}"
-#     from: "{{ mailfrom }}"
-#     to: "{{ mailto }}"
-#     bcc: "{{ bccto }}"

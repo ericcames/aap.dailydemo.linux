@@ -3,4 +3,3 @@ region: us-west-1
 servername: Linux Daily Demo
 my_email_address: "{{ user_name }}@redhat.com"
 ansible_python_interpreter: /usr/bin/python3
-user_name: mickey.mouse
