@@ -1,0 +1,14 @@
+---
+- name: So that we know why we built the thing
+  register: my_result
+  servicenow.itsm.api:
+    action: post
+    resource: "{{ relationship_resource }}"
+    data:
+      child: "{{ relationship_child }}"
+      parent: "{{ my_server }}"
+      type: "{{ relationship_type }}"
+
+- name: print the result
+  ansible.builtin.debug:
+    var: my_result

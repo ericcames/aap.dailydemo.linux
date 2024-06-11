@@ -1,19 +1,41 @@
 ---
-- name: Printing
-  debug:
-    var: my_server
+- name: Check for our mandatory variables
+  # You can create a custom credential for the mandatory variables
+  ansible.builtin.assert:
+    that:
+      - MAILHOST is defined
+      - MAILHOST_PORT is defined
+      - MAILHOST_USERNAME is defined
+      - MAILHOST_PASSWORD is defined
+    fail_msg: "Please make sure your mandatory variables are set"
+    success_msg: "All mandatory variables have beed set"
 
 - name: Send an email with the link to the aap demo Server
   community.general.mail:
-    host: "{{ smtpserver }}"
-    port: "{{ smtp_port }}"
+    host: "{{ MAILHOST }}"
+    port: "{{ MAILHOST_PORT }}"
     secure: try
-    username: "{{ smtp_username }}"
-    password: "{{ smtp_password }}"
+    username: "{{ MAILHOST_USERNAME }}"
+    password: "{{ MAILHOST_PASSWORD }}"
     subject: Ansible Automation Platform (AAP) Daily Demo - Linux
-    body: "System {{ my_server['ansible_stats']['data']['my_server'] }} has been successfully provisioned using AAP.\n
-           You can admin the machine here: https://{{ my_server['ansible_stats']['data']['my_server'] }}:9090\n
-           ssh {{ my_server['ansible_stats']['data']['my_server'] }}"
+    body: "System {{ my_server }} has been successfully provisioned using AAP.\n
+           You can admin the machine here: https://{{ my_server }}:9090\n
+           ssh {{ my_server }}"
     from: "{{ mailfrom }}"
     to: "{{ mailto }}"
     bcc: "{{ bccto }}"
+
+    # - name: Send an email with the link to the aap demo Server
+#   community.general.mail:
+#     host: "{{ smtpserver }}"
+#     port: "{{ smtp_port }}"
+#     secure: try
+#     username: "{{ smtp_username }}"
+#     password: "{{ smtp_password }}"
+#     subject: Ansible Automation Platform (AAP) Daily Demo - Linux
+#     body: "System {{ my_server['ansible_stats']['data']['my_server'] }} has been successfully provisioned using AAP.\n
+#            You can admin the machine here: https://{{ my_server['ansible_stats']['data']['my_server'] }}:9090\n
+#            ssh {{ my_server['ansible_stats']['data']['my_server'] }}"
+#     from: "{{ mailfrom }}"
+#     to: "{{ mailto }}"
+#     bcc: "{{ bccto }}"

@@ -1,8 +1,8 @@
 ---
-- name: LAMP setup
+- name: Website setup
   hosts: rheldemo
   become: true
 
   roles:
 
-    - role: lamp_setup
+    - role: website_setup

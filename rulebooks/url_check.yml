@@ -1,0 +1,15 @@
+---
+- name: Check webserver
+  hosts: all
+  sources:
+    - ansible.eda.url_check:
+        urls:
+          - https://aap.kona.services:8443
+        delay: 60
+  rules:
+    - name: Check webserver
+      condition: event.url_check.status == "up"
+      action:
+        run_job_template:
+          name: "web checks are good"
+          organization: Ames Company

@@ -1,0 +1,7 @@
+---
+- name: creating a cmdb record
+  hosts: localhost
+
+  roles:
+
+    - role: create_configuration_item

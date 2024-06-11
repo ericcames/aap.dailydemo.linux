@@ -1,7 +1,7 @@
 ---
 - name: Record the post_install_time
   delegate_to: localhost
-  register: post_install_time
+  register: post_install_time_raw
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"
 
@@ -12,6 +12,12 @@
 - name: Pre-check | services state
   ansible.builtin.set_fact:
     pre_check_services: "{{ services }}"
+
+- name: Capture post_install_time
+  register: post_install_time
+  ansible.builtin.set_stats:
+    data:
+      post_install_time: "{{ post_install_time_raw.stdout }}"
 
 - name: Making sure all our software is installed
   ansible.builtin.dnf:
@@ -45,9 +51,9 @@
   ansible.builtin.set_fact:
     my_public_ip: "{{ hostvars['localhost']['my_public_ip'] }}"
 
-- name: Print ansible facts
+- name: Print my_public_ip
   ansible.builtin.debug:
-    msg: "{{ hostvars[inventory_hostname]['ansible_facts'] }}"
+    var: my_public_ip
 
 - name: Update the /etc/hosts file
   ansible.builtin.template:

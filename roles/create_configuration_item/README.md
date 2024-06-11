@@ -1,14 +1,15 @@
-linux_unregister_servers
+create_configuration_item
 =========
 ```
-This will unregister the server from Insights and the Customer Portal.
+Create a Configuration Management Database (CMDB) Record in ServiceNow
 ```
 Requirements
 ------------
 
 Role Variables
 --------------
-
+```
+```
 Dependencies
 ------------
 
@@ -16,13 +17,13 @@ Example Playbook
 ----------------
 ```
 ---
-- name: Linux unregistration
-  hosts: all
+- name: Creates a configuration item
+  hosts: localhost
   connection: local
 
   roles:
 
-    - role: linux_unregister_servers
+    - role: create_configuration_item
 ```
 License
 -------

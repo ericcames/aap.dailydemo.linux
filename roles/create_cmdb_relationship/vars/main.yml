@@ -1,0 +1,4 @@
+relationship_resource: cmdb_rel_ci
+relationship_child: "Ansible Demonstrations"
+my_server: aap.example.com
+relationship_type: "Uses::Used by"
