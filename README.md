@@ -152,3 +152,7 @@ OAuth Redirect URL: https://ven05433.service-now.com/api/sn_ansible_spoke/ansibl
 # Cockpit the Administrators GUI
 
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/cockpit.png "cockpit")
+
+# The command line; there's no place like home :-)
+
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/cli.png "The command line")
