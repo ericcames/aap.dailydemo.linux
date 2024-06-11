@@ -45,7 +45,7 @@ extra_vars:
 [7. User access](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/provision_user_access_07.yml "provision_user_access_07.yml")<br>
 [8. Application install](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/lamp_setup_08.yml "lamp_setup_08.yml")<br>
 [9. Website deployment](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/website_deployment_09.yml "website_deployment_09.yml")<br>
-[10. Send notification that the website is ready](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/sendmail_10.ym "sendmail_10.yml")<br>
+[10. Send notification that the website is ready](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/sendmail_10.yml "sendmail_10.yml")<br>
 - Custom Mail Server credential
 ```
 Input configuration
@@ -79,6 +79,11 @@ extra_vars:
   MAILHOST_PASSWORD: '{{smtp_password}}'
   MAILHOST_USERNAME: '{{smtp_username}}'
 ```
+[Site Delete will clean everything up](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/site_delete.yml "site_delete.yml")<br>
+
+ServiceNow directory
+=======
+
 # The website
 
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/DDLW1.png "Webtop")
