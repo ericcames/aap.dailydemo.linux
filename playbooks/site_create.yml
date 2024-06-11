@@ -14,9 +14,9 @@
   hosts: rheldemo
   become: true
   gather_facts: true
-  # vars:
-  #   vpc_create_time: "{{ hostvars['localhost']['vpc_create_time']['stdout'] }}"
-  #   machine_create_time: "{{ hostvars['localhost']['machine_create_time']['stdout'] }}"
+  vars:
+    vpc_create_time: "{{ hostvars['localhost']['vpc_create_time'] }}"
+    machine_create_time: "{{ hostvars['localhost']['machine_create_time'] }}"
 
   roles:
 
@@ -26,6 +26,12 @@
     - role: linux_account_create
     - role: lamp_setup
     - role: website_setup
+    - role: zjleblanc.reporting.dnf
+      vars:
+        linux_patch_run_once: false
+        linux_patch_become_publish: true
+        linux_patch_output_remote_host: "{{ inventory_hostname }}"
+        linux_patch_output_dest: "/var/www/html/patch.html"
 
 - name: Send email
   hosts: localhost

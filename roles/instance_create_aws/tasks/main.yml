@@ -1,18 +1,24 @@
 ---
+- name: Record the machine_create_time
+  ansible.builtin.set_fact:
+    machine_create_time: "{{ lookup('pipe', 'date \"+%H:%M:%S\"') }}"
+
+- name: Publish to workflow artifacts
+  ansible.builtin.set_stats:
+    data:
+      machine_create_time: "{{ machine_create_time }}"
+
 - name: Adding incident management error handling
   block:
-
     - name: Record the machine_create_time
       delegate_to: localhost
-      register: machine_create_time_raw
-      ansible.builtin.command:
-        cmd: "date '+%H:%M:%S'"
+      ansible.builtin.set_fact:
+        machine_create_time: "{{ lookup('pipe', 'date \"+%H:%M:%S\"') }}"
 
-    - name: Capture vpc start time
-      register: machine_create_time
+    - name: Publish to workflow artifacts
       ansible.builtin.set_stats:
         data:
-          machine_create_time: "{{ machine_create_time_raw.stdout }}"
+          machine_create_time: "{{ machine_create_time }}"
 
     - name: Looking up Subnet_id
       register: subnet_id

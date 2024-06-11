@@ -17,24 +17,21 @@
       tag:Name: Linux Daily Demo
       instance-state-name: [running]
 
-- name: Get an AAP API Token and store it as new_token
-  register: new_token
-  ansible.builtin.uri:
-    url: https://{{ controller_url }}/api/v2/tokens/
-    method: POST
-    user: "{{ controller_user }}"
-    password: "{{ controller_passwd }}"
+- name: Create a new token using username/password
+  ansible.controller.token:
+    controller_host: https://{{ controller_url }}
+    controller_username: "{{ controller_user }}"
+    controller_password: "{{ controller_passwd }}"
     validate_certs: false
-    force_basic_auth: true
-    status_code: 201
-    return_content: true
+    description: Daily Demo token
+    scope: write
+    state: present
 
 - name: Remove Linux Daily Demo server from the inventory
   loop: "{{ instance_info['instances'] }}"
   ansible.controller.host:
     controller_host: https://{{ controller_url }}
-    controller_username: "{{ controller_user }}"
-    controller_oauthtoken: "{{ new_token.json.token }}"
+    controller_oauthtoken: "{{ controller_token }}"
     name: "{{ item['public_dns_name'] }}"
     inventory: "{{ managed_inventory_name }}"
     state: absent
@@ -44,8 +41,7 @@
     - rheldemo
   ansible.controller.group:
     controller_host: https://{{ controller_url }}
-    controller_username: "{{ controller_user }}"
-    controller_oauthtoken: "{{ new_token.json.token }}"
+    controller_oauthtoken: "{{ controller_token }}"
     name: "{{ item }}"
     inventory: "{{ managed_inventory_name }}"
     state: absent

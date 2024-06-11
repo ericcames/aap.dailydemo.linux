@@ -5,6 +5,14 @@
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"
 
+- name: Get services
+  check_mode: false
+  ansible.builtin.service_facts:
+
+- name: Pre-check | services state
+  ansible.builtin.set_fact:
+    pre_check_services: "{{ services }}"
+
 - name: Capture post_install_time
   register: post_install_time
   ansible.builtin.set_stats:
@@ -20,19 +28,20 @@
       - wget
       - git
       - rsync
-    state: present
-
-- name: Gather the list of packages we want to update here; excluding sudo & openssl
-  register: my_packages
-  ansible.builtin.shell: dnf list updates --security -q | grep -v Available| grep -v sudo|grep -v openssl | awk '{print $1}'
-  args:
-    executable: /bin/bash
+    state: installed
 
 - name: patching my_packages
-  when: my_packages.stdout_lines != []
-  ansible.builtin.shell: "dnf update -y {{ my_packages.stdout_lines | join(' ') }}"
-  args:
-    executable: /bin/bash
+  register: dnf_patch
+  ansible.builtin.dnf:
+    name: '*'
+    security: true
+    skip_broken: true
+    update_only: true
+    state: latest
+
+- name: Set fact for report
+  ansible.builtin.set_fact:
+    pkg_mgr_output: "{{ dnf_patch }}"
 
 - name: Register the insights client
   redhat.insights.insights_register:
@@ -40,7 +49,7 @@
 
 - name: Get the ansible fact from the first play
   ansible.builtin.set_fact:
-    my_public_ip: "{{ hostvars['localhost']['my_public_ip']}}"
+    my_public_ip: "{{ hostvars['localhost']['my_public_ip'] }}"
 
 - name: Print my_public_ip
   ansible.builtin.debug:
@@ -145,3 +154,7 @@
 - name: Reboot the machine if it is required
   when: reboot_required.stat.exists
   ansible.builtin.reboot:
+
+- name: Get services
+  check_mode: false
+  ansible.builtin.service_facts:

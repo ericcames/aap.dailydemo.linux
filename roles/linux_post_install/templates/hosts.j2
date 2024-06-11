@@ -2,5 +2,7 @@
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 
 {% for host in groups['rheldemo'] %}
-{{ my_public_ip }} {{ hostvars[host]['ansible_facts']['fqdn'] }} {{ hostvars[host]['ansible_facts']['hostname'] }}
+{% if 'fqdn' in hostvars[host]['ansible_facts'] or 'hostname' in hostvars[host]['ansible_facts'] %}
+{{ my_public_ip }} {{ hostvars[host]['ansible_facts']['fqdn'] | default('') }} {{ hostvars[host]['ansible_facts']['hostname'] | default('') }}
+{% endif %}
 {% endfor %}
