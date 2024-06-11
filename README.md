@@ -148,3 +148,7 @@ OAuth Redirect URL: https://ven05433.service-now.com/api/sn_ansible_spoke/ansibl
 # A youtube video of the demo
 
 - [AAP Daily Demo Linux](https://youtu.be/Wvf7-CZmAHI?si=oxqDRAWsfqpXTnD- "AAP Daily Demo Linux")
+
+# Cockpit the Administrators GUI
+
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/cockpit.png "cockpit")
