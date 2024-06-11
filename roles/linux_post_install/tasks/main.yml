@@ -29,6 +29,7 @@
   ansible.builtin.dnf:
     name: '*'
     security: true
+    skip_broken: true
 
 - name: Set fact for report
   ansible.builtin.set_fact:
