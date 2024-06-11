@@ -28,8 +28,7 @@
   register: dnf_patch
   ansible.builtin.dnf:
     name: '*'
-    update_cache: true
-    skip_broken: true
+    security: true
 
 - name: Set fact for report
   ansible.builtin.set_fact:

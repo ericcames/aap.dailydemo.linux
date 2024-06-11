@@ -30,11 +30,6 @@
     network:
       assign_public_ip: "{{ assign_public_ip }}"
     image_id: "{{ image }}"
-    volumes:
-      - device_name: /dev/sda1
-        ebs:
-          volume_size: 20
-          delete_on_termination: true
     tags:
       Environment: linux-dailydemo
       AlwaysUp: "{{ alwaysup }}"
