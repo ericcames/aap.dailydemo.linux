@@ -1,0 +1,20 @@
+---
+- name: Retrieve requested item ticket sysid
+  register: result
+  servicenow.itsm.api_info:
+    resource: sc_req_item
+    sysparm_query: numberSTARTSWITH{{ ticket_number }}
+
+- name: Print the result
+  ansible.builtin.debug:
+    var: result
+
+- name: Update the requested item work notes and state in ServiceNow
+  servicenow.itsm.api:
+    action: patch
+    resource: sc_req_item
+    sys_id: "{{ result.record[0].sys_id }}"
+    data:
+      request_state: "{{ request_state | default(omit) }}"
+      comments: "{{ requested_item_comments }}"
+      state: "{{ requested_item_state }}"
