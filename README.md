@@ -122,6 +122,24 @@ env:
 [Ansible spoke setup - Alex Dworjan](https://github.com/shadowman-lab/Ansible-SNOW/tree/master/SNOWSetup#servicenowaap-integration-instructions-using-ansible-spoke "Ansible spoke setup - Alex") <br>
 [Ansible spoke youtube - Alex Dworjan](https://www.youtube.com/watch?v=DmPXiRHjgRY "Ansible spoke youtube - Alex Dworjan") <br>
 
+- ServiceNow Ansible spoke setup additional Ansible controllers
+```
+Flow Designer -> Connections -> Add Connection
+
+Connection Name: ericamesAAPalias
+Connection URL: https://ericames.ddns.net
+Credential Name: Eric Ames AAP Spoke Credentials
+Application Registry Name: Eric Ames Spoke Registry
+OAuth Client ID: %SECRETID%
+OAuth Client Secret: %SECRETGOESHERE%
+Oauth Entity Profile Name: Eric Ames Spoke Registry default_profile
+OAuth Entity Scope: write
+Authorization URL: https://ericames.ddns.net/api/o/authorize/
+Token URL: https://ericames.ddns.net/api/o/token/
+OAuth Redirect URL: https://ven05433.service-now.com/api/sn_ansible_spoke/ansible_oauth_redirect
+
+```
+
 # The website
 
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/DDLW1.png "Webtop")
