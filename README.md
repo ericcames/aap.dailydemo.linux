@@ -144,6 +144,8 @@ OAuth Redirect URL: https://ven05433.service-now.com/api/sn_ansible_spoke/ansibl
 ```
 - Automated incident management example
 
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/Workflow1.png "Start of workflow")
+
 [Example Error Handling in support of incident enrichment](https://github.com/ericcames/aap.dailydemo.linux/blob/main/roles/instance_create_aws/tasks/main.yml "Example Error Handling") <br>
 
 ```
