@@ -5,7 +5,7 @@ A demo designed to showcase many of the use cases that people are looking for.  
 # The workflow
 
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/Workflow1.png "Start of workflow")
-![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/Workflow2.png "Workflow")
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/Workflow2.png "Middle of Workflow")
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/Workflow3.png "End of Workflow")
 
 **The playbooks**
