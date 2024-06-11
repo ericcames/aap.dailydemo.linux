@@ -88,9 +88,13 @@ ServiceNow
 
 **The playbooks**
 
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/Workflow2.png "Middle of Workflow")
+
 [Create a CMDB record](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/create_ci.yml "create_ci.yml") <br>
 [Create a CMDB relationship](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/create_cmdb_relationship.yml "create_cmdb_relationship.yml") <br>
 [Create incident ticket](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/incident_create.yml "incident_create.yml") <br>
+[Update requested item ticket](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/update_sn_req_itm.yml "update_sn_req_itm.yml") <br>
+
 
 - ServiceNow credential
 ```
