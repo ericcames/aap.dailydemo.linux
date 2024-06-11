@@ -88,6 +88,7 @@ ServiceNow
 
 [Create a CMDB record](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/create_ci.yml "create_ci.yml") <br>
 [Create a CMDB relationship](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/create_cmdb_relationship.yml "create_cmdb_relationship.yml") <br>
+[Create incident ticket](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/incident_create.yml "incident_create.yml") <br>
 
 - ServiceNow credential
 ```
