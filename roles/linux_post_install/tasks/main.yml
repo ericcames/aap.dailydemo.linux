@@ -28,7 +28,8 @@
   register: dnf_patch
   ansible.builtin.dnf:
     name: '*'
-    exclude: [sudo]
+    exclude:
+      - java-*
     skip_broken: true
 
 - name: Set fact for report
