@@ -187,8 +187,12 @@ OAuth Redirect URL: https://ven05433.service-now.com/api/sn_ansible_spoke/ansibl
 
 # The website
 
-![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/DDLW1.png "Webtop")
-![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/DDLW2.png "Webbottom")
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/Web01.png "Webtop")
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/Web02.png "Webbottom")
+
+- Patching Report
+
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/Patchingreport.png "zjleblanc.reporting collection")
 
 # A youtube video of the demo
 
