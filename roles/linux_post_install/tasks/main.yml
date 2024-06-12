@@ -160,9 +160,12 @@
   ansible.builtin.service_facts:
 
 - name: Save patch reporting facts
+  loop:
+    - key: "{{ inventory_hostname }}"
+      value:
+        pre_check_services: "{{ pre_check_services }}"
+        services: "{{ services }}"
+        pkg_mgr_output: "{{ pkg_mgr_output }}"
   ansible.builtin.set_stats:
-    per_host: true
     data:
-      pre_check_services: "{{ pre_check_services }}"
-      services: "{{ services }}"
-      pkg_mgr_output: "{{ pkg_mgr_output }}"
+      patch_reports: "{{ patch_reports | default({}) | combine ({ item.key : item.value }) }}"

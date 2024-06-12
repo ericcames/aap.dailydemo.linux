@@ -3,9 +3,16 @@
   become: true
   gather_facts: true
 
-  roles:
+  tasks:
+    - name: Extract patch report data from stats
+      ansible.builtin.set_fact:
+        pre_check_services: "{{ patch_reports[inventory_hostname]['pre_check_services'] }}"
+        services: "{{ patch_reports[inventory_hostname]['services'] }}"
+        pkg_mgr_output: "{{ patch_reports[inventory_hostname]['pkg_mgr_output'] }}"
 
-    - role: zjleblanc.reporting.dnf
+    - name: Generate patching report
+      ansible.builtin.include_role:
+        name: zjleblanc.reporting.dnf
       vars:
         linux_patch_run_once: false
         linux_patch_become_publish: true
