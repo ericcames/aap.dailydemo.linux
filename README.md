@@ -13,6 +13,7 @@ A demo designed to showcase many of the use cases that people are looking for.  
 [1. Create our network container](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/create_vpc_01.yml "create_vpc_01.yml") <br>
 [2. Create our virtual machine](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/create_instance_02.yml "create_instance_02.yml")<br>
 [3. Update our inventory](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/add_inventory_03.yml "add_inventory_03.yml")<br>
+
 Ansible Controller Credential<br>
 Input configuration
 ```
@@ -70,6 +71,7 @@ extra_vars:
 [9. Website deployment](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/website_deployment_09.yml "website_deployment_09.yml")<br>
 [10. Reporting](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/reporting.yml "reporting.yml")<br>
 [11. Send notification that the website is ready](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/sendmail_10.yml "sendmail_10.yml")<br>
+
 Custom Mail Server credential<br>
 Input configuration
 ```
@@ -118,7 +120,6 @@ ServiceNow
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/DDLWF1.png "Start of workflow")
 
 [Update requested item ticket](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/update_sn_req_itm.yml "update_sn_req_itm.yml") <br>
-
 
 ServiceNow credential<br>
 Input configuration
