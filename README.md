@@ -44,8 +44,8 @@ extra_vars:
 [4. Gather instance information](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/get_instance_info_04.yml "get_instance_info_04.yml")<br>
 [5. Red Hat Registration](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/redhat_subscription_manager_05.yml "redhat_subscription_manager_05.yml")<br>
 
-- Red Hat Customer Portal Credential
-  Input configuration
+Red Hat Customer Portal Credential<br>
+Input configuration
 ```
 fields:
   - id: user
@@ -59,7 +59,7 @@ required:
   - user
   - password
 ```
-  Injector configuration
+Injector configuration
 ```
 extra_vars:
   customer_portal_password: '{{user}}'
