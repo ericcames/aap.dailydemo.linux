@@ -3,6 +3,7 @@
 - name: Record the subscription_time
   delegate_to: 127.0.0.1
   register: subscription_time_pre
+  changed_when: false
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"
 
