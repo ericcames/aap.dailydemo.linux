@@ -13,10 +13,9 @@ A demo designed to showcase many of the use cases that people are looking for.  
 [1. Create our network container](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/create_vpc_01.yml "create_vpc_01.yml") <br>
 [2. Create our virtual machine](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/create_instance_02.yml "create_instance_02.yml")<br>
 [3. Update our inventory](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/add_inventory_03.yml "add_inventory_03.yml")<br>
-- Custom Ansible Controller Credential
-```
+Ansible Controller Credential<br>
 Input configuration
-
+```
 fields:
   - id: url
     type: string
@@ -33,9 +32,8 @@ required:
   - user
   - password
 ```
-```
 Injector configuration
-
+```
 extra_vars:
   controller_url: '{{url}}'
   controller_user: '{{user}}'
@@ -72,10 +70,9 @@ extra_vars:
 [9. Website deployment](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/website_deployment_09.yml "website_deployment_09.yml")<br>
 [10. Reporting](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/reporting.yml "reporting.yml")<br>
 [11. Send notification that the website is ready](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/sendmail_10.yml "sendmail_10.yml")<br>
-- Custom Mail Server credential
-```
+Custom Mail Server credential<br>
 Input configuration
-
+```
 fields:
   - id: smtp_server
     type: string
@@ -96,9 +93,8 @@ required:
   - smtp_username
   - smtp_password
 ```
-```
 Injector configuration
-
+```
 extra_vars:
   MAILHOST: '{{smtp_server}}'
   MAILHOST_PORT: '{{smtp_port}}'
@@ -124,10 +120,9 @@ ServiceNow
 [Update requested item ticket](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/update_sn_req_itm.yml "update_sn_req_itm.yml") <br>
 
 
-- ServiceNow credential
-```
+ServiceNow credential<br>
 Input configuration
-
+```
 fields:
   - id: instance
     type: string
@@ -144,9 +139,8 @@ required:
   - username
   - password
 ```
-```
 Injector configuration
-
+```
 env:
   SN_HOST: '{{instance}}'
   SN_PASSWORD: '{{password}}'
