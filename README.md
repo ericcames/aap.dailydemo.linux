@@ -43,6 +43,29 @@ extra_vars:
 ```
 [4. Gather instance information](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/get_instance_info_04.yml "get_instance_info_04.yml")<br>
 [5. Red Hat Registration](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/redhat_subscription_manager_05.yml "redhat_subscription_manager_05.yml")<br>
+
+- Red Hat Customer Portal Credential
+  Input configuration
+```
+fields:
+  - id: user
+    type: string
+    label: Red Hat Customer Portal Username (access.redhat.com)
+  - id: password
+    type: string
+    label: Red Hat Customer Portal Password
+    secret: true
+required:
+  - user
+  - password
+```
+  Injector configuration
+```
+extra_vars:
+  customer_portal_password: '{{user}}'
+  customer_portal_username: '{{password}}'
+```
+
 [6. Configuration Management](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/post_install_06.yml "post_install_06.yml")<br>
 [7. User access](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/provision_user_access_07.yml "provision_user_access_07.yml")<br>
 [8. Application install](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/lamp_setup_08.yml "lamp_setup_08.yml")<br>
