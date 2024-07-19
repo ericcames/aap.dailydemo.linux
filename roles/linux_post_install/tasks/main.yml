@@ -2,6 +2,7 @@
 - name: Record the post_install_time
   delegate_to: localhost
   register: post_install_time_raw
+  changed_when: false
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"
 
@@ -23,14 +24,10 @@
   ansible.builtin.dnf:
     name:
       - insights-client
-      - bind-utils
-      - ansible-core
-      - wget
-      - git
-      - rsync
+      - cockpit
     state: installed
 
-- name: patching my_packages
+- name: Patching my_packages
   register: dnf_patch
   ansible.builtin.dnf:
     name: '*'
@@ -107,11 +104,6 @@
     state: directory
     mode: "0755"
 
-- name: Install the latest version of cockpit
-  ansible.builtin.dnf:
-    name: cockpit
-    state: latest
-
 - name: Make sure the /etc/cockpit directory exists
   ansible.builtin.file:
     path: /etc/cockpit
@@ -137,14 +129,10 @@
     mode: u+rw,g-wx,o-wx
 
 - name: Enable the cockpit socket
-  changed_when: false
-  ansible.builtin.command:
-    cmd: systemctl enable cockpit.socket
-
-- name: Start the cockpit socket
-  changed_when: false
-  ansible.builtin.command:
-    cmd: systemctl start cockpit.socket
+  ansible.builtin.systemd_service:
+    name: cockpit.socket
+    state: started
+    enabled: true
 
 - name: Check to see if we need a reboot
   register: reboot_required
