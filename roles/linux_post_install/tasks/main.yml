@@ -156,4 +156,4 @@
         pkg_mgr_output: "{{ pkg_mgr_output }}"
   ansible.builtin.set_stats:
     data:
-      patch_reports: "{{ patch_reports | default({}) | combine ({ item.key : item.value }) }}"
+      patch_reports: "{{ patch_reports | default({}) | combine({item.key: item.value}) }}"
