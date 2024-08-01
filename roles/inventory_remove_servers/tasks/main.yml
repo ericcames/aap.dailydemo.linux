@@ -32,6 +32,7 @@
   ansible.controller.host:
     controller_host: https://{{ controller_url }}
     controller_oauthtoken: "{{ controller_token }}"
+    validate_certs: false
     name: "{{ item['public_dns_name'] }}"
     inventory: "{{ managed_inventory_name }}"
     state: absent
@@ -42,6 +43,7 @@
   ansible.controller.group:
     controller_host: https://{{ controller_url }}
     controller_oauthtoken: "{{ controller_token }}"
+    validate_certs: false
     name: "{{ item }}"
     inventory: "{{ managed_inventory_name }}"
     state: absent
