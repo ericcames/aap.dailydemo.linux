@@ -17,6 +17,14 @@
     group: root
     mode: u+rw,g-wx,o-wx
 
+- name: Copy the image file for the website
+  ansible.builtin.copy:
+    src: images/AmesQNRCode.png
+    dest: /var/www/html/AmesQNRCode.png
+    owner: root
+    group: root
+    mode: u+rw,g-wx,o-wx
+
 - name: Copy the index.html for the website
   ansible.builtin.template:
     src: index_html_aapdemo.j2
