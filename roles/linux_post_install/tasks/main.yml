@@ -27,11 +27,19 @@
       - cockpit
     state: installed
 
+- name: Gather the list of packages we want to up here; excluding sudo & openssl
+  register: my_packages
+  changed_when: false
+  ansible.builtin.shell:
+    cmd: set -o pipefail && dnf list updates --security -q | grep -v Available| grep -v sudo|grep -v openssl | awk '{print $1}'
+    executable: /bin/bash
+
 - name: Patching my_packages
   register: dnf_patch
+  when: my_packages.stdout_lines != []
   ansible.builtin.dnf:
-    name: '*'
-    security: true
+    name: "{{ my_packages.stdout_lines | join(' ') }}"
+    security: false
     skip_broken: true
     update_only: true
     state: latest
