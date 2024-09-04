@@ -35,7 +35,7 @@
       - sudo.x86_64
       - openssl.x86_64
     security: false
-    skip_broken: false
+    skip_broken: true
     update_cache: true
     update_only: false
     state: latest
