@@ -39,9 +39,10 @@
   when: my_packages.stdout_lines != []
   ansible.builtin.dnf:
     name: "{{ my_packages.stdout_lines | join(',') }}"
-    security: true
-    skip_broken: true
-    update_only: true
+    # Keep this commented out so that the R1000 demo works
+    # security: true
+    # skip_broken: true
+    # update_only: true
     state: latest
 
 - name: Set fact for report
