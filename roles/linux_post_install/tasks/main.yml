@@ -34,16 +34,23 @@
     cmd: set -o pipefail && dnf list updates | grep -v Available| grep -v sudo|grep -v openssl | awk '{print $1}'
     executable: /bin/bash
 
+# - name: Patching my_packages
+#   register: dnf_patch
+#   when: my_packages.stdout_lines != []
+#   ansible.builtin.dnf:
+#     name: "{{ my_packages.stdout_lines | join(',') }}"
+#     # Keep this commented out so that the R1000 demo works
+#     # security: true
+#     # skip_broken: true
+#     # update_only: true
+#     state: latest
+
 - name: Patching my_packages
   register: dnf_patch
   when: my_packages.stdout_lines != []
-  ansible.builtin.dnf:
-    name: "{{ my_packages.stdout_lines | join(',') }}"
-    # Keep this commented out so that the R1000 demo works
-    # security: true
-    # skip_broken: true
-    # update_only: true
-    state: latest
+  ansible.builtin.shell: "dnf update -y {{ my_packages.stdout_lines | join(' ') }}"
+  args:
+    executable: /bin/bash
 
 - name: Set fact for report
   ansible.builtin.set_fact:
