@@ -20,13 +20,6 @@
     data:
       post_install_time: "{{ post_install_time_raw.stdout }}"
 
-- name: Making sure all our software is installed
-  ansible.builtin.dnf:
-    name:
-      - insights-client
-      - cockpit
-    state: installed
-
 # - name: Gather the list of packages we want to up here; excluding sudo & openssl
 #   register: my_packages
 #   changed_when: false
@@ -47,6 +40,13 @@
     update_only: false
     state: latest
 
+- name: Making sure all our software is installed
+  ansible.builtin.dnf:
+    name:
+      - insights-client
+      - cockpit
+    state: installed
+
 # - name: Patching my_packages
 #   register: dnf_patch
 #   when: my_packages.stdout_lines != []
@@ -59,8 +59,11 @@
     pkg_mgr_output: "{{ dnf_patch }}"
 
 - name: Register the insights client
-  redhat.insights.insights_register:
-    state: present
+  vars:
+    rhc_insights:
+      autoupdate: true
+  ansible.builtin.import_role:
+    name: redhat.rhel_system_roles.rhc
 
 - name: Get the ansible fact from the first play
   ansible.builtin.set_fact:
