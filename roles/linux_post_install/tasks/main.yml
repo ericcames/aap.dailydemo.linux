@@ -36,8 +36,7 @@
       - openssl.x86_64
     security: false
     skip_broken: true
-    update_cache: true
-    update_only: false
+    update_only: true
     state: latest
 
 - name: UnRegister and Register the insights client
