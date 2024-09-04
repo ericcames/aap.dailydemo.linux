@@ -40,10 +40,17 @@
     update_only: false
     state: latest
 
+- name: UnRegister and Register the insights client
+  vars:
+    rhc_insights:
+      rhc_state: reconnect
+      autoupdate: true
+  ansible.builtin.import_role:
+    name: redhat.rhel_system_roles.rhc
+
 - name: Making sure all our software is installed
   ansible.builtin.dnf:
     name:
-      - insights-client
       - cockpit
     state: installed
 
@@ -57,13 +64,6 @@
 - name: Set fact for report
   ansible.builtin.set_fact:
     pkg_mgr_output: "{{ dnf_patch }}"
-
-- name: Register the insights client
-  vars:
-    rhc_insights:
-      autoupdate: true
-  ansible.builtin.import_role:
-    name: redhat.rhel_system_roles.rhc
 
 - name: Get the ansible fact from the first play
   ansible.builtin.set_fact:
