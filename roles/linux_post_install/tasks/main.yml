@@ -45,7 +45,6 @@
     skip_broken: false
     update_cache: true
     update_only: false
-    use_backend: "dnf4"
     state: latest
 
 # - name: Patching my_packages
