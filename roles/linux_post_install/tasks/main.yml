@@ -39,8 +39,8 @@
   ansible.builtin.dnf:
     name: '*'
     exclude:
-      - sudo
-      - openssl
+      - sudo.x86_64
+      - openssl.x86_64
     security: false
     skip_broken: false
     update_cache: true
