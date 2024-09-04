@@ -11,3 +11,5 @@ collections:
   - name: community.aws
   - name: zjleblanc.reporting
     version: ">=1.3.0"
+  - name: redhat.rhel_system_roles
+    version: 1.23.0
