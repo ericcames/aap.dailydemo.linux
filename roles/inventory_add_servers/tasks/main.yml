@@ -53,10 +53,6 @@
     enabled: true
 
 - name: Create a group for our Linux Daily Demo servers
-  register: group_add_results
-  until: group_add_results.status == 200
-  retries: 10
-  delay: 10
   loop: "{{ instance_info['instances'] }}"
   ansible.controller.group:
     controller_host: https://{{ controller_url }}
