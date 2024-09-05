@@ -45,6 +45,11 @@
   ansible.builtin.import_role:
     name: redhat.rhel_system_roles.rhc
 
+- name: Run the insights-client to update insights vulnerability data
+  changed_when: false
+  ansible.builtin.command:
+    cmd: insights-client
+
 - name: Making sure all our software is installed
   ansible.builtin.dnf:
     name:
