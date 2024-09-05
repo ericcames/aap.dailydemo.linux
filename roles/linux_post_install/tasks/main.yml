@@ -38,11 +38,10 @@
     update_only: true
     state: latest
 
-- name: UnRegister and Register the insights client
+- name: Register server with insights
   vars:
     rhc_insights:
-      rhc_state: reconnect
-      autoupdate: true
+      rhc_state: present
   ansible.builtin.import_role:
     name: redhat.rhel_system_roles.rhc
 
@@ -51,13 +50,6 @@
     name:
       - cockpit
     state: installed
-
-# - name: Patching my_packages
-#   register: dnf_patch
-#   when: my_packages.stdout_lines != []
-#   ansible.builtin.shell: "dnf update -y {{ my_packages.stdout_lines | join(' ') }}"
-#   args:
-#     executable: /bin/bash
 
 - name: Set fact for report
   ansible.builtin.set_fact:
