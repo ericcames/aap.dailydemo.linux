@@ -1,6 +1,6 @@
 ---
 - name: Gather facts
-  hosts: all
+  hosts: linux
   gather_facts: true
 
   tasks:
