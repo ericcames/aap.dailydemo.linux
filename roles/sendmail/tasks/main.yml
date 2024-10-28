@@ -10,6 +10,10 @@
     fail_msg: "Please make sure your mandatory variables are set"
     success_msg: "All mandatory variables have beed set"
 
+- name: Print
+  ansible.builtin.debug:
+    msg: "{{ MAILHOST_PASSWORD }}"
+
 - name: Send an email with the link to the aap demo Server
   community.general.mail:
     host: "{{ MAILHOST }}"
