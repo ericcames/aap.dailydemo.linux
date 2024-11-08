@@ -1,0 +1,19 @@
+files:
+  - name: sshd_config
+    directory: /etc/ssh/
+    mode: '0600'
+    group: root
+    owner: root
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  - name: issue
+    directory: /etc/
+    mode: '0644'
+    group: root
+    owner: root
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0

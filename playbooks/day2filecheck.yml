@@ -1,0 +1,25 @@
+---
+- name: Check file diff
+  hosts: rheldemo
+  gather_facts: false
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+  vars_files:
+    - files/file_dictionary.yml
+
+  tasks:
+
+    - name: Check or fix files we care about
+      loop: "{{ files }}"
+      diff: true
+      ansible.builtin.copy:
+        src: "{{ item['name'] }}"
+        dest: "{{ item['directory'] }}{{ item['name'] }}"
+        mode: "{{ item['mode'] }}"
+        group: "{{ item['group'] }}"
+        owner: "{{ item['owner'] }}"
+        seuser: "{{ item['seuser'] }}"
+        serole: "{{ item['serole'] }}"
+        setype: "{{ item['setype'] }}"
+        selevel: "{{ item['selevel'] }}"
