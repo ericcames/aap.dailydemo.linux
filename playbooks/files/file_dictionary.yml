@@ -8,6 +8,7 @@ files:
     serole: object_r
     setype: etc_t
     selevel: s0
+    attributes: +i
   - name: issue
     directory: /etc/
     mode: '0644'
@@ -17,3 +18,4 @@ files:
     serole: object_r
     setype: etc_t
     selevel: s0
+    attributes: +i
