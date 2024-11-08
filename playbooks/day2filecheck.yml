@@ -23,17 +23,3 @@
         serole: "{{ item['serole'] }}"
         setype: "{{ item['setype'] }}"
         selevel: "{{ item['selevel'] }}"
-
-    # - name: Check or fix file permissions we care about
-    #   loop: "{{ files }}"
-    #   diff: true
-    #   ansible.builtin.file:
-    #     state: file
-    #     path: "{{ item['directory'] }}{{ item['name'] }}"
-    #     mode: "{{ item['mode'] }}"
-    #     group: "{{ item['group'] }}"
-    #     owner: "{{ item['owner'] }}"
-    #     seuser: "{{ item['seuser'] }}"
-    #     serole: "{{ item['serole'] }}"
-    #     setype: "{{ item['setype'] }}"
-    #     selevel: "{{ item['selevel'] }}"
