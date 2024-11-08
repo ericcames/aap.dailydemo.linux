@@ -29,8 +29,7 @@
       diff: true
       ansible.builtin.file:
         state: file
-        src: "{{ item['name'] }}"
-        dest: "{{ item['directory'] }}{{ item['name'] }}"
+        path: "{{ item['directory'] }}{{ item['name'] }}"
         mode: "{{ item['mode'] }}"
         group: "{{ item['group'] }}"
         owner: "{{ item['owner'] }}"
