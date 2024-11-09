@@ -9,8 +9,38 @@ files:
     setype: etc_t
     selevel: s0
     attributes: +i
+  - name: sshd-banner
+    directory: /etc/ssh
+    mode: '0644'
+    group: root
+    owner: root
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+    attributes: +i
   - name: issue
     directory: /etc/
+    mode: '0644'
+    group: root
+    owner: root
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+    attributes: +i
+  - name: issue.cockpit
+    directory: /etc/
+    mode: '0644'
+    group: root
+    owner: root
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+    attributes: +i
+  - name: cockpit.conf
+    directory: /etc/cockpit/
     mode: '0644'
     group: root
     owner: root
