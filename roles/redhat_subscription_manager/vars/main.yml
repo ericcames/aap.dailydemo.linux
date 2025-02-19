@@ -2,3 +2,6 @@
 customer_portal_username: mikey.mouse
 customer_portal_password: redhat123
 status: present
+sat6_fqdn: sat.kona.services
+org_id: "AmesCO"
+activation_key: ''
