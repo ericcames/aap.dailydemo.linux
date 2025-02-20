@@ -39,6 +39,7 @@
     state: "{{ status }}"
     activationkey: "{{ activation_key }}"
     org_id: "{{ org_id }}"
+    consumer_name: "{{ inventory_hostname }}"
 
 - name: Installing Satellite key for remote execution
   tags:
