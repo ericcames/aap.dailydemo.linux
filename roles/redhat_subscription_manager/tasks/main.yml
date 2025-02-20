@@ -28,7 +28,7 @@
 
 - name: Registering {{ inventory_hostname }} to {{ sat6_fqdn }}
   community.general.redhat_subscription:
-    state: present
+    state: "{{ status }}"
     activationkey: "{{ activation_key }}"
     org_id: "{{ org_id }}"
 
@@ -36,4 +36,4 @@
   ansible.posix.authorized_key:
     user: ec2-user
     key: "{{ lookup('url', 'https://{{ sat6_fqdn}}:9090/ssh/pubkey', validate_certs=False, split_lines=False) }}"
-    state: present
+    state: "{{ status }}"
