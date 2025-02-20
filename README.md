@@ -61,8 +61,8 @@ required:
 Injector configuration
 ```
 extra_vars:
-  customer_portal_password: '{{user}}'
-  customer_portal_username: '{{password}}'
+  customer_portal_password: '{{password}}'
+  customer_portal_username: '{{user}}'
 ```
 
 [6. Configuration Management](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/post_install_06.yml "post_install_06.yml")<br>
