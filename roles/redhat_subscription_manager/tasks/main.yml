@@ -1,6 +1,8 @@
 ---
 # Gather the start time to use in a later playbook
 - name: Record the subscription_time
+  tags:
+    - create
   delegate_to: 127.0.0.1
   register: subscription_time_pre
   changed_when: false
@@ -9,6 +11,8 @@
 
 # Make the start time available to other playbooks
 - name: Capture the subscription_time
+  tags:
+    - create
   ansible.builtin.set_stats:
     data:
       subscription_time: "{{ subscription_time_pre.stdout }}"
@@ -29,6 +33,8 @@
     disable_gpg_check: true
 
 - name: Registering {{ inventory_hostname }} to {{ sat6_fqdn }}
+  tags:
+    - always
   community.general.redhat_subscription:
     state: "{{ status }}"
     activationkey: "{{ activation_key }}"
