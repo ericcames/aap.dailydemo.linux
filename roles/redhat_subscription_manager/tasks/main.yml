@@ -21,9 +21,11 @@
 #     consumer_name: "{{ inventory_hostname }}"
 
 - name: Installing katello-ca-consumer-latest.noarch.rpm from {{ sat6_fqdn }} on {{ inventory_hostname }}
+  tags:
+    - create
   ansible.builtin.dnf:
     name: http://{{ sat6_fqdn }}/pub/katello-ca-consumer-latest.noarch.rpm
-    state: "{{ status }}"
+    state: present
     disable_gpg_check: true
 
 - name: Registering {{ inventory_hostname }} to {{ sat6_fqdn }}
@@ -33,7 +35,9 @@
     org_id: "{{ org_id }}"
 
 - name: Installing Satellite key for remote execution
+  tags:
+    - create
   ansible.posix.authorized_key:
     user: ec2-user
     key: "{{ lookup('url', 'https://{{ sat6_fqdn}}:9090/ssh/pubkey', validate_certs=False, split_lines=False) }}"
-    state: "{{ status }}"
+    state: present
