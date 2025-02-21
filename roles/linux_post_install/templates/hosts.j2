@@ -3,6 +3,6 @@
 
 {% for host in groups['rheldemo'] %}
 {% if 'fqdn' in hostvars[host]['ansible_facts'] or 'hostname' in hostvars[host]['ansible_facts'] %}
-{{ my_public_ip }} {{ hostvars[host]['ansible_facts']['fqdn'] | default('') }} {{ hostvars[host]['ansible_facts']['hostname'] | default('') }}
+{{ my_public_ip }} {{ hostvars[host]['ansible_facts']['nodename'] | default('') }} {{ hostvars[host]['ansible_facts']['hostname'] | default('') }}
 {% endif %}
 {% endfor %}
