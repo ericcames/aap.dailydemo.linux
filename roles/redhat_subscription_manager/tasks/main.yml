@@ -17,11 +17,11 @@
     data:
       subscription_time: "{{ subscription_time_pre.stdout }}"
 
-- name: Setting the hostname to the public hostname
-  tags:
-    - create
-  ansible.builtin.hostname:
-    name: "{{ inventory_hostname }}"
+# - name: Setting the hostname to the public hostname
+#   tags:
+#     - create
+#   ansible.builtin.hostname:
+#     name: "{{ inventory_hostname }}"
 
 - name: Remove the rh-amazon-rhui-client rpm
   tags:
