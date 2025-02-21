@@ -1,7 +1,0 @@
----
-- name: Create AWS VPC
-  hosts: localhost
-  connection: local
-
-  roles:
-    - role: vpc_create_aws
