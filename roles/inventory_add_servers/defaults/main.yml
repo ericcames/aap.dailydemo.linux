@@ -1,7 +1,0 @@
----
-controller_url: example.com
-controller_user: mickey.mouse
-controller_passwd: password
-managed_inventory_name: AAP Managed Inventory
-region: us-west-1
-ansible_python_interpreter: /usr/bin/python3
