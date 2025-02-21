@@ -3,17 +3,28 @@
   hosts: rheldemo
   become: true
 
-  roles:
+  tasks:
 
-    - role: linux_unregister_servers
-    - role: redhat_subscription_manager
-      status: absent
+    - name: Red Hat Subscription Manager
+      tags:
+        - remove
+      ansible.builtin.include_role:
+        name: redhat_subscription_manager
 
-
-- name: Delete aap daily demo linux server at Amazon
+- name: Delete aap daily demo linux server
   hosts: localhost
   connection: local
 
-  roles:
-    - role: instance_delete_aws
-    - role: inventory_remove_servers
+  tasks:
+
+    - name: Include the vm role
+      tags:
+        - remove
+      ansible.builtin.include_role:
+        name: vm
+
+    - name: Include the inventory role
+      tags:
+        - remove
+      ansible.builtin.include_role:
+        name: inventory
