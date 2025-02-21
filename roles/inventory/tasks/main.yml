@@ -55,7 +55,7 @@
         controller_host: "{{ lookup('ansible.builtin.env', 'CONTROLLER_HOST') }}"
         controller_oauthtoken: "{{ controller_token }}"
         validate_certs: false
-        name: satellite
+        name: rheldemo
         description: Automation Controller Group
         inventory: "{{ inventory_managed_inventory_name }}"
         hosts: "{{ item['public_dns_name'] }}"
@@ -66,7 +66,7 @@
       ansible.builtin.add_host:
         name: "{{ item['public_dns_name'] }}"
         groups:
-          - satellite
+          - rheldemo
 
     - name: Remove my daily demo token
       ansible.controller.token:

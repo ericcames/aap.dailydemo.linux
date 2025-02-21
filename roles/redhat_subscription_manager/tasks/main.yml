@@ -1,64 +1,77 @@
 ---
-# Gather the start time to use in a later playbook
-- name: Record the subscription_time
+- name: Registering system with Satellite
   tags:
     - create
-  delegate_to: 127.0.0.1
-  register: subscription_time_pre
-  changed_when: false
-  ansible.builtin.command:
-    cmd: "date '+%H:%M:%S'"
+  block:
 
-# Make the start time available to other playbooks
-- name: Capture the subscription_time
-  tags:
-    - create
-  ansible.builtin.set_stats:
-    data:
-      subscription_time: "{{ subscription_time_pre.stdout }}"
+    # Gather the start time to use in a later playbook
+    - name: Record the subscription_time
+      delegate_to: 127.0.0.1
+      register: subscription_time_pre
+      changed_when: false
+      ansible.builtin.command:
+        cmd: "date '+%H:%M:%S'"
 
-- name: Setting the hostname to the public hostname
-  tags:
-    - create
-  ansible.builtin.hostname:
-    name: "{{ inventory_hostname }}"
+    # Make the start time available to other playbooks
+    - name: Capture the subscription_time
+      ansible.builtin.set_stats:
+        data:
+          subscription_time: "{{ subscription_time_pre.stdout }}"
 
-- name: Remove the rh-amazon-rhui-client rpm
-  tags:
-    - create
-  ansible.builtin.dnf:
-    name: rh-amazon-rhui-client
-    state: removed
+    - name: Setting the hostname to the public hostname
+      ansible.builtin.hostname:
+        name: "{{ inventory_hostname }}"
 
-- name: Enable the rhsm repo
-  tags:
-    - create
-  changed_when: false
-  ansible.builtin.shell:
-    cmd: set -o pipefail && subscription-manager config --rhsm.manage_repos=1
-    executable: /bin/bash
+    - name: Remove the rh-amazon-rhui-client rpm
+      ansible.builtin.dnf:
+        name: rh-amazon-rhui-client
+        state: removed
 
-- name: Installing katello-ca-consumer-latest.noarch.rpm from Satellite server
-  tags:
-    - create
-  ansible.builtin.dnf:
-    name: http://{{ sat6_fqdn }}/pub/katello-ca-consumer-latest.noarch.rpm
-    state: present
-    disable_gpg_check: true
+    - name: Enable the rhsm repo
+      changed_when: false
+      ansible.builtin.shell:
+        cmd: set -o pipefail && subscription-manager config --rhsm.manage_repos=1
+        executable: /bin/bash
 
-- name: Registering server with Satellite
-  tags:
-    - always
-  community.general.redhat_subscription:
-    state: "{{ status }}"
-    activationkey: "{{ activation_key }}"
-    org_id: "{{ org_id }}"
-    consumer_name: "{{ inventory_hostname }}"
+    - name: Installing katello-ca-consumer-latest.noarch.rpm from Satellite server
+      ansible.builtin.dnf:
+        name: http://{{ sat6_fqdn }}/pub/katello-ca-consumer-latest.noarch.rpm
+        state: present
+        disable_gpg_check: true
 
-- name: Installing Satellite key for remote execution
+    - name: Registering server with Satellite
+      community.general.redhat_subscription:
+        state: present
+        activationkey: "{{ activation_key }}"
+        org_id: "{{ org_id }}"
+        consumer_name: "{{ inventory_hostname }}"
+
+    - name: Installing Satellite key for remote execution
+      ansible.posix.authorized_key:
+        user: ec2-user
+        key: "{{ lookup('url', 'https://{{ sat6_fqdn}}:9090/ssh/pubkey', validate_certs=False, split_lines=False) }}"
+        state: present
+
+    - name: Register with Red Hat Insights
+      register: result
+      changed_when: result.rc == 1
+      failed_when: result.rc > 1
+      ansible.builtin.command: insights-client --register
+
+- name: Un-Registering system from Satellite and Insights
   tags:
-    - create
-  ansible.posix.authorized_key:
-    user: ec2-user
-    key: "{{ lookup('url', 'https://{{ sat6_fqdn}}:9090/ssh/pubkey', validate_certs=False, split_lines=False) }}"
-    state: present
+    - remove
+  block:
+
+    - name: UN-Register and subscribe the system
+      community.general.redhat_subscription:
+        state: absent
+        org_id: "{{ org_id }}"
+        activationkey: "{{ activation_key }}"
+        consumer_name: "{{ inventory_hostname }}"
+
+    - name: UN-Register Red Hat Insights
+      register: result
+      changed_when: result.rc == 1
+      failed_when: result.rc > 1
+      ansible.builtin.command: insights-client --unregister
