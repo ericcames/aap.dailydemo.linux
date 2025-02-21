@@ -27,16 +27,16 @@
 #     cmd: set -o pipefail && dnf list updates | grep -v Available| grep -v sudo|grep -v openssl | awk '{print $1}'
 #     executable: /bin/bash
 
-- name: Patching my_packages
-  register: dnf_patch
-  ansible.builtin.dnf:
-    name: '*'
-    exclude:
-      - sudo.x86_64
-    security: false
-    skip_broken: true
-    update_only: true
-    state: latest
+# - name: Patching my_packages
+#   register: dnf_patch
+#   ansible.builtin.dnf:
+#     name: '*'
+#     exclude:
+#       - sudo.x86_64
+#     security: false
+#     skip_broken: true
+#     update_only: true
+#     state: latest
 
 - name: Register server with insights
   vars:
