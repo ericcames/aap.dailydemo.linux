@@ -1,7 +1,12 @@
 ---
-- name: Add new vm to the inventory
+- name: Update the inventory
   hosts: localhost
   connection: local
 
-  roles:
-    - role: inventory_add_servers
+  tasks:
+
+    - name: Include the inventory role
+      tags:
+        - create
+      ansible.builtin.include_role:
+        name: inventory
