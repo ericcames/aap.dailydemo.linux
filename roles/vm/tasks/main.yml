@@ -1,0 +1,92 @@
+---
+- name: Creating a vm with Inc managment in the case of failure
+  tags:
+    - create
+  block:
+
+    - name: Looking up Subnet_id
+      register: subnet_id
+      amazon.aws.ec2_vpc_subnet_info:
+        region: "{{ vm_region }}"
+        filters:
+          tag:Name: "{{ vm_subnet_name }}"
+
+    - name: Setting vpc_subnet_id based on Lookup
+      when: vpc_subnet_id is undefined
+      ansible.builtin.set_fact:
+        vpc_subnet_id: "{{ subnet_id.subnets[0].id }}"
+
+    - name: Creating machine instance
+      register: ec2_vms
+      amazon.aws.ec2_instance:
+        name: "{{ vm_name }}"
+        region: "{{ vm_region }}"
+        state: running
+        key_name: "{{ vm_my_ssh_key }}"
+        vpc_subnet_id: "{{ vpc_subnet_id }}"
+        instance_type: "{{ vm_instance_type }}"
+        security_group: "{{ vm_ec2_security_group_name }}"
+        network:
+          assign_public_ip: "{{ vm_assign_public_ip }}"
+        image_id: "{{ vm_image }}"
+        tags:
+          Environment: "{{ vm_vpc_name }}"
+          AlwaysUp: "{{ vm_alwaysup }}"
+          Createdby: Ansible Controller
+          Contact: "{{ vm_my_email_address }}"
+          DeletebBy: "{{ vm_ec2_ansible_group }}"
+        wait: true
+        wait_timeout: 600
+
+    - name: Wait 300 seconds for port 22 to become open and contain "OpenSSH"
+      loop: "{{ ec2_vms['instances'] }}"
+      ansible.builtin.wait_for:
+        port: 22
+        host: "{{ item['public_ip_address'] }}"
+        search_regex: OpenSSH
+        delay: 10
+
+  rescue:
+
+    - name: Capture the error message
+      register: my_error
+      ansible.builtin.set_stats:
+        data:
+          my_error: "{{ ansible_failed_result.msg }}"
+
+    - name: Capture the Job ID
+      register: my_job_id
+      ansible.builtin.set_stats:
+        data:
+          my_job_id: "{{ tower_job_id }}"
+
+    - name: Capture the Job Template name
+      register: my_job_template_name
+      ansible.builtin.set_stats:
+        data:
+          my_job_template_name: "{{ tower_job_template_name }}"
+
+    - name: Fail the job even though the rescue worked
+      ansible.builtin.fail:
+        msg: failing so we create the incident ticket
+
+- name: Removing our vm
+  tags:
+    - remove
+  block:
+
+    - name: Get instances id with appropriate Environment tag
+      register: instance_info
+      amazon.aws.ec2_instance_info:
+        region: "{{ vm_region }}"
+        filters:
+          tag:Environment: "{{ vm_vpc_name }}"
+          instance-state-name: [running]
+          tag:Contact: "{{ vm_my_email_address }}"
+
+    - name: Setting ec2 nodes to absent
+      loop: "{{ instance_info['instances'] }}"
+      amazon.aws.ec2_instance:
+        region: "{{ vm_region }}"
+        state: absent
+        instance_ids: "{{ item['instance_id'] }}"
