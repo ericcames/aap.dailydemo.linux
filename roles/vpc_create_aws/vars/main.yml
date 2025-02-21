@@ -1,6 +1,6 @@
 ---
-vpc_name: linux-dailydemo
-vpc_cidr: 172.16.1.0/24
+vpc_name: satellite-dailydemo
+vpc_cidr: 172.16.20.0/24
 region: us-west-1
 user_name: eric.ames
 alwaysup: false

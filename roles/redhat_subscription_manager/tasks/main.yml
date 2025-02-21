@@ -17,14 +17,36 @@
     data:
       subscription_time: "{{ subscription_time_pre.stdout }}"
 
-# - name: Register and subscribe the system
-#   community.general.redhat_subscription:
-#     username: "{{ customer_portal_username }}"
-#     password: "{{ customer_portal_password }}"
-#     state: "{{ status }}"
-#     consumer_name: "{{ inventory_hostname }}"
+- name: Setting the hostname to the public hostname
+  tags:
+    - create
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
 
-- name: Installing katello-ca-consumer-latest.noarch.rpm from {{ sat6_fqdn }} on {{ inventory_hostname }}
+- name: Remove the rh-amazon-rhui-client rpm
+  tags:
+    - create
+  ansible.builtin.dnf:
+    name: rh-amazon-rhui-client
+    state: removed
+
+- name: Enable the rhsm repo
+  tags:
+    - create
+  changed_when: false
+  ansible.builtin.shell:
+    cmd: set -o pipefail && subscription-manager config --rhsm.manage_repos=1
+    executable: /bin/bash
+
+- name: Refresh the rhsm repo
+  tags:
+    - create
+  changed_when: false
+  ansible.builtin.shell:
+    cmd: set -o pipefail && subscription-manager refresh
+    executable: /bin/bash
+
+- name: Installing katello-ca-consumer-latest.noarch.rpm from Satellite server
   tags:
     - create
   ansible.builtin.dnf:
@@ -32,7 +54,7 @@
     state: present
     disable_gpg_check: true
 
-- name: Registering {{ inventory_hostname }} to {{ sat6_fqdn }}
+- name: Registering server with Satellite
   tags:
     - always
   community.general.redhat_subscription:

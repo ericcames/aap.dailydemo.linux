@@ -1,5 +1,5 @@
 ---
-vpc_name: linux-dailydemo
+vpc_name: satellite-dailydemo
 user_name: eric.ames
 subnet_name: "{{ vpc_name }}_Subnet"
 image: ami-054f77471c0e69deb
