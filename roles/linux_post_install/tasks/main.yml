@@ -22,8 +22,8 @@
 
 - name: Gather package info
   register: dnf_patch
-  ansible.builtin.package_facts:
-    manager: auto
+  ansible.builtin.dnf:
+    list: installed
 
 - name: Register server with insights
   vars:
