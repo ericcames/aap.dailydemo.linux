@@ -93,7 +93,7 @@
 
     - name: Remove inventory host groups
       loop:
-        - satellite
+        - rheldemo
       ansible.controller.group:
         controller_host: "{{ lookup('ansible.builtin.env', 'CONTROLLER_HOST') }}"
         controller_oauthtoken: "{{ controller_token }}"
