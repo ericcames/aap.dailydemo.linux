@@ -20,23 +20,10 @@
     data:
       post_install_time: "{{ post_install_time_raw.stdout }}"
 
-# - name: Gather the list of packages we want to up here; excluding sudo & openssl
-#   register: my_packages
-#   changed_when: false
-#   ansible.builtin.shell:
-#     cmd: set -o pipefail && dnf list updates | grep -v Available| grep -v sudo|grep -v openssl | awk '{print $1}'
-#     executable: /bin/bash
-
-# - name: Patching my_packages
-#   register: dnf_patch
-#   ansible.builtin.dnf:
-#     name: '*'
-#     exclude:
-#       - sudo.x86_64
-#     security: false
-#     skip_broken: true
-#     update_only: true
-#     state: latest
+- name: Gather package info
+  register: dnf_patch
+  ansible.builtin.package_facts:
+    manager: dnf
 
 - name: Register server with insights
   vars:
