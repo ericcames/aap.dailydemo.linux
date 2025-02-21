@@ -1,7 +1,0 @@
----
-- name: Sends a mail
-  hosts: localhost
-
-  roles:
-
-    - role: sendmail
