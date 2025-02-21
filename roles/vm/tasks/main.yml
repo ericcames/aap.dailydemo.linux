@@ -30,7 +30,7 @@
           assign_public_ip: "{{ vm_assign_public_ip }}"
         image_id: "{{ vm_image }}"
         tags:
-          Environment: "{{ vm_vpc_name }}"
+          Environment: linux-dailydemo
           AlwaysUp: "{{ vm_alwaysup }}"
           Createdby: Ansible Controller
           Contact: "{{ vm_my_email_address }}"
