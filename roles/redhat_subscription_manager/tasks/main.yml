@@ -38,14 +38,6 @@
     cmd: set -o pipefail && subscription-manager config --rhsm.manage_repos=1
     executable: /bin/bash
 
-- name: Refresh the rhsm repo
-  tags:
-    - create
-  changed_when: false
-  ansible.builtin.shell:
-    cmd: set -o pipefail && subscription-manager refresh
-    executable: /bin/bash
-
 - name: Installing katello-ca-consumer-latest.noarch.rpm from Satellite server
   tags:
     - create
