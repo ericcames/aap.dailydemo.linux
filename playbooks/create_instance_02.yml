@@ -1,7 +1,12 @@
 ---
-- name: Create machine instance
+- name: Create daily demo linux server
   hosts: localhost
   connection: local
 
-  roles:
-    - role: instance_create_aws
+  tasks:
+
+    - name: Include the vm role
+      tags:
+        - create
+      ansible.builtin.include_role:
+        name: vm

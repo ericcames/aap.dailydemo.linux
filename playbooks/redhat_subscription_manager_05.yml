@@ -1,9 +1,12 @@
 ---
-- name: Registering system with Red Hat Subscription Management
+- name: UN-Registering system with Red Hat Subscription Management and Red Hat Insights
   hosts: rheldemo
   become: true
 
-  roles:
+  tasks:
 
-    - role: redhat_subscription_manager
-      status: present
+    - name: Red Hat Subscription Manager
+      tags:
+        - create
+      ansible.builtin.include_role:
+        name: redhat_subscription_manager
