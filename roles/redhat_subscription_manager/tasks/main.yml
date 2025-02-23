@@ -52,11 +52,18 @@
         key: "{{ lookup('url', 'https://{{ sat6_fqdn}}:9090/ssh/pubkey', validate_certs=False, split_lines=False) }}"
         state: present
 
-    - name: Register with Red Hat Insights
-      register: result
-      changed_when: result.rc == 1
-      failed_when: result.rc > 1
-      ansible.builtin.command: insights-client --register
+    - name: Register server with insights
+      vars:
+        rhc_insights:
+          rhc_state: present
+      ansible.builtin.import_role:
+        name: redhat.rhel_system_roles.rhc
+
+    # - name: Register with Red Hat Insights
+    #   register: result
+    #   changed_when: result.rc == 1
+    #   failed_when: result.rc > 1
+    #   ansible.builtin.command: insights-client --register
 
 - name: Un-Registering system from Satellite and Insights
   tags:

@@ -4,6 +4,12 @@
     - create
   block:
 
+    - name: Capture machine_create_time
+      register: machine_create_time
+      ansible.builtin.set_stats:
+        data:
+          machine_create_time: "{{ machine_create_time_raw.stdout }}"
+
     - name: Looking up Subnet_id
       register: subnet_id
       amazon.aws.ec2_vpc_subnet_info:
