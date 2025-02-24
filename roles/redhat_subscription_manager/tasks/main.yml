@@ -77,8 +77,15 @@
         activationkey: "{{ activation_key }}"
         consumer_name: "{{ inventory_hostname }}"
 
-    - name: UN-Register Red Hat Insights
-      register: result
-      changed_when: result.rc == 1
-      failed_when: result.rc > 1
-      ansible.builtin.command: insights-client --unregister
+    - name: UN-Register server with insights
+      vars:
+        rhc_insights:
+          rhc_state: absent
+      ansible.builtin.import_role:
+        name: redhat.rhel_system_roles.rhc
+
+    # - name: UN-Register Red Hat Insights
+    #   register: result
+    #   changed_when: result.rc == 1
+    #   failed_when: result.rc > 1
+    #   ansible.builtin.command: insights-client --unregister
