@@ -1,10 +1,12 @@
 ---
 - name: Get the create_date
+  changed_when: false
   register: create_date
   ansible.builtin.command:
     cmd: "date '+%Y-%m-%d'"
 
 - name: Get the website start Time
+  changed_when: false
   register: website_start_time
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"

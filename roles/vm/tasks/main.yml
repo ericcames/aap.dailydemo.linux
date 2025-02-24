@@ -4,7 +4,14 @@
     - create
   block:
 
-    - name: Capture machine_create_time
+    - name: Record the machine_create_time
+      delegate_to: localhost
+      register: machine_create_time_raw
+      changed_when: false
+      ansible.builtin.command:
+        cmd: "date '+%H:%M:%S'"
+
+    - name: Share machine_create_time
       register: machine_create_time
       ansible.builtin.set_stats:
         data:
