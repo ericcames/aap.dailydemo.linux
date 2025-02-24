@@ -34,11 +34,3 @@
     owner: root
     group: root
     mode: u+rw,g-wx,o-wx
-
-- name: Create directory for patch report
-  ansible.builtin.file:
-    name: /var/www/html/patch
-    state: directory
-    owner: root
-    group: root
-    mode: u+rwx,g-w,o-wx

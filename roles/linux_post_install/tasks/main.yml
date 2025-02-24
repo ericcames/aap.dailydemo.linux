@@ -6,34 +6,17 @@
   ansible.builtin.command:
     cmd: "date '+%H:%M:%S'"
 
-- name: Get services
-  check_mode: false
-  ansible.builtin.service_facts:
-
-- name: Pre-check | services state
-  ansible.builtin.set_fact:
-    pre_check_services: "{{ services }}"
-
 - name: Capture post_install_time
   register: post_install_time
   ansible.builtin.set_stats:
     data:
       post_install_time: "{{ post_install_time_raw.stdout }}"
 
-- name: Gather package info
-  register: dnf_patch
-  ansible.builtin.dnf:
-    list: installed
-
 - name: Making sure all our software is installed
   ansible.builtin.dnf:
     name:
       - cockpit
     state: installed
-
-- name: Set fact for report
-  ansible.builtin.set_fact:
-    pkg_mgr_output: "{{ dnf_patch }}"
 
 - name: Get the ansible fact from the first play
   ansible.builtin.set_fact:
@@ -133,18 +116,3 @@
 - name: Reboot the machine if it is required
   when: reboot_required.stat.exists
   ansible.builtin.reboot:
-
-- name: Get services
-  check_mode: false
-  ansible.builtin.service_facts:
-
-- name: Save patch reporting facts
-  loop:
-    - key: "{{ inventory_hostname }}"
-      value:
-        pre_check_services: "{{ pre_check_services }}"
-        services: "{{ services }}"
-        pkg_mgr_output: "{{ pkg_mgr_output }}"
-  ansible.builtin.set_stats:
-    data:
-      patch_reports: "{{ patch_reports | default({}) | combine({item.key: item.value}) }}"
