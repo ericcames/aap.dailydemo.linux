@@ -79,9 +79,8 @@
 
     - name: UN-Register server with insights
       vars:
-        rhc_insights:
-          state: absent
-      ansible.builtin.import_role:
+        rhc_state: absent
+      ansible.builtin.include_role:
         name: redhat.rhel_system_roles.rhc
 
     # - name: UN-Register Red Hat Insights
