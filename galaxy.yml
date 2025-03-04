@@ -1,0 +1,33 @@
+---
+authors:
+  - Eric Ames (ericcames)
+dependencies:
+  "amazon.aws": ">=7.2.0"
+  "ansible.posix": ">=1.6.2"
+  "ansible.utils": ">=5.1.2"
+  "ansible.platform": ">=2.5.3"
+  "ansible.hub": ">=1.0.0"
+  "ansible.controller": ">=4.6.2"
+  "ansible.eda": ">=2.2.0"
+  "infra.aap_configuration": ">=3.1.0"
+  "servicenow.itsm": ">=2.4.0"
+  "servicenow.servicenow": ">=1.0.6"
+  "community.mysql": ">=3.8.0"
+  "community.general": ">=8.1.0"
+  "redhat.rhel_system_roles": ">=1.88.9"
+  "redhat.satellite": ">=5.1.0"
+license_file: LICENSE
+name: linux_daily_demo
+description: Build a stand alone webserver with custom content.  Subscribe the server to Satellite for and automated pathcing demo.
+namespace: ericcames
+readme: README.md
+repository: https://github.com/ericcames/aap.dailydemo.linux
+issues: https://github.com/ericcames/aap.dailydemo.linux/issues
+tags:
+  - lab
+  - cloud
+  - aws
+  - linux
+  - satellite
+  - dailydemo
+version: 0.0.0
