@@ -10,6 +10,9 @@ Root access on the machines in the inventory
 ```
 Role Variables
 --------------
+```
+ticket_number: 123456
+```
 
 Dependencies
 ------------

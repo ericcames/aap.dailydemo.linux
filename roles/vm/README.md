@@ -12,11 +12,12 @@ Amazon Web Services Credential in Ansible Automation Platform
 Role Variables
 --------------
 ```
-vm_name: F5 Daily Demo
-vm_vpc_name: f5-dailydemo
+vm_name: Linux Daily Demo
+vm_environment_tag: linux-dailydemo
+vm_vpc_name: satellite-dailydemo
 vm_user_name: eric.ames
 vm_subnet_name: "{{ vm_vpc_name }}_Subnet"
-vm_image: ami-0a6612e49a32df1e9
+vm_image: ami-054f77471c0e69deb
 vm_count: 1
 vm_region: us-west-1
 vm_assign_public_ip: true
@@ -30,12 +31,13 @@ ansible_python_interpreter: /usr/bin/python3
 ```
 Dependencies
 ------------
+Satellite Infrastructure. This vm will be provisioned in the satellite-dailydemo vpc.  It will also be register with the Satellite server.
 
 Example Playbook
 ----------------
 ```
 ---
-- name: Create our F5 daily demo vm
+- name: Create our vm
   hosts: localhost
   connection: local
 
@@ -43,14 +45,14 @@ Example Playbook
 
     - name: Include the vm role
       tags:
-        - createvm
+        - create
       ansible.builtin.include_role:
         name: vm
 
 or
 
 ---
-- name: Remove our F5 daily demo vm
+- name: Remove our vm
   hosts: localhost
   connection: local
 
@@ -58,7 +60,7 @@ or
 
     - name: Include the vm role
       tags:
-        - removevm
+        - remove
       ansible.builtin.include_role:
         name: vm
 ```
