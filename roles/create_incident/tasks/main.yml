@@ -6,7 +6,7 @@
     caller: "{{ create_incident_caller_name }}"
     short_description: |
           "Ansible Automation Platform - Job ID: {{ vm_my_job_id }}
-           Template named: {{ create_incident_my_job_template_name }}
+           Template named: {{ vm_my_job_template_name }}
            failure see description."
     description: |
           "ServiceNow Request: {{ ticket_number }}\n\n
