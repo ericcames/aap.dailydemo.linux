@@ -11,11 +11,26 @@
       ansible.builtin.command:
         cmd: "date '+%H:%M:%S'"
 
+    - name: Share vm_name with other steps in the workflow
+      ansible.builtin.set_stats:
+        data:
+          vm_name: "{{ vm_name }}"
+
+    - name: Share vm_region with other steps in the workflow
+      ansible.builtin.set_stats:
+        data:
+          vm_region: "{{ vm_region }}"
+
+    - name: Share vm_my_email_address with other steps in the workflow
+      ansible.builtin.set_stats:
+        data:
+          vm_my_email_address: "{{ vm_my_email_address }}"
+
     - name: Share machine_create_time
       register: machine_create_time
       ansible.builtin.set_stats:
         data:
-          machine_create_time: "{{ machine_create_time_raw.stdout }}"
+          vm_machine_create_time: "{{ machine_create_time_raw.stdout }}"
 
     - name: Looking up Subnet_id
       register: subnet_id
@@ -24,10 +39,10 @@
         filters:
           tag:Name: "{{ vm_subnet_name }}"
 
-    - name: Setting vpc_subnet_id based on Lookup
-      when: vpc_subnet_id is undefined
-      ansible.builtin.set_fact:
-        vpc_subnet_id: "{{ subnet_id.subnets[0].id }}"
+    # - name: Setting vpc_subnet_id based on Lookup
+    #   when: vpc_subnet_id is undefined
+    #   ansible.builtin.set_fact:
+    #     vpc_subnet_id: "{{ subnet_id.subnets[0].id }}"
 
     - name: Creating machine instance
       register: ec2_vms
@@ -65,19 +80,19 @@
       register: my_error
       ansible.builtin.set_stats:
         data:
-          my_error: "{{ ansible_failed_result.msg }}"
+          vm_my_error: "{{ ansible_failed_result.msg }}"
 
     - name: Capture the Job ID
       register: my_job_id
       ansible.builtin.set_stats:
         data:
-          my_job_id: "{{ tower_job_id }}"
+          vm_my_job_id: "{{ tower_job_id }}"
 
     - name: Capture the Job Template name
       register: my_job_template_name
       ansible.builtin.set_stats:
         data:
-          my_job_template_name: "{{ tower_job_template_name }}"
+          vm_my_job_template_name: "{{ tower_job_template_name }}"
 
     - name: Fail the job even though the rescue worked
       ansible.builtin.fail:

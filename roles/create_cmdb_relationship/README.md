@@ -9,11 +9,15 @@ Requirements
 Role Variables
 --------------
 ```
-relationship_resource: cmdb_rel_ci
-relationship_child: "Ansible Demonstrations"
-my_server: aap.example.com
-relationship_type: "Uses::Used by"
-
+create_cmdb_relationship_resource: cmdb_rel_ci
+create_cmdb_relationship_child: "Ansible Demonstrations"
+create_cmdb_relationship_type: "Uses::Used by"
+#
+# This is stat in the get_instance_info role
+# get_instance_info_server: ''
+#
+# Credential Types needed for this role
+# ServiceNow ITSM Credential - This is a Custom Credential
 ```
 Dependencies
 ------------

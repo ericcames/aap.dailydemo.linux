@@ -11,7 +11,14 @@ Root access on the machines in the inventory
 Role Variables
 --------------
 ```
-ticket_number: 123456
+website_setup_qnr_code: "AmesQNRCode.png"
+website_setup_short_url: "https://red.ht/3Z9vKIa"
+#
+# Variable set at the workflow template
+# ticket_number: ''
+#
+# Credential Types needed for this role
+# Machine
 ```
 
 Dependencies

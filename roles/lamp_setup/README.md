@@ -10,7 +10,11 @@ Root access on the machines in the inventory
 ```
 Role Variables
 --------------
-
+```
+#
+# Credential Types needed for this role
+# Machine
+```
 Dependencies
 ------------
 

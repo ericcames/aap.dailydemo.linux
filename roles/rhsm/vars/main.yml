@@ -1,0 +1,11 @@
+---
+rhsm_status: present
+rhsm_sat6_fqdn: sat.kona.services
+rhsm_org_id: "AmesCO"
+rhsm_activation_key: ''
+#
+# Stat used in website_setup role
+# rhsm_subscription_time: ''
+#
+# Credential Types needed for this role
+# Machine

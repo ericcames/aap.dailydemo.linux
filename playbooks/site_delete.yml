@@ -9,7 +9,7 @@
       tags:
         - remove
       ansible.builtin.include_role:
-        name: redhat_subscription_manager
+        name: rhsm
 
 - name: Delete aap daily demo linux server
   hosts: localhost

@@ -27,11 +27,27 @@ vm_ec2_security_group_name: "{{ vm_vpc_name }}_SECGRP"
 vm_ec2_ansible_group: "{{ vm_user_name }}"
 vm_my_email_address: "{{ vm_user_name }}@redhat.com"
 vm_my_ssh_key: zigfreed-ssh-key
-ansible_python_interpreter: /usr/bin/python3
+#
+# These variables are used in the create_incident role
+vm_my_error: ''
+vm_my_job_id: ''
+vm_my_job_template_name: ''
+#
+# Set these variables in the job template extra vars
+# ansible_python_interpreter: /usr/bin/python3
+#
+# This variable is used in the website_setup role
+vm_machine_create_time: ''
+#
+# Credential Types needed for this role
+# Amazon Web Services
 ```
 Dependencies
 ------------
 Satellite Infrastructure. This vm will be provisioned in the satellite-dailydemo vpc.  It will also be register with the Satellite server.
+
+Collection used to build the Satellite server.
+ericcames.satellite_dailydemo
 
 Example Playbook
 ----------------

@@ -9,9 +9,16 @@ Requirements
 Role Variables
 --------------
 ```
-customer_portal_username: mikey.mouse
-customer_portal_password: redhat123
-status: present
+rhsm_status: present
+rhsm_sat6_fqdn: sat.kona.services
+rhsm_org_id: "AmesCO"
+rhsm_activation_key: ''
+#
+# Stat used in website_setup role
+# rhsm_subscription_time: ''
+#
+# Credential Types needed for this role
+# Machine
 ```
 Dependencies
 ------------

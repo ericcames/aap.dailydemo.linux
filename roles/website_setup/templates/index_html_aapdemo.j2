@@ -11,24 +11,24 @@
 <h3 align=left>This website is running on Red Hat Enterprise Linux Server</h3>
 
 <h2>Important Information</h2>
-<img src="AmesQNRCode.png" alt="">
+<img src="{{ website_setup_qnr_code }}" alt="">
 <ul>
-  <a href="https://red.ht/3Z9vKIa">https://red.ht/3Z9vKIa</a>
+  <a href="{{ website_setup_short_url }}">{{ website_setup_short_url }}</a>
 </ul>
 
 <h4>Provisioning Details</h4>
 <ul>
   <li><b>Request Number:</b> {{ ticket_number }} </li>
   <li><b>Create date:</b> {{ create_date.stdout }} </li>
-  <li><b>Instance create time:</b> {{ machine_create_time }} </li>
-  <li><b>Post install start time:</b> {{ post_install_time }} </li>
+  <li><b>Instance create time:</b> {{ vm_machine_create_time }} </li>
+  <li><b>Post install start time:</b> {{ linux_post_install_time }} </li>
     <ul>
       <li>Software updates</li>
       <li>Disable root login</li>
       <li>Configuration changes</li>
       <li>Reboot the machine</li>
     </ul>
-  <li><b>LAMP deployment start time:</b> {{ lamp_time }} </li>
+  <li><b>LAMP deployment start time:</b> {{ lamp_setup_time }} </li>
   <li><b>Website start time: </b> {{ website_start_time.stdout }} </li>
 </ul>
 
