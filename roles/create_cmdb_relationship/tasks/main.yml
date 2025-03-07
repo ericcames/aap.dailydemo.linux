@@ -3,12 +3,12 @@
   register: my_result
   servicenow.itsm.api:
     action: post
-    resource: "{{ relationship_resource }}"
+    resource: "{{ create_cmdb_relationship_resource }}"
     data:
-      child: "{{ relationship_child }}"
-      parent: "{{ my_server }}"
-      type: "{{ relationship_type }}"
+      child: "{{ create_cmdb_relationship_child }}"
+      parent: "{{ get_instance_info_server }}"
+      type: "{{ create_cmdb_relationship_type }}"
 
-- name: print the result
+- name: Print the result
   ansible.builtin.debug:
     var: my_result

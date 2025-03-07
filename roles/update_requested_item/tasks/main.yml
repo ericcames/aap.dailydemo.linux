@@ -15,6 +15,6 @@
     resource: sc_req_item
     sys_id: "{{ result.record[0].sys_id }}"
     data:
-      request_state: "{{ request_state | default(omit) }}"
-      comments: "{{ requested_item_comments }}"
-      state: "{{ requested_item_state }}"
+      request_state: "{{ update_requested_item_state | default(omit) }}"
+      comments: "{{ update_requested_item_comments }}"
+      state: "{{ update_requested_item_state }}"

@@ -2,22 +2,22 @@
 - name: Create a configuration item
   register: server_info
   servicenow.itsm.configuration_item:
-    name: "{{ my_server }}"
+    name: "{{ get_instance_info_server }}"
     state: present
-    short_description: "{{ ci_short_description }}"
-    serial_number: "{{ my_instance_id }}"
-    asset_tag: "{{ my_ami_id }}"
-    sys_class_name: "{{ ci_sys_class_name }}"
-    assigned_to: "{{ ci_assigned_to }}"
-    environment: "{{ ci_environment }}"
-    install_status: "{{ ci_install_status }}"
-    category: "{{ ci_category }}"
+    short_description: "{{ create_configuration_item_short_description }}"
+    serial_number: "{{ get_instance_info_instance_id }}"
+    asset_tag: "{{ get_instance_info_ami_id }}"
+    sys_class_name: "{{ create_configuration_item_sys_class_name }}"
+    assigned_to: "{{ create_configuration_item_assigned_to }}"
+    environment: "{{ create_configuration_item_environment }}"
+    install_status: "{{ create_configuration_item_install_status }}"
+    category: "{{ create_configuration_item_category }}"
     other:
-      model_number: "{{ my_instance_type }}"
-      assignment_group: "{{ support_group }}"
-    ip_address: "{{ my_public_ip }}"
-    operational_status: "{{ ci_operational_status }}"
+      model_number: "{{ get_instance_info_instance_type }}"
+      assignment_group: "{{ create_configuration_item_support_group }}"
+    ip_address: "{{ get_instance_info_public_ip }}"
+    operational_status: "{{ create_configuration_item_operational_status }}"
 
-- name: print the result
+- name: Print the result
   ansible.builtin.debug:
     var: server_info

@@ -5,38 +5,20 @@
 
   roles:
 
-    - role: vpc_create_aws
-    - role: instance_create_aws
-    - role: inventory_add_servers
+    - role: vm
+    - role: inventory
     - role: get_instance_info
 
 - name: Server configration management is begining
   hosts: rheldemo
   become: true
   gather_facts: true
-  vars:
-    vpc_create_time: "{{ hostvars['localhost']['vpc_create_time'] }}"
-    machine_create_time: "{{ hostvars['localhost']['machine_create_time'] }}"
 
   roles:
 
-    - role: redhat_subscription_manager
+    - role: rhsm
       status: present
     - role: linux_post_install
     - role: linux_account_create
     - role: lamp_setup
     - role: website_setup
-    - role: zjleblanc.reporting.dnf
-      vars:
-        linux_patch_run_once: false
-        linux_patch_become_publish: true
-        linux_patch_output_remote_host: "{{ inventory_hostname }}"
-        linux_patch_output_dest: "/var/www/html/patch.html"
-
-- name: Send email
-  hosts: localhost
-  connection: local
-
-  roles:
-
-    - role: sendmail

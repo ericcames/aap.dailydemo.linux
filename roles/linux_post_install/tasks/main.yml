@@ -10,7 +10,7 @@
   register: post_install_time
   ansible.builtin.set_stats:
     data:
-      post_install_time: "{{ post_install_time_raw.stdout }}"
+      linux_post_install_time: "{{ post_install_time_raw.stdout }}"
 
 - name: Making sure all our software is installed
   ansible.builtin.dnf:

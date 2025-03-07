@@ -18,9 +18,9 @@
     - name: Get Demo instances we care about
       register: instance_info
       amazon.aws.ec2_instance_info:
-        region: "{{ inventory_region }}"
+        region: "{{ vm_region }}"
         filters:
-          tag:Name: "{{ inventory_vm_name }}"
+          tag:Name: "{{ vm_name }}"
           instance-state-name: [running]
 
     - name: Create a new token using username/password
@@ -45,7 +45,7 @@
         controller_oauthtoken: "{{ controller_token }}"
         validate_certs: false
         name: "{{ item['public_dns_name'] }}"
-        inventory: "{{ inventory_managed_inventory_name }}"
+        inventory: "{{ inventory_name }}"
         state: present
         enabled: true
 
@@ -57,7 +57,7 @@
         validate_certs: false
         name: rheldemo
         description: Automation Controller Group
-        inventory: "{{ inventory_managed_inventory_name }}"
+        inventory: "{{ inventory_name }}"
         hosts: "{{ item['public_dns_name'] }}"
         preserve_existing_hosts: true
 
@@ -99,7 +99,7 @@
         controller_oauthtoken: "{{ controller_token }}"
         validate_certs: false
         name: "{{ item }}"
-        inventory: "{{ inventory_managed_inventory_name }}"
+        inventory: "{{ inventory_name }}"
         state: absent
 
     - name: Remove my daily demo token

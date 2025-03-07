@@ -9,6 +9,26 @@ Requirements
 Role Variables
 --------------
 ```
+create_configuration_item_sys_class_name: cmdb_ci_linux_server
+create_configuration_item_environment: production
+create_configuration_item_install_status: installed
+create_configuration_item_category: Hardware
+create_configuration_item_support_group: "Ansible West Tigers"
+create_configuration_item_operational_status: operational
+#
+# These variables are set as extra vars
+create_configuration_item_short_description: "created by aap.kona.services:8443"
+create_configuration_item_assigned_to: mickey.mouse
+#
+# These are stats picked up in the get_instance_info role
+# get_instance_info_server: ''
+# get_instance_info_instance_id: ''
+# get_instance_info_ami_id: ''
+# get_instance_info_instance_type: ''
+# get_instance_info_public_ip: ''
+#
+# Credential Types needed for this role
+# ServiceNow ITSM Credential - This is a Custom Credential
 ```
 Dependencies
 ------------
