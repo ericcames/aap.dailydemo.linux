@@ -5,14 +5,17 @@
     state: new
     caller: "{{ create_incident_caller_name }}"
     short_description: |
-          "Ansible Automation Platform - Job ID: {{ vm_my_job_id }}
-           Template named: {{ vm_my_job_template_name }}
-           failure see description."
+          Ansible Automation Platform - Job ID: {{ vm_my_job_id }}
+          Template named: {{ vm_my_job_template_name }}
+          failure see description
     description: |
-          "ServiceNow Request: {{ ticket_number }}\n\n
-           Ansible Job ID: {{ vm_my_job_id }}\n\n
-           Template named: {{ vm_my_job_template_name }}\n\n
-           Message: {{ vm_my_error }}"
+          ServiceNow Request: {{ ticket_number }}
+
+          Ansible Job ID: {{ vm_my_job_id }}
+
+          Template named: {{ vm_my_job_template_name }}
+
+          Message: {{ vm_my_error }}
     impact: "{{ create_incident_incident_impact }}"
     urgency: "{{ create_incident_incident_urgency }}"
     other:
