@@ -1,15 +1,8 @@
 ---
-- name: Creating a vm with Inc managment in the case of failure
+- name: Stuff we are always going to do
   tags:
-    - create
+    - always
   block:
-
-    - name: Record the machine_create_time
-      delegate_to: localhost
-      register: machine_create_time_raw
-      changed_when: false
-      ansible.builtin.command:
-        cmd: "date '+%H:%M:%S'"
 
     - name: Share vm_name with other steps in the workflow
       ansible.builtin.set_stats:
@@ -25,6 +18,18 @@
       ansible.builtin.set_stats:
         data:
           vm_my_email_address: "{{ vm_my_email_address }}"
+
+- name: Creating a vm with Inc managment in the case of failure
+  tags:
+    - create
+  block:
+
+    - name: Record the machine_create_time
+      delegate_to: localhost
+      register: machine_create_time_raw
+      changed_when: false
+      ansible.builtin.command:
+        cmd: "date '+%H:%M:%S'"
 
     - name: Share machine_create_time
       register: machine_create_time
