@@ -1,0 +1,8 @@
+---
+controller_schedules:
+  - name: Delete Daily Demo Linux
+    description: Schedule to run the demo playbook once a day at 6:00 pm
+    rrule: DTSTART;TZID={{ timezone_id }}:20230101T180000 RRULE:FREQ=DAILY;INTERVAL=1
+    unified_job_template: "Delete Daily Demo Linux"
+    state: present
+    job_tags: remove

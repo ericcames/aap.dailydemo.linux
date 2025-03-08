@@ -1,0 +1,18 @@
+---
+controller_templates:
+  - name: Delete Daily Demo Linux
+    job_type: run
+    inventory: AAP Managed Inventory
+    organization: "{{ my_organization }}"
+    execution_environment: Default execution environment
+    project: aap.dailydemo.linux
+    playbook: playbooks/site_delete.yml
+    ask_tags_on_launch: false
+    job_tags: remove
+    credentials:
+      - "{{ my_rh_aap_credential }}"
+      - "{{ my_sat_credential }}"
+      - "{{ my_aws_credential }}"
+      - "{{ my_aws_machine_credential }}"
+    extra_vars:
+      ansible_python_interpreter: /usr/bin/python3
