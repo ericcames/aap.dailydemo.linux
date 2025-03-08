@@ -124,7 +124,7 @@ controller_templates:
     credentials:
       - "{{ my_itsm_credential }}"
     extra_vars:
-      update_requested_item_comments: '|-
+      update_requested_item_comments: "|-
           Provisioning details
 
           Machine Create Time: {{ vm_machine_create_time }}
@@ -145,7 +145,7 @@ controller_templates:
 
           AWS Instance Type: {{ get_instance_info_instance_type }}
 
-          AWS availability zone: {{ get_instance_info_availability_zone }}'
+          AWS availability zone: {{ get_instance_info_availability_zone }}"
       update_requested_item_state: 3
 
   - name: DDL - VM Create
