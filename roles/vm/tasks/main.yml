@@ -1,26 +1,26 @@
 ---
-- name: Stuff we are always going to do
-  tags:
-    - always
-  block:
+# - name: Stuff we are always going to do
+#   tags:
+#     - always
+#   block:
 
-    - name: Share vm_name with other steps in the workflow
-      register: vm_name
-      ansible.builtin.set_stats:
-        data:
-          vm_name: "{{ vm_name }}"
+#     - name: Share vm_name with other steps in the workflow
+#       register: vm_name
+#       ansible.builtin.set_stats:
+#         data:
+#           vm_name: "{{ vm_name }}"
 
-    - name: Share vm_region with other steps in the workflow
-      register: vm_region
-      ansible.builtin.set_stats:
-        data:
-          vm_region: "{{ vm_region }}"
+#     - name: Share vm_region with other steps in the workflow
+#       register: vm_region
+#       ansible.builtin.set_stats:
+#         data:
+#           vm_region: "{{ vm_region }}"
 
-    - name: Share vm_my_email_address with other steps in the workflow
-      register: vm_my_email_address
-      ansible.builtin.set_stats:
-        data:
-          vm_my_email_address: "{{ vm_my_email_address }}"
+#     - name: Share vm_my_email_address with other steps in the workflow
+#       register: vm_my_email_address
+#       ansible.builtin.set_stats:
+#         data:
+#           vm_my_email_address: "{{ vm_my_email_address }}"
 
 - name: Creating a vm with Inc managment in the case of failure
   tags:
