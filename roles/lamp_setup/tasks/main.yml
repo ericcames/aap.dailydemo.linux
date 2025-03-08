@@ -7,7 +7,7 @@
     cmd: "date '+%H:%M:%S'"
 
 - name: Capture lamp time
-  register: lamp_time
+  register: lamp_setup_time
   ansible.builtin.set_stats:
     data:
       lamp_setup_time: "{{ lamp_time_raw.stdout }}"
