@@ -138,36 +138,36 @@ controller_templates:
     credentials:
       - "{{ my_aws_machine_credential }}"
 
-  # - name: DDL - Update request ticket - success
-  #   job_type: run
-  #   inventory: AAP Managed Inventory
-  #   organization: "{{ my_organization }}"
-  #   execution_environment: Default execution environment
-  #   project: aap.dailydemo.linux
-  #   playbook: playbooks/servicenow/update_sn_req_itm.yml
-  #   credentials:
-  #     - "{{ my_itsm_credential }}"
-  #   extra_vars:
-  #     update_requested_item_comments: "|-
-  #         Provisioning details
+  - name: DDL - Update request ticket - success
+    job_type: run
+    inventory: AAP Managed Inventory
+    organization: "{{ my_organization }}"
+    execution_environment: Default execution environment
+    project: aap.dailydemo.linux
+    playbook: playbooks/servicenow/update_sn_req_itm.yml
+    credentials:
+      - "{{ my_itsm_credential }}"
+    extra_vars:
+      update_requested_item_comments: "|-
+          Provisioning details
 
-  #         Machine Create Time: {{ vm_machine_create_time }}
+          Machine Create Time: \\{\\{ vm_machine_create_time \\}\\}
 
-  #         RedHat Subscription Time: {{ rhsm_subscription_time }}
+          RedHat Subscription Time: \\{\\{ rhsm_subscription_time \\}\\}
 
-  #         Post Install Time: {{ linux_post_install_time }}
+          Post Install Time: \\{\\{ linux_post_install_time \\}\\}
 
-  #         Website Start Time: {{ lamp_setup_time }}
+          Website Start Time: \\{\\{ lamp_setup_time \\}\\}
 
-  #         Public DNS Name: {{ get_instance_info_server }}
+          Public DNS Name: \\{\\{ get_instance_info_server \\}\\}
 
-  #         Public IP Address: {{ get_instance_info_public_ip }}
+          Public IP Address: \\{\\{ get_instance_info_public_ip \\}\\}
 
-  #         AWS AMI ID: {{ get_instance_info_ami_id }}
+          AWS AMI ID: \\{\\{ get_instance_info_ami_id \\}\\}
 
-  #         AWS Instance ID: {{ get_instance_info_instance_id }}
+          AWS Instance ID: \\{\\{ get_instance_info_instance_id \\}\\}
 
-  #         AWS Instance Type: {{ get_instance_info_instance_type }}
+          AWS Instance Type: \\{\\{ get_instance_info_instance_type \\}\\}
 
-  #         AWS availability zone: {{ get_instance_info_availability_zone }}"
-  #     update_requested_item_state: 3
+          AWS availability zone: \\{\\{ get_instance_info_availability_zone \\}\\}"
+      update_requested_item_state: 3
