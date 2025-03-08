@@ -1,6 +1,6 @@
 ---
 - name: Gather facts
-  hosts: linux
+  hosts: rheldemo
   gather_facts: true
 
   tasks:
