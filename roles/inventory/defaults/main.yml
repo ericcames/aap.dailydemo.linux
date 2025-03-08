@@ -1,5 +1,7 @@
 ---
 inventory_name: AAP Managed Inventory
+inventory_vm_name: Linux Daily Demo
+inventory_vm_region: us-west-1
 #
 # These variables are set in the vm role
 # vm_name: Linux Daily Demo
