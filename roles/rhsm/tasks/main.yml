@@ -40,11 +40,23 @@
         disable_gpg_check: true
 
     - name: Registering server with Satellite
-      community.general.redhat_subscription:
-        state: present
-        activationkey: "{{ rhsm_activation_key }}"
-        org_id: "{{ rhsm_org_id }}"
-        consumer_name: "{{ inventory_hostname }}"
+      register: command
+      redhat.satellite.registration_command:
+        # server_url: "{{ rhsm_sat6_fqdn }}"
+        # username: "{{ satellite_username }}"
+        # password: "{{ satellite_password }}"
+        activation_keys: "{{ rhsm_activation_key }}"
+        organization: "{{ rhsm_org_id }}"
+        update_packages: false
+        force: true
+        insecure: true
+        validate_certs: false
+        jwt_expiration: 1
+
+    - name: Register client to Satellite
+      changed_when: false
+      ansible.builtin.command:
+        cmd: "{{ command.registration_command }}"
 
     - name: Installing Satellite key for remote execution
       ansible.posix.authorized_key:
