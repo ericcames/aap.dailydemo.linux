@@ -22,24 +22,6 @@
         data:
           vm_my_email_address: "{{ vm_my_email_address }}"
 
-    - name: Capture the error message
-      register: my_error
-      ansible.builtin.set_stats:
-        data:
-          vm_my_error: "{{ ansible_failed_result.msg }}"
-
-    - name: Capture the Job ID
-      register: my_job_id
-      ansible.builtin.set_stats:
-        data:
-          vm_my_job_id: "{{ tower_job_id }}"
-
-    - name: Capture the Job Template name
-      register: my_job_template_name
-      ansible.builtin.set_stats:
-        data:
-          vm_my_job_template_name: "{{ tower_job_template_name }}"
-
 - name: Creating a vm with Inc managment in the case of failure
   tags:
     - create
@@ -101,6 +83,24 @@
         delay: 10
 
   rescue:
+
+    - name: Capture the error message
+      register: my_error
+      ansible.builtin.set_stats:
+        data:
+          vm_my_error: "{{ ansible_failed_result.msg }}"
+
+    - name: Capture the Job ID
+      register: my_job_id
+      ansible.builtin.set_stats:
+        data:
+          vm_my_job_id: "{{ tower_job_id }}"
+
+    - name: Capture the Job Template name
+      register: my_job_template_name
+      ansible.builtin.set_stats:
+        data:
+          vm_my_job_template_name: "{{ tower_job_template_name }}"
 
     - name: Fail the job even though the rescue worked
       ansible.builtin.fail:
