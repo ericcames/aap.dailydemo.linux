@@ -18,9 +18,9 @@
     - name: Get Demo instances we care about
       register: instance_info
       amazon.aws.ec2_instance_info:
-        region: "{{ vm_region }}"
+        region: "{{ inventory_vm_region }}"
         filters:
-          tag:Name: "{{ vm_name }}"
+          tag:Name: "{{ inventory_vm_name }}"
           instance-state-name: [running]
 
     - name: Create a new token using username/password
