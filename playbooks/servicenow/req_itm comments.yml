@@ -1,7 +1,0 @@
----
-- name: Update requested item comments in ServiceNow
-  hosts: localhost
-
-  roles:
-
-    - role: requested_item_comment
