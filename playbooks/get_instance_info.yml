@@ -1,8 +1,0 @@
----
-- name: Gather machine info
-  hosts: localhost
-  connection: local
-
-  roles:
-
-    - role: get_instance_info

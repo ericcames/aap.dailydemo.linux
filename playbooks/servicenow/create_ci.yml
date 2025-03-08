@@ -1,5 +1,5 @@
 ---
-- name: creating a cmdb record
+- name: Creating a cmdb record
   hosts: localhost
 
   roles:
