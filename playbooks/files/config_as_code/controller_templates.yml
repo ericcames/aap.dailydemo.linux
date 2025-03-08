@@ -16,3 +16,158 @@ controller_templates:
       - "{{ my_aws_machine_credential }}"
     extra_vars:
       ansible_python_interpreter: /usr/bin/python3
+
+  - name: DDL - Application Install
+    job_type: run
+    inventory: AAP Managed Inventory
+    organization: "{{ my_organization }}"
+    execution_environment: Default execution environment
+    project: aap.dailydemo.linux
+    playbook: playbooks/lamp_setup_08.yml
+    credentials:
+      - "{{ my_aws_machine_credential }}"
+
+  - name: DDL - Configuration Management
+    job_type: run
+    inventory: AAP Managed Inventory
+    organization: "{{ my_organization }}"
+    execution_environment: Default execution environment
+    project: aap.dailydemo.linux
+    playbook: playbooks/post_install_06.yml
+    credentials:
+      - "{{ my_aws_machine_credential }}"
+
+  - name: DDL - Create a CMDB record
+    job_type: run
+    inventory: AAP Managed Inventory
+    organization: "{{ my_organization }}"
+    execution_environment: Default execution environment
+    project: aap.dailydemo.linux
+    playbook: playbooks/servicenow/create_ci.yml
+    credentials:
+      - "{{ my_itsm_credential }}"
+    extra_vars:
+      create_configuration_item_assigned_to: "{{ my_itsm_username }}"
+      create_configuration_item_short_description: Ansible Automation Platfrom 2.5 demo
+
+  - name: DDL - Create Incident
+    job_type: run
+    inventory: AAP Managed Inventory
+    organization: "{{ my_organization }}"
+    execution_environment: Default execution environment
+    project: aap.dailydemo.linux
+    playbook: playbooks/servicenow/incident_create.yml
+    credentials:
+      - "{{ my_itsm_credential }}"
+    extra_vars:
+      create_incident_caller_name: "{{ my_itsm_username }}"
+
+  - name: DDL - Get Instance Info
+    job_type: run
+    inventory: AAP Managed Inventory
+    organization: "{{ my_organization }}"
+    execution_environment: Default execution environment
+    project: aap.dailydemo.linux
+    playbook: playbooks/get_instance_info_04.yml
+    credentials:
+      - "{{ my_aws_credential }}"
+    extra_vars:
+      ansible_python_interpreter: /usr/bin/python3
+
+  - name: DDL - Inventory Update
+    job_type: run
+    inventory: AAP Managed Inventory
+    organization: "{{ my_organization }}"
+    execution_environment: Default execution environment
+    project: aap.dailydemo.linux
+    playbook: playbooks/add_inventory_03.yml
+    ask_tags_on_launch: false
+    job_tags: create
+    credentials:
+      - "{{ my_aws_credential }}"
+      - "{{ my_rh_aap_credential }}"
+    extra_vars:
+      ansible_python_interpreter: /usr/bin/python3
+
+  - name: DDL - Red Hat Registration
+    job_type: run
+    inventory: AAP Managed Inventory
+    organization: "{{ my_organization }}"
+    execution_environment: Default execution environment
+    project: aap.dailydemo.linux
+    playbook: playbooks/redhat_subscription_manager_05.yml
+    ask_tags_on_launch: false
+    job_tags: create
+    credentials:
+      - "{{ my_aws_machine_credential }}"
+    extra_vars:
+      rhsm_status: present
+      rhsm_activation_key: RHEL9 Dev
+
+  - name: DDL - Update request ticket - failure
+    job_type: run
+    inventory: AAP Managed Inventory
+    organization: "{{ my_organization }}"
+    execution_environment: Default execution environment
+    project: aap.dailydemo.linux
+    playbook: playbooks/servicenow/update_sn_req_itm.yml
+    credentials:
+      - "{{ my_itsm_credential }}"
+
+  - name: DDL - Update request ticket - success
+    job_type: run
+    inventory: AAP Managed Inventory
+    organization: "{{ my_organization }}"
+    execution_environment: Default execution environment
+    project: aap.dailydemo.linux
+    playbook: playbooks/servicenow/update_sn_req_itm.yml
+    credentials:
+      - "{{ my_itsm_credential }}"
+    extra_vars:
+      update_requested_item_comments: |-
+          Provisioning details
+
+          Machine Create Time: {{ vm_machine_create_time }}
+
+          RedHat Subscription Time: {{ rhsm_subscription_time }}
+
+          Post Install Time: {{ linux_post_install_time }}
+
+          Website Start Time: {{ lamp_setup_time }}
+
+          Public DNS Name: {{ get_instance_info_server }}
+
+          Public IP Address: {{ get_instance_info_public_ip }}
+
+          AWS AMI ID: {{ get_instance_info_ami_id }}
+
+          AWS Instance ID: {{ get_instance_info_instance_id }}
+
+          AWS Instance Type: {{ get_instance_info_instance_type }}
+
+          AWS availability zone: {{ get_instance_info_availability_zone }}
+      update_requested_item_state: 3
+
+  - name: DDL - VM Create
+    job_type: run
+    inventory: AAP Managed Inventory
+    organization: "{{ my_organization }}"
+    execution_environment: Default execution environment
+    project: aap.dailydemo.linux
+    playbook: playbooks/create_instance_02.yml
+    ask_tags_on_launch: false
+    job_tags: create
+    credentials:
+      - "{{ my_aws_credential }}"
+    extra_vars:
+      ansible_python_interpreter: /usr/bin/python3
+
+  - name: DDL - Website deployment
+    job_type: run
+    inventory: AAP Managed Inventory
+    organization: "{{ my_organization }}"
+    execution_environment: Default execution environment
+    project: aap.dailydemo.linux
+    playbook: playbooks/website_deployment_09.yml
+    credentials:
+      - "{{ my_aws_machine_credential }}"
