@@ -8,9 +8,9 @@
     - name: Determine that the Satellite credential is set
       ansible.builtin.assert:
         that:
-          - "lookup('ansible.builtin.env', 'username') !=''"
-          - "lookup('ansible.builtin.env', 'host') !=''"
-          - "lookup('ansible.builtin.env', 'password') !=''"
+          - "lookup('ansible.builtin.env', 'SAT_USERNAME') !=''"
+          - "lookup('ansible.builtin.env', 'SAT_HOST') !=''"
+          - "lookup('ansible.builtin.env', 'SAT_PASSWORD') !=''"
         fail_msg:
           - "Red Hat Satellite 6 credential is not set"
           - "Please assign correct credentials to the Job Template"
@@ -58,9 +58,9 @@
     - name: Registering server with Satellite
       register: command
       redhat.satellite.registration_command:
-        server_url: "{{ lookup('ansible.builtin.env', 'host') }}"
-        username: "{{ lookup('ansible.builtin.env', 'username') }}"
-        password: "{{ lookup('ansible.builtin.env', 'password') }}"
+        server_url: "{{ lookup('ansible.builtin.env', 'SAT_HOST') }}"
+        username: "{{ lookup('ansible.builtin.env', 'SAT_USERNAME') }}"
+        password: "{{ lookup('ansible.builtin.env', 'SAT_PASSWORD') }}"
         activation_keys: "{{ rhsm_activation_key }}"
         organization: "{{ rhsm_org_id }}"
         update_packages: false
