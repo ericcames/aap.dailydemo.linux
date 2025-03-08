@@ -1,0 +1,59 @@
+---
+- name: Setup Linux demo
+  hosts: localhost
+  gather_facts: false
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    my_organization: "AmesCO"
+    my_vault: "ericames-vault"
+    my_rh_aap_credential: "aap.kona.services"
+    my_aws_credential: "AWS Blank Open Environment pvwk8"
+    my_aws_machine_credential: "AWS Machine Credential - Ames"
+    my_sat_credential: "sat.kona.services"
+    timezone_id: "America/Phoenix"
+
+  tasks:
+
+    # fail with good error for Automation controller user
+    - name: Determine that both AAP and Machine credentials are set
+      ansible.builtin.assert:
+        that:
+          - "lookup('ansible.builtin.env', 'CONTROLLER_USERNAME') !=''"
+          - "lookup('ansible.builtin.env', 'CONTROLLER_HOST') !=''"
+          - "lookup('ansible.builtin.env', 'CONTROLLER_PASSWORD') !=''"
+        fail_msg:
+          - "Red Hat Ansible Automation Platform credential is not set"
+          - "Please assign correct credentials to the Job Template"
+
+    - name: Create a new token
+      ansible.controller.token:
+        controller_host: "{{ lookup('ansible.builtin.env', 'CONTROLLER_HOST') }}"
+        controller_username: "{{ lookup('ansible.builtin.env', 'CONTROLLER_USERNAME') }}"
+        controller_password: "{{ lookup('ansible.builtin.env', 'CONTROLLER_PASSWORD') }}"
+        validate_certs: false
+        description: F5 Setup
+        scope: write
+        state: present
+
+    - name: Include configurations
+      ansible.builtin.include_vars:
+        dir: files/config_as_code
+
+    - name: Demo Components
+      vars:
+        meta_dependency_check: false  # noqa: var-naming[no-role-prefix]
+      ansible.builtin.include_role:
+        name: infra.aap_configuration.dispatch
+
+    - name: Print Message
+      when: user_message is defined
+      ansible.builtin.debug:
+        msg: "{{ user_message }}"
+
+    - name: Remove my token
+      ansible.controller.token:
+        controller_host: "{{ lookup('ansible.builtin.env', 'CONTROLLER_HOST') }}"
+        controller_oauthtoken: "{{ controller_token }}"
+        existing_token: "{{ controller_token }}"
+        validate_certs: false
+        state: absent
