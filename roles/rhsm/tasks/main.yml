@@ -1,6 +1,22 @@
 ---
 - name: Registering system with Satellite
   tags:
+    - always
+  block:
+
+    # fail with good error for Automation controller user
+    - name: Determine that the Satellite credential is set
+      ansible.builtin.assert:
+        that:
+          - "lookup('ansible.builtin.env', 'username') !=''"
+          - "lookup('ansible.builtin.env', 'host') !=''"
+          - "lookup('ansible.builtin.env', 'password') !=''"
+        fail_msg:
+          - "Red Hat Satellite 6 credential is not set"
+          - "Please assign correct credentials to the Job Template"
+
+- name: Registering system with Satellite
+  tags:
     - create
   block:
 
@@ -42,12 +58,15 @@
     - name: Registering server with Satellite
       register: command
       redhat.satellite.registration_command:
-        # server_url: "{{ rhsm_sat6_fqdn }}"
-        # username: "{{ satellite_username }}"
-        # password: "{{ satellite_password }}"
+        server_url: "{{ lookup('ansible.builtin.env', 'host') }}"
+        username: "{{ lookup('ansible.builtin.env', 'username') }}"
+        password: "{{ lookup('ansible.builtin.env', 'password') }}"
         activation_keys: "{{ rhsm_activation_key }}"
         organization: "{{ rhsm_org_id }}"
         update_packages: false
+        hostgroup: Webservers
+        setup_insights: true
+        setup_remote_execution_pull: true
         force: true
         insecure: true
         validate_certs: false
@@ -58,18 +77,18 @@
       ansible.builtin.command:
         cmd: "{{ command.registration_command }}"
 
-    - name: Installing Satellite key for remote execution
-      ansible.posix.authorized_key:
-        user: ec2-user
-        key: "{{ lookup('url', 'https://{{ rhsm_sat6_fqdn}}:9090/ssh/pubkey', validate_certs=False, split_lines=False) }}"
-        state: present
+    # - name: Installing Satellite key for remote execution
+    #   ansible.posix.authorized_key:
+    #     user: ec2-user
+    #     key: "{{ lookup('url', 'https://{{ rhsm_sat6_fqdn}}:9090/ssh/pubkey', validate_certs=False, split_lines=False) }}"
+    #     state: present
 
-    - name: Register server with insights
-      vars:
-        rhc_insights:
-          rhc_state: present
-      ansible.builtin.import_role:
-        name: redhat.rhel_system_roles.rhc
+    # - name: Register server with insights
+    #   vars:
+    #     rhc_insights:
+    #       rhc_state: present
+    #   ansible.builtin.import_role:
+    #     name: redhat.rhel_system_roles.rhc
 
     # - name: Register with Red Hat Insights
     #   register: result
