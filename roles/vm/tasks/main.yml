@@ -39,10 +39,10 @@
         filters:
           tag:Name: "{{ vm_subnet_name }}"
 
-    # - name: Setting vpc_subnet_id based on Lookup
-    #   when: vpc_subnet_id is undefined
-    #   ansible.builtin.set_fact:
-    #     vpc_subnet_id: "{{ subnet_id.subnets[0].id }}"
+    - name: Setting vpc_subnet_id based on Lookup
+      when: vpc_subnet_id is undefined
+      ansible.builtin.set_fact:
+        vpc_subnet_id: "{{ subnet_id.subnets[0].id }}"
 
     - name: Creating machine instance
       register: ec2_vms
