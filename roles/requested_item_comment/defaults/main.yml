@@ -1,6 +1,7 @@
 ---
 # These variables are set as Extra Vars
 requested_item_comment_comments: "Your Comments go here"
+requested_item_comment_stage: Deployment
 #
 # Job output
 # ansible_success_result.msg
