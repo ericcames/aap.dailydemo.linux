@@ -1,0 +1,159 @@
+---
+controller_workflows:
+-   name: "workflow - F5-0-AWS Add custom profiles"
+    organization: "{{ my_organization }}"
+    related:
+      workflow_nodes:
+      -   identifier: "F5 -1- AWS -Import certificate and key"
+          related:
+            success_nodes:
+            -   identifier: "F5 -2- AWS -Create custom clientssl"
+          unified_job_template:
+              name: "F5 -1- AWS -Import certificate and key"
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
+      -   identifier: "F5 -2- AWS -Create custom clientssl"
+          related:
+            success_nodes:
+            -   identifier: "F5 -2- AWS -Create custom TCP profile"
+          unified_job_template:
+            name: "F5 -2- AWS -Create custom clientssl"
+            organization:
+              name: "{{ my_organization }}"
+            type: job_template
+      -   identifier: "F5 -2- AWS -Create custom TCP profile"
+          related:
+            success_nodes:
+            -   identifier: "F5 -2- AWS -Add custom HTTP profile"
+          unified_job_template:
+            name: "F5 -2- AWS -Create custom TCP profile"
+            organization:
+              name: "{{ my_organization }}"
+            type: job_template
+      -   identifier: "F5 -2- AWS -Add custom HTTP profile"
+          unified_job_template:
+            name: "F5 -2- AWS -Add custom HTTP profile"
+            organization:
+              name: "{{ my_organization }}"
+            type: job_template
+
+-   name: workflow - 0 - Deploy web app on F5 in AWS
+    organization: "{{ my_organization }}"
+    related:
+      workflow_nodes:
+      -   identifier: "workflow - F5-0-AWS Add custom profiles"
+          related:
+            success_nodes:
+            -   identifier: "F5 -3- AWS -Add pool and members"
+          unified_job_template:
+              name: "workflow - F5-0-AWS Add custom profiles"
+              organization:
+                name: "{{ my_organization }}"
+              type: workflow_job_template
+      -   identifier: "F5 -3- AWS -Add pool and members"
+          related:
+            success_nodes:
+            -   identifier: "F5 -4- AWS -Create VIP"
+          unified_job_template:
+            name: "F5 -3- AWS -Add pool and members"
+            organization:
+              name: "{{ my_organization }}"
+            type: job_template
+      -   identifier: "F5 -4- AWS -Create VIP"
+          unified_job_template:
+            name: "F5 -4- AWS -Create VIP"
+            organization:
+              name: "{{ my_organization }}"
+            type: job_template
+
+-   name: "workflow - F5-6-AWS delete custom profiles"
+    organization: "{{ my_organization }}"
+    related:
+      workflow_nodes:
+      -   identifier: "F5 -6- AWS -Delete custom clientssl"
+          related:
+            success_nodes:
+            -   identifier: "F5 -6- AWS -Delete custom HTTP profile"
+          unified_job_template:
+              name: "F5 -6- AWS -Delete custom clientssl"
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
+      -   identifier: "F5 -6- AWS -Delete custom HTTP profile"
+          related:
+            success_nodes:
+            -   identifier: "F5 -6- AWS -Delete custom TCP profile"
+          unified_job_template:
+            name: "F5 -6- AWS -Delete custom HTTP profile"
+            organization:
+              name: "{{ my_organization }}"
+            type: job_template
+      -   identifier: "F5 -6- AWS -Delete custom TCP profile"
+          related:
+            success_nodes:
+            -   identifier: "F5 -6- AWS -Delete certificate and key"
+          unified_job_template:
+            name: "F5 -6- AWS -Delete custom TCP profile"
+            organization:
+              name: "{{ my_organization }}"
+            type: job_template
+      -   identifier: "F5 -6- AWS -Delete certificate and key"
+          unified_job_template:
+            name: "F5 -6- AWS -Delete certificate and key"
+            organization:
+              name: "{{ my_organization }}"
+            type: job_template
+
+-   name: workflow - 6 - Remove web app from F5 on AWS
+    organization: "{{ my_organization }}"
+    related:
+      workflow_nodes:
+      -   identifier: "F5 -6- AWS -Delete VIP"
+          related:
+            success_nodes:
+            -   identifier: "F5 -6- AWS -Delete pool"
+          unified_job_template:
+            name: "F5 -6- AWS -Delete VIP"
+            organization:
+              name: "{{ my_organization }}"
+            type: job_template
+      -   identifier: "F5 -6- AWS -Delete pool"
+          related:
+            success_nodes:
+            -   identifier: "workflow - F5-6-AWS delete custom profiles"
+          unified_job_template:
+            name: "F5 -6- AWS -Delete pool"
+            organization:
+              name: "{{ my_organization }}"
+            type: job_template
+      -   identifier: "workflow - F5-6-AWS delete custom profiles"
+          unified_job_template:
+              name: "workflow - F5-6-AWS delete custom profiles"
+              organization:
+                name: "{{ my_organization }}"
+              type: workflow_job_template
+
+-   name: Daily Demo F5 Create
+    organization: "{{ my_organization }}"
+    job_tags:
+      create
+    skip_tags:
+      remove
+    related:
+      workflow_nodes:
+      -   identifier: "Daily Demo F5 Create/Remove"
+          related:
+            success_nodes:
+            -   identifier: "Daily Demo F5 website"
+          unified_job_template:
+            name: "Daily Demo F5 Create/Remove"
+            organization:
+              name: "{{ my_organization }}"
+            type: job_template
+      -   identifier: "Daily Demo F5 website"
+          unified_job_template:
+              name: "Daily Demo F5 website"
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
