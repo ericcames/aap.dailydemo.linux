@@ -35,6 +35,25 @@
         scope: write
         state: present
 
+    - name: Grab vault from remote url
+      when: 'remotevault is true'
+      ansible.builtin.get_url:
+        url: '{{ my_remote_vault }}'
+        dest: files/vaults/remotevault.yml
+        mode: '0644'
+
+    - name: Include my Remote vault
+      when: 'remotevault is true'
+      ansible.builtin.include_vars:
+        dir: files/vaults
+        files_matching: remotevault.yml
+
+    - name: Include my vault
+      when: 'remotevault is not defined'
+      ansible.builtin.include_vars:
+        dir: files/vaults
+        files_matching: "{{ my_local_vault }}"
+
     - name: Include configurations
       ansible.builtin.include_vars:
         dir: files/config_as_code
