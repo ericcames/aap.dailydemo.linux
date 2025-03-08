@@ -55,7 +55,7 @@
         state: present
         disable_gpg_check: true
 
-    - name: Registering server with Satellite
+    - name: Generate registration command
       register: command
       redhat.satellite.registration_command:
         server_url: "{{ lookup('ansible.builtin.env', 'SAT_HOST') }}"
@@ -73,8 +73,7 @@
         jwt_expiration: 1
 
     - name: Register client to Satellite
-      changed_when: false
-      ansible.builtin.command:
+      ansible.builtin.shell:
         cmd: "{{ command.registration_command }}"
 
     # - name: Installing Satellite key for remote execution
