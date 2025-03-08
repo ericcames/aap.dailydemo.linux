@@ -15,14 +15,6 @@
           - "Red Hat Ansible Automation Platform credential is not set"
           - "Please assign correct credentials to the Job Template"
 
-    - name: Get Demo instances we care about
-      register: instance_info
-      amazon.aws.ec2_instance_info:
-        region: "{{ vm_region }}"
-        filters:
-          tag:Name: "{{ vm_name }}"
-          instance-state-name: [running]
-
     - name: Create a new token using username/password
       ansible.controller.token:
         controller_host: "{{ lookup('ansible.builtin.env', 'CONTROLLER_HOST') }}"
@@ -37,6 +29,14 @@
   tags:
     - create
   block:
+
+    - name: Get Demo instances we care about
+      register: instance_info
+      amazon.aws.ec2_instance_info:
+        region: "{{ vm_region }}"
+        filters:
+          tag:Name: "{{ vm_name }}"
+          instance-state-name: [running]
 
     - name: Update the AAP Managed Inventory
       loop: "{{ instance_info['instances'] }}"

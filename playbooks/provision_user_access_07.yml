@@ -1,8 +1,0 @@
----
-- name: Access provisioning
-  hosts: rheldemo
-  become: true
-
-  roles:
-
-    - role: linux_account_create
