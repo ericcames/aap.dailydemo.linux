@@ -19,6 +19,7 @@ rhsm_activation_key: ''
 #
 # Credential Types needed for this role
 # Machine
+# Red Hat Satellite 6 - that works
 ```
 Dependencies
 ------------

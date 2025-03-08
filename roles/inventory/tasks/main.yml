@@ -81,16 +81,6 @@
     - remove
   block:
 
-    # - name: Remove vm from the inventory
-    #   loop: "{{ instance_info['instances'] }}"
-    #   ansible.controller.host:
-    #     controller_host: "{{ lookup('ansible.builtin.env', 'CONTROLLER_HOST') }}"
-    #     controller_oauthtoken: "{{ controller_token }}"
-    #     validate_certs: false
-    #     name: "{{ item['public_dns_name'] }}"
-    #     inventory: "{{ inventory_managed_inventory_name }}"
-    #     state: absent
-
     - name: Remove inventory host groups
       loop:
         - rheldemo
