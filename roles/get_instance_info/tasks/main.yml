@@ -14,43 +14,43 @@
     msg: "{{ instance_info.instances[0].instance_id }}"
 
 - name: Capture public dns name
-  register: my_server
+  register: get_instance_info_server
   ansible.builtin.set_stats:
     data:
       get_instance_info_server: "{{ instance_info.instances[0].public_dns_name }}"
 
 - name: Capture public ip address
-  register: my_public_ip
+  register: get_instance_info_public_ip
   ansible.builtin.set_stats:
     data:
       get_instance_info_public_ip: "{{ instance_info.instances[0].public_ip_address }}"
 
 - name: Capture image id
-  register: my_ami_id
+  register: get_instance_info_ami_id
   ansible.builtin.set_stats:
     data:
       get_instance_info_ami_id: "{{ instance_info.instances[0].image_id }}"
 
 - name: Capture instance id
-  register: my_instance_id
+  register: my_get_instance_info_instance_id
   ansible.builtin.set_stats:
     data:
       get_instance_info_instance_id: "{{ instance_info.instances[0].instance_id }}"
 
 - name: Capture instance type
-  register: my_instance_type
+  register: get_instance_info_instance_type
   ansible.builtin.set_stats:
     data:
       get_instance_info_instance_type: "{{ instance_info.instances[0].instance_type }}"
 
-- name: Capture public ip address
-  register: my_launch_time
+- name: Capture launch time
+  register: get_instance_info_launch_time
   ansible.builtin.set_stats:
     data:
       get_instance_info_launch_time: "{{ instance_info.instances[0].launch_time }}"
 
 - name: Capture availability zone
-  register: my_availability_zone
+  register: get_instance_info_availability_zone
   ansible.builtin.set_stats:
     data:
       get_instance_info_availability_zone: "{{ instance_info.instances[0].placement.availability_zone }}"
