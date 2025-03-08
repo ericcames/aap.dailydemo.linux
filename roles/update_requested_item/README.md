@@ -9,8 +9,14 @@ Requirements
 Role Variables
 --------------
 ```
-# These variables are set as Extra Vars
-update_requested_item_comments: "Your Comments go here"
+update_requested_item_comments: |-
+  Uh-Oh something broke.
+
+  ServiceNow incident number: {{ create_incident_ticket }}
+
+  Ansible Job ID: {{ vm_my_job_id }}
+
+  Message: {{ vm_my_error }}
 update_requested_item_state: 4
 #
 # Variable set at the workflow template
