@@ -149,25 +149,25 @@ controller_templates:
       - "{{ my_itsm_credential }}"
     extra_vars:
       update_requested_item_comments: |-
-          Provisioning details
+          "Provisioning details
 
-          Machine Create Time: !unsafe "{{ vm_machine_create_time }}"
+          Machine Create Time: !unsafe "{%raw%}{{ vm_machine_create_time }}{%endraw%}"
 
-          RedHat Subscription Time: !unsafe "{{ rhsm_subscription_time }}"
+          RedHat Subscription Time: !unsafe "{%raw%}{{ rhsm_subscription_time }}{%endraw%}"
 
-          Post Install Time: !unsafe "{{ linux_post_install_time }}"
+          Post Install Time: !unsafe "{%raw%}{{ linux_post_install_time }}{%endraw%}"
 
-          Website Start Time: !unsafe "{{ lamp_setup_time }}"
+          Website Start Time: !unsafe "{%raw%}{{ lamp_setup_time }}{%endraw%}"
 
-          Public DNS Name: !unsafe "{{ get_instance_info_server }}"
+          Public DNS Name: !unsafe "{%raw%}{{ get_instance_info_server }}{%endraw%}"
 
-          Public IP Address: !unsafe "{{ get_instance_info_public_ip }}"
+          Public IP Address: !unsafe "{%raw%}{{ get_instance_info_public_ip }}{%endraw%}"
 
-          AWS AMI ID: !unsafe "{{ get_instance_info_ami_id }}"
+          AWS AMI ID: !unsafe "{%raw%}{{ get_instance_info_ami_id }}{%endraw%}"
 
-          AWS Instance ID: !unsafe "{{ get_instance_info_instance_id }}"
+          AWS Instance ID: !unsafe "{%raw%}{{ get_instance_info_instance_id }}{%endraw%}"
 
-          AWS Instance Type: !unsafe "{{ get_instance_info_instance_type }}"
+          AWS Instance Type: !unsafe "{%raw%}{{ get_instance_info_instance_type }}{%endraw%}"
 
-          AWS availability zone: !unsafe "{{ get_instance_info_availability_zone }}"
+          AWS availability zone: !unsafe "{%raw%}{{ get_instance_info_availability_zone }}{%endraw%}""
       update_requested_item_state: 3
