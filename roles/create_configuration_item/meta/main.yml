@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  role_name: create_configuration_item
+  author: Eric Ames (ericcames)
+  description: Used to create a Server CMDB record in service now
+  license: MIT License
+  min_ansible_version: "2.12"

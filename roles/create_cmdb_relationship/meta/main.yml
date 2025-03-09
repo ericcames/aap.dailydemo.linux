@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  role_name: create_cmdb_relationship
+  author: Eric Ames (ericcames)
+  description: Used to relate a server cmdb record to a business application record in Servicenow
+  license: MIT License
+  min_ansible_version: "2.12"

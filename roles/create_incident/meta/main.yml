@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  role_name: create_incident
+  author: Eric Ames (ericcames)
+  description: Create a ServiceNow incident ticket
+  license: MIT License
+  min_ansible_version: "2.12"

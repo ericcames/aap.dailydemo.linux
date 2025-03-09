@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  role_name: website_setup
+  author: Eric Ames (ericcames)
+  description: Install a custom website
+  license: MIT License
+  min_ansible_version: "2.12"

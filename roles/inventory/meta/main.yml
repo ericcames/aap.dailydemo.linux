@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  role_name: inventory
+  author: Eric Ames (ericcames)
+  description: This role manages our inventory for us.
+  license: MIT License
+  min_ansible_version: "2.12"
