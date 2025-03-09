@@ -100,6 +100,7 @@ controller_templates:
     job_tags: create
     credentials:
       - "{{ my_aws_machine_credential }}"
+      - "{{ my_sat_credential }}"
     extra_vars:
       rhsm_status: present
       rhsm_activation_key: RHEL9 Dev
