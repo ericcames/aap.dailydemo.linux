@@ -95,7 +95,7 @@ env:
 
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwebtop.png "Webtop")
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwebmid.png "Webmid")
-![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlWebbot.png "Webbottom")
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwebbot.png "Webbottom")
 
 # Cockpit the Administrators GUI
 
