@@ -1,0 +1,111 @@
+---
+controller_workflows:
+  - name: Run Workflow for Linux Daily Demo
+    organization: "{{ my_organization }}"
+    ask_variables_on_launch: true
+    extra_vars:
+      ticket_number: "RITM0010831"
+    related:
+      workflow_nodes:
+      -   identifier: DDL - VM Create
+          related:
+            success_nodes:
+            -   identifier: DDL - Inventory Update
+            failure_nodes:
+            -   identifier: DDL - Create Incident
+          unified_job_template:
+              name: DDL - VM Create
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
+      -   identifier: DDL - Create Incident
+          related:
+            always_nodes:
+            -   identifier: DDL - Update request ticket - failure
+          unified_job_template:
+              name: DDL - Create Incident
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
+      -   identifier: DDL - Inventory Update
+          related:
+            success_nodes:
+            -   identifier: DDL - Get Instance Info
+          unified_job_template:
+              name: DDL - Inventory Update
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
+      -   identifier: DDL - Update request ticket - failure
+          unified_job_template:
+              name: DDL - Update request ticket - failure
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
+      -   identifier: DDL - Get Instance Info
+          related:
+            success_nodes:
+            -   identifier: DDL - Red Hat Registration
+            -   identifier: DDL - Create a CMDB record
+          unified_job_template:
+              name: DDL - Get Instance Info
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
+      -   identifier: DDL - Create a CMDB record
+          related:
+            success_nodes:
+            -   identifier: DDL - Create CMDB relationship
+          unified_job_template:
+              name: DDL - Create a CMDB record
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
+      -   identifier: DDL - Create CMDB relationship
+          unified_job_template:
+              name: DDL - Create CMDB relationship
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
+      -   identifier: DDL - Red Hat Registration
+          related:
+            success_nodes:
+            -   identifier: DDL - Configuration Management
+          unified_job_template:
+              name: DDL - Red Hat Registration
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
+      -   identifier: DDL - Configuration Management
+          related:
+            success_nodes:
+            -   identifier: DDL - Application Install
+          unified_job_template:
+              name: DDL - Configuration Management
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
+      -   identifier: DDL - Application Install
+          related:
+            success_nodes:
+            -   identifier: DDL - Website deployment
+          unified_job_template:
+              name: DDL - Application Install
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
+      -   identifier: DDL - Website deployment
+          related:
+            always_nodes:
+            -   identifier: DDL - Update request ticket - success
+          unified_job_template:
+              name: DDL - Website deployment
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
+      -   identifier: DDL - Update request ticket - success
+          unified_job_template:
+              name: DDL - Update request ticket - success
+              organization:
+                name: "{{ my_organization }}"
+              type: job_template
