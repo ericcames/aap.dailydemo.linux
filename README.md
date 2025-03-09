@@ -28,7 +28,7 @@ aap_configuration_async_retries: 60
 # The workflow
 
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwf1.png "Start of workflow")
-![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlw2.png "Middle of Workflow")
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwf2.png "Middle of Workflow")
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwf3.png "End of Workflow")
 
 **The playbooks**
@@ -93,9 +93,9 @@ env:
 
 # The website
 
-![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/webtop.png "Webtop")
-![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/webmid.png "Webmid")
-![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/Webbot.png "Webbottom")
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwebtop.png "Webtop")
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwebmid.png "Webmid")
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlWebbot.png "Webbottom")
 
 # Cockpit the Administrators GUI
 
