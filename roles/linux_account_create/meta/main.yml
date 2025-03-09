@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  role_name: linux_post_install
+  author: Eric Ames (ericcames)
+  description: Used to add the final touches to our new VM
+  license: MIT License
+  min_ansible_version: "2.12"

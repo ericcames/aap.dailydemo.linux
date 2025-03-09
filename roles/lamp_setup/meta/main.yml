@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  role_name: lamp_setup
+  author: Eric Ames (ericcames)
+  description: Setup a webserver
+  license: MIT License
+  min_ansible_version: "2.12"

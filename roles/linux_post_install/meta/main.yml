@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  role_name: linux_account_create
+  author: Eric Ames (ericcames)
+  description: Used to create local accounts
+  license: MIT License
+  min_ansible_version: "2.12"
