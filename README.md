@@ -1,6 +1,6 @@
 Ansible Automation Platform Daily Demo for Linux
 =========
-A demo designed to showcase many of the use cases that people are looking for.  We are using the workflow visualizer to show how the various building blocks are put together and enable the delivery on demand of a custom website.  The playbooks call roles, the roles allow for ease of sharing the code and also allow for documentation of the various things needed in each role. The demo is designed to be integrated with an IT Service Management (ITSM) system.  Everything will be documented in ITSM system via the skillfull use of automation.
+A demo designed to showcase many of the use cases that people are looking for.  We are using the workflow visualizer to show how the various building blocks are put together and enable the delivery on demand of a custom website.  The playbooks call roles, the roles allow for ease of sharing the code and also allow for documentation of the various things needed in each role. The demo is designed to be integrated with an IT Service Management (ITSM) system.  Everything will be documented in ITSM system via the skillfull use of automation.  We have added integration with Red Hat Satellite to enable us to demo automated patching using satellite.
 
 Day 0 - Configuration as code (CAC) a repeatable build process for this demo
 =========
@@ -96,6 +96,11 @@ env:
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwebtop.png "Webtop")
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwebmid.png "Webmid")
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwebbot.png "Webbottom")
+
+# Red Hat Satellite
+
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlsat1.png "Webtop")
+![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlsat2.png "Webmid")
 
 # Cockpit the Administrators GUI
 
