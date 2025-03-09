@@ -117,11 +117,11 @@ controller_templates:
       update_requested_item_comments: |-
         "Uh-Oh something broke.
 
-         ServiceNow incident number: {{ {{ create_incident_ticket }} }}
+         ServiceNow incident number: '{{' create_incident_ticket '}}'
 
-         Ansible Job ID: {{ {{ vm_my_job_id }} }}
+         Ansible Job ID: '{{' vm_my_job_id '}}'
 
-         Message: {{ {{ vm_my_error }} }}"
+         Message: '{{' vm_my_error '}}'"
       update_requested_item_state: 4
 
   - name: DDL - VM Create
