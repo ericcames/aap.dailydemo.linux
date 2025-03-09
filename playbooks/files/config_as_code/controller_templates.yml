@@ -149,7 +149,7 @@ controller_templates:
       - "{{ my_itsm_credential }}"
     extra_vars:
       update_requested_item_comments:
-          Provisioning details
+          "Provisioning details
 
           Machine Create Time: !unsafe "{%raw%}{{ vm_machine_create_time }}{%endraw%}"
 
@@ -169,5 +169,5 @@ controller_templates:
 
           AWS Instance Type: !unsafe "{%raw%}{{ get_instance_info_instance_type }}{%endraw%}"
 
-          AWS availability zone: !unsafe "{%raw%}{{ get_instance_info_availability_zone }}{%endraw%}"
+          AWS availability zone: !unsafe "{%raw%}{{ get_instance_info_availability_zone }}{%endraw%}""
       update_requested_item_state: 3
