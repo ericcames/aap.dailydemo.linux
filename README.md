@@ -25,6 +25,8 @@ my_remote_vault: >-
   https://raw.githubusercontent.com/ericcames/aap.as.code/refs/heads/main/playbooks/files/vaults/ames/vault_ames.yml
 aap_configuration_async_retries: 60
 ```
+Day 1 - Run the Linux Daily Demo Workflow
+=========
 # The workflow
 
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwf1.png "Start of workflow")
@@ -96,6 +98,11 @@ env:
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwebtop.png "Webtop")
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwebmid.png "Webmid")
 ![alt text](https://github.com/ericcames/aap.dailydemo.linux/blob/main/images/ddlwebbot.png "Webbottom")
+
+Day 2 - Common tasks
+=========
+[Linux Day 2 - Facts Cached](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/gather_facts.yml "Linux Day 2 - Facts Cached") <br>
+[Linux Day 2 - file check](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/day2filecheck.yml "Linux Day 2 - file check") <br>
 
 # Red Hat Satellite
 
