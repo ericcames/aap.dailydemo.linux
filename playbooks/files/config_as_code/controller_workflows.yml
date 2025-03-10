@@ -1,6 +1,6 @@
 ---
 controller_workflows:
-  - name: Run Workflow for Linux Daily Demo
+  - name: Run workflow for the Linux Daily Demo
     organization: "{{ my_organization }}"
     ask_variables_on_launch: true
     extra_vars:
