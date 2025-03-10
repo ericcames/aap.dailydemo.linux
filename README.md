@@ -101,7 +101,7 @@ env:
 
 Day 2 - Common tasks
 =========
-[Linux Day 2 - Facts Cached](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/servicenow/gather_facts.yml "Linux Day 2 - Facts Cached") <br>
+[Linux Day 2 - Facts Cached](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/gather_facts.yml "Linux Day 2 - Facts Cached") <br>
 [Linux Day 2 - file check](https://github.com/ericcames/aap.dailydemo.linux/blob/main/playbooks/day2filecheck.yml "Linux Day 2 - file check") <br>
 
 # Red Hat Satellite
