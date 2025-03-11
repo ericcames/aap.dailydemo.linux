@@ -25,9 +25,13 @@ repository: https://github.com/ericcames/aap.dailydemo.linux
 issues: https://github.com/ericcames/aap.dailydemo.linux/issues
 tags:
   - lab
+  - automation
+  - ansible
   - cloud
   - aws
+  - amazon
   - linux
   - satellite
   - dailydemo
-version: 0.0.0
+  - sales
+version: 0.0.1
