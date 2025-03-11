@@ -173,10 +173,10 @@ controller_templates:
     credentials:
       - "{{ my_itsm_credential }}"
     extra_vars:
-      update_requested_item_comments: !unsafe 'Uh-Oh something broke.\n\n
+      update_requested_item_comments: !unsafe "Uh-Oh something broke.\n\n
                                                ServiceNow incident number: {{ create_incident_ticket }}\n\n
                                                Ansible Job ID: {{ vm_my_job_id }}\n\n
-                                               Message: {{ vm_my_error }}'
+                                               Message: {{ vm_my_error }}"
       update_requested_item_state: 4
 
   - name: Linux Day 2 - file check
