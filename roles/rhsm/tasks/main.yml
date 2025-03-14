@@ -73,6 +73,9 @@
         jwt_expiration: 1
 
     - name: Register client to Satellite
+      register: result
+      changed_when: result.rc == 1
+      failed_when: result.rc > 1
       ansible.builtin.shell:
         cmd: "{{ command.registration_command }}"
 
@@ -82,39 +85,20 @@
     #     key: "{{ lookup('url', 'https://{{ rhsm_sat6_fqdn}}:9090/ssh/pubkey', validate_certs=False, split_lines=False) }}"
     #     state: present
 
-    # - name: Register server with insights
-    #   vars:
-    #     rhc_insights:
-    #       rhc_state: present
-    #   ansible.builtin.import_role:
-    #     name: redhat.rhel_system_roles.rhc
-
-    # - name: Register with Red Hat Insights
-    #   register: result
-    #   changed_when: result.rc == 1
-    #   failed_when: result.rc > 1
-    #   ansible.builtin.command: insights-client --register
-
 - name: Un-Registering system from Satellite and Insights
   tags:
     - remove
   block:
 
-    - name: UN-Register and subscribe the system
+    - name: UN-Register server from Red Hat Insights
+      register: result
+      changed_when: result.rc == 1
+      failed_when: result.rc > 1
+      ansible.builtin.command: insights-client --unregister
+
+    - name: UN-Register the system from Satellite
       community.general.redhat_subscription:
         state: absent
         org_id: "{{ rhsm_org_id }}"
         activationkey: "{{ rhsm_activation_key }}"
         consumer_name: "{{ inventory_hostname }}"
-
-    - name: UN-Register server with insights
-      vars:
-        rhc_state: absent
-      ansible.builtin.include_role:
-        name: redhat.rhel_system_roles.rhc
-
-    # - name: UN-Register Red Hat Insights
-    #   register: result
-    #   changed_when: result.rc == 1
-    #   failed_when: result.rc > 1
-    #   ansible.builtin.command: insights-client --unregister

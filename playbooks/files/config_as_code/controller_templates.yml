@@ -16,6 +16,7 @@ controller_templates:
       - "{{ my_aws_machine_credential }}"
     extra_vars:
       ansible_python_interpreter: /usr/bin/python3
+      rhsm_activation_key: RHEL9 Dev
 
   - name: DDL - Application Install
     job_type: run
