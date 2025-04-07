@@ -2,6 +2,7 @@
 - name: Create daily demo linux server
   hosts: localhost
   connection: local
+  gather_facts: true
 
   tasks:
 
@@ -10,3 +11,7 @@
         - create
       ansible.builtin.include_role:
         name: vm
+
+    - name: Print all variables for localhost
+      ansible.builtin.debug:
+        var: hostvars[inventory_hostname]
