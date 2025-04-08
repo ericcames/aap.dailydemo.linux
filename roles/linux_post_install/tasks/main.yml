@@ -104,15 +104,20 @@
     state: started
     enabled: true
 
-- name: Upgrade all packages
+- name: Upgrade all packages except sudo.x86_64
   ansible.builtin.dnf:
     name: "*"
     state: latest
     update_only: true
-    security: false
     skip_broken: true
     exclude:
       - sudo.x86_64
+
+- name: Update Red Hat Insights after package updates
+  register: result
+  changed_when: result.rc == 1
+  failed_when: result.rc > 1
+  ansible.builtin.command: insights-client --register
 
 - name: Check to see if we need a reboot
   register: reboot_required
