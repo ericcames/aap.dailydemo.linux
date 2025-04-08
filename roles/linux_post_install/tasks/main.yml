@@ -109,8 +109,10 @@
     name: "*"
     state: latest
     update_only: true
+    security: false
+    skip_broken: true
     exclude:
-      - openssl-3.0.7-6.el9_2.x86_64
+      - sudo.x86_64
 
 - name: Check to see if we need a reboot
   register: reboot_required
