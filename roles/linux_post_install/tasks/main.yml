@@ -108,7 +108,7 @@
   ansible.builtin.dnf:
     name: "*"
     state: latest
-    only_upgrade: true
+    update_only: true
     exclude:
       - openssl
 
