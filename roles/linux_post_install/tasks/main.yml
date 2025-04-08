@@ -110,7 +110,7 @@
     state: latest
     update_only: true
     exclude:
-      - openssl
+      - openssl-3.0.7-6.el9_2.x86_64
 
 - name: Check to see if we need a reboot
   register: reboot_required
