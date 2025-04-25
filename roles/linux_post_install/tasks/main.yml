@@ -108,6 +108,8 @@
   ansible.builtin.dnf:
     name: "*"
     state: latest
+    security: true
+    bugfix: true
     update_only: true
     skip_broken: true
     exclude:
