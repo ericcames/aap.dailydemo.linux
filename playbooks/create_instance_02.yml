@@ -13,7 +13,7 @@
 
     - name: Include the update_sn_req_item role to update our ticket
       tags:
-        - create
+        - always
       vars:
         update_requested_item_comments: Your new virtual machine has been created
         update_requested_item_state: 2
