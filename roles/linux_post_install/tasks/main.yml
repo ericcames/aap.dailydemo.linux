@@ -104,6 +104,16 @@
     state: started
     enabled: true
 
+# https://access.redhat.com/solutions/7041171
+- name: Update the insights-client.conf file
+  ansible.builtin.blockinfile:
+    path: /etc/insights-client/insights-client.conf
+    append_newline: true
+    prepend_newline: true
+    block: |
+      #Set build_packagecache=True to refresh the yum/dnf cache during the insights-client check-in
+      build_packagecache=True
+
 - name: Upgrade all packages except sudo.x86_64
   ansible.builtin.dnf:
     name: "*"
@@ -119,7 +129,7 @@
   register: result
   changed_when: result.rc == 1
   failed_when: result.rc > 1
-  ansible.builtin.command: insights-client --register
+  ansible.builtin.command: insights-client --register --build-packagecache
 
 - name: Check to see if we need a reboot
   register: reboot_required
