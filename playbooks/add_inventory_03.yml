@@ -5,8 +5,29 @@
 
   tasks:
 
+    - name: Update ticket with inventory update start
+      tags:
+        - always
+      vars:
+        update_requested_item_comments: |-
+          Starting inventory update so that AAP knows about our new machine.  Automate more.
+          The job id is {{ tower_job_id }}
+          The template name is {{ tower_job_template_name }}
+        update_requested_item_state: 2
+      ansible.builtin.include_role:
+        name: update_requested_item
+
     - name: Include the inventory role
       tags:
         - create
       ansible.builtin.include_role:
         name: inventory
+
+    - name: Update ticket with the completion of the inventory update.
+      tags:
+        - always
+      vars:
+        update_requested_item_comments: Our inventory is up to date.  Toil less!
+        update_requested_item_state: 2
+      ansible.builtin.include_role:
+        name: update_requested_item
