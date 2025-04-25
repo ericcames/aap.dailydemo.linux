@@ -5,13 +5,25 @@
 
   tasks:
 
+    - name: Ticket start for vm creation
+      tags:
+        - always
+      vars:
+        update_requested_item_comments: |-
+          Starting VM creation.  Ansible Automation Platform Rocks! :-)
+          The job id is {{ tower_job_id }}
+          The template name is {{ tower_job_template_name }}
+        update_requested_item_state: 2
+      ansible.builtin.include_role:
+        name: update_requested_item
+
     - name: Include the vm role
       tags:
         - create
       ansible.builtin.include_role:
         name: vm
 
-    - name: Include the update_sn_req_item role to update our ticket
+    - name: Ticket update vm creation is complete.  Hoo-yah! Automation Rocks!
       tags:
         - always
       vars:
